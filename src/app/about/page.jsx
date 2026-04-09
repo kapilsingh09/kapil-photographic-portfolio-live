@@ -242,7 +242,7 @@ export default function About() {
                   fill
                   sizes="(max-width: 768px) 100vw, 400px"
                   className="object-cover object-top"
-                  priority
+                  loading="lazy"
                 />
               </motion.div>
             </motion.div>

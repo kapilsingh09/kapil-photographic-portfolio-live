@@ -318,7 +318,7 @@ export default function HeroSection() {
                 {/* ── CINEMATIC BUNDLE PAGE BLUR OVERLAY ── here is the blur*/}
                 <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-20">
                     <motion.div
-                        className="sticky top-0 left-0 w-full h-screen backdrop-blur-[12px] bg-white/20 transition-all duration-300"
+                        className="sticky top-0 left-0 w-full h-screen backdrop-blur-[12px] bg-slate-900/10 dark:bg-black/30 transition-colors duration-300"
                         style={{ opacity: bundleBlurOpacity, WebkitBackdropFilter: "blur(12px)" }}
                     />
                 </div>
@@ -334,8 +334,8 @@ export default function HeroSection() {
                             hoverTag={{ label: "@morgan", bg: "bg-red-500" }}
                             disableHover={isBundling}
                         >
-                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-xl overflow-hidden bg-gray-100">
-                                <Image src="/images/img-1.jpg" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
+                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-xl overflow-hidden bg-surface-muted transition-colors">
+                                <Image src="/images/img-1.jpg" loading="lazy" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
                             </div>
                         </FloatingImage>
 
@@ -348,8 +348,8 @@ export default function HeroSection() {
                             hoverTag={{ label: "@coplin", bg: "bg-blue-500" }}
                             disableHover={isBundling}
                         >
-                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-lg overflow-hidden bg-gray-100">
-                                <Image src="/images/img-2.jpg" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
+                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-lg overflow-hidden bg-surface-muted transition-colors">
+                                <Image src="/images/img-2.jpg" loading="lazy" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
                             </div>
                         </FloatingImage>
 
@@ -362,8 +362,8 @@ export default function HeroSection() {
                             hoverTag={{ label: "@robin", bg: "bg-violet-600" }}
                             disableHover={isBundling}
                         >
-                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-lg overflow-hidden bg-gray-100">
-                                <Image src="/images/img-3.jpg" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
+                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-lg overflow-hidden bg-surface-muted transition-colors">
+                                <Image src="/images/img-3.jpg" loading="lazy" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
                             </div>
                         </FloatingImage>
 
@@ -374,14 +374,14 @@ export default function HeroSection() {
                             hoverTag={{ label: "@taylor", bg: "bg-amber-500" }}
                             disableHover={isBundling}
                         >
-                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-lg overflow-hidden bg-gray-100">
-                                <Image src="/images/img-7.jpg" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
+                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-lg overflow-hidden bg-surface-muted transition-colors">
+                                <Image src="/images/img-7.jpg" loading="lazy" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
                             </div>
                         </FloatingImage>
 
                         <FloatingImage index={4} scrollYProgress={scrollYProgress} isInView={isInView} hoverTag={{ label: "@jordan", bg: "bg-pink-500" }} disableHover={isBundling}>
-                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-2xl overflow-hidden bg-gray-100">
-                                <Image src="/images/img-5.jpg" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
+                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-2xl overflow-hidden bg-surface-muted transition-colors">
+                                <Image src="/images/img-5.jpg" loading="lazy" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
                             </div>
                         </FloatingImage>
 
@@ -394,14 +394,14 @@ export default function HeroSection() {
                             hoverTag={{ label: "@andrea", bg: "bg-green-500" }}
                             disableHover={isBundling}
                         >
-                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-lg overflow-hidden bg-gray-100">
-                                <Image src="/images/img-4.jpg" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
+                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-lg overflow-hidden bg-surface-muted transition-colors">
+                                <Image src="/images/img-4.jpg" loading="lazy" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
                             </div>
                         </FloatingImage>
 
                         <FloatingImage index={6} scrollYProgress={scrollYProgress} isInView={isInView} hoverTag={{ label: "@alex", bg: "bg-cyan-500" }} disableHover={isBundling}>
-                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-xl overflow-hidden bg-gray-100">
-                                <Image src="/images/img-6.jpg" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
+                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-xl overflow-hidden bg-surface-muted transition-colors">
+                                <Image src="/images/img-6.jpg" loading="lazy" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
                             </div>
                         </FloatingImage>
                     </div>
@@ -417,7 +417,7 @@ export default function HeroSection() {
                         initial={{ opacity: 0, filter: "blur(12px)", y: -20 }}
                         animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
                         transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-                        className="text-4xl md:text-6xl font-bold text-gray-900 max-w-4xl leading-tight inline-block"
+                        className="text-4xl md:text-6xl font-bold text-content max-w-4xl leading-tight inline-block transition-colors"
                     >
                         A place to display your masterpiece.
                     </motion.h1>
@@ -427,9 +427,9 @@ export default function HeroSection() {
                 {/* Mobile: keep layout tight (no floating images) */}
                 <div className="md:hidden w-full max-w-md mt-8 mb-10">
                     <div className="grid grid-cols-3 gap-2 opacity-95">
-                        {["/images/img-1.jpg", "/images/img-2.jpg", "/images/img-3.jpg", "/images/img-7.jpg", "/images/img-5.jpg", "/images/img-4.jpg"].map((src) => (
-                            <div key={src} className="relative aspect-square overflow-hidden rounded-2xl bg-gray-100 shadow-sm">
-                                <Image src={src} alt="" fill sizes="(max-width: 768px) 33vw, 210px" className="object-cover" />
+                        {["/images/img-1.jpg", "/images/img-2.jpg", "/images/img-3.jpg", "/images/img-7.jpg", "/images/img-5.jpg", "/images/img-4.jpg"].map((src, idx) => (
+                            <div key={src} className="relative aspect-square overflow-hidden rounded-2xl bg-surface-muted shadow-sm transition-colors">
+                                <Image src={src} loading="lazy" alt="" fill sizes="(max-width: 768px) 33vw, 210px" className="object-cover" />
                             </div>
                         ))}
                     </div>
@@ -441,21 +441,21 @@ export default function HeroSection() {
                     transition={{ duration: 0.8, delay: 0.7, type: "spring", stiffness: 100, damping: 15 }}
                     className="flex flex-col items-center gap-5"
                 >
-                    <p className="text-gray-600 text-md max-w-xl ">
+                    <p className="text-content-muted text-md max-w-xl transition-colors">
                         Photographers can showcase their work and clients can easily book them.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 w-full sm:w-auto">
                         <motion.button
                             whileHover={{ scale: 1.04 }}
                             whileTap={{ scale: 0.96 }}
-                            className="w-full sm:w-44 h-12 rounded-full bg-black text-white text-sm font-semibold tracking-tight cursor-pointer"
+                            className="w-full sm:w-44 h-12 rounded-full bg-content text-surface text-sm font-semibold tracking-tight cursor-pointer shadow-md transition-colors"
                             onClick={() => router.push('/pricing')}>
                             Get Started
                         </motion.button>
                         <motion.button
                             whileHover={{ scale: 1.04 }}
                             whileTap={{ scale: 0.96 }}
-                            className="w-full sm:w-44 h-12 rounded-full bg-white text-black text-sm font-semibold tracking-tight cursor-pointer border-2 border-transparent hover:border-black transition-colors duration-200"
+                            className="w-full sm:w-44 h-12 rounded-full bg-surface text-content text-sm font-semibold tracking-tight cursor-pointer border-[1.5px] border-border-subtle hover:border-content transition-colors duration-200"
                             onClick={() => router.push('/gallery')}
                         >
                             Explore
@@ -472,22 +472,22 @@ export default function HeroSection() {
             <section className="min-h-screen w-full flex flex-col lg:flex-row items-center justify-between px-6 md:px-16 lg:px-28 py-20 lg:py-0 overflow-visible relative pb-20 z-40">
                 {/* --- MOBILE (STATIC) --- */}
                 <div className="md:hidden flex-1 max-w-2xl space-y-6 z-50 text-left relative">
-                    <p className="text-xs tracking-[0.2em] text-black font-medium uppercase">
+                    <p className="text-xs tracking-[0.2em] text-content font-medium uppercase transition-colors">
                         Photography &amp; Portfolio
                     </p>
-                    <h1 className="text-4xl font-bold leading-[1.1] text-gray-900">
+                    <h1 className="text-4xl font-bold leading-[1.1] text-content transition-colors">
                         Showcase, Sell, <br />
-                        <span className="text-red-600">&amp; acquire arts</span> <br />
+                        <span className="text-red-600 dark:text-red-500">&amp; acquire arts</span> <br />
                         to our marketplace.
                     </h1>
-                    <p className="subtext-lg max-w-md">
+                    <p className="subtext-lg max-w-md text-content-muted transition-colors">
                         A place to display your masterpiece. Dynamic community where artists and buyers seamlessly merge and grow together.
                     </p>
                     <div className="flex flex-wrap gap-4 pt-4">
-                        <button className="btn-primary-lg pointer-events-auto">
+                        <button onClick={() => router.push("/pricing")} className="btn-primary-lg pointer-events-auto">
                             Join for $9.99/m
                         </button>
-                        <button className="btn-secondary-lg pointer-events-auto">
+                        <button onClick={() => router.push("/about")} className="btn-secondary-lg pointer-events-auto">
                             Read More
                         </button>
                     </div>

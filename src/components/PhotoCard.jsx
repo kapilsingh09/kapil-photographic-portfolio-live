@@ -148,7 +148,7 @@ export default function PhotoCard() {
                                         alt={`Artwork ${currentIndex + 1}`}
                                         fill
                                         className="object-cover"
-                                        priority
+                                        loading="lazy"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                                 </motion.div>

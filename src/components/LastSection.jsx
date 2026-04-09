@@ -1,8 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
+// import { useRouter } from 'next/navigation'
 import { Aperture, BookImage, Images, PenLine } from 'lucide-react'
 import Image from 'next/image'
+
 
 // ─── Framer Variants ──────────────────────────────────────────────────────────
 
@@ -15,9 +17,11 @@ const fadeUp = (delay = 0) => ({
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
+import { useRouter } from 'next/navigation'
 export default function LastSection() {
+  const router = useRouter();
   return (
-    <section className="flex min-h-[100dvh] items-center justify-center px-4 py-24 md:py-0 md:px-10">
+    <section className="flex min-h-[100vh] items-center justify-center px-4 py-24 md:py-0 md:px-10">
       <div className="grid w-full max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
 
         {/* ── Left Card ─────────────────────────────────────────── */}
@@ -33,7 +37,7 @@ export default function LastSection() {
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover object-top"
-            priority
+            loading="lazy"
           />
 
           {/* Bottom frosted blur layer */}
@@ -98,6 +102,7 @@ export default function LastSection() {
 
             {/* Button */}
             <motion.button
+            onClick={()=>{router.push("/contact")}}
               {...fadeUp(0.35)}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
@@ -185,6 +190,7 @@ export default function LastSection() {
 
             {/* Button */}
             <motion.button
+              onClick={()=>{router.push("/gallery")}}
               {...fadeUp(0.4)}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}

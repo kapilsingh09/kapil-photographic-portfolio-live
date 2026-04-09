@@ -8,13 +8,13 @@ import Image from 'next/image'
 // ─── Input Field Component ───────────────────────────────────────────────────
 
 function Field({ label, type = 'text', placeholder, value, onChange, as = 'input', error }) {
-  const baseClass = `w-full bg-transparent border-b py-3 text-sm text-gray-900 placeholder-gray-400 outline-none transition-all duration-300 focus:ring-0 ${
-    error ? 'border-red-400 focus:border-red-500' : 'border-gray-300 focus:border-gray-900'
+  const baseClass = `w-full bg-transparent border-b py-3 text-sm text-content placeholder:text-content-muted outline-none transition-all duration-300 focus:ring-0 ${
+    error ? 'border-red-400 focus:border-red-500' : 'border-border-subtle focus:border-content'
   }`
 
   return (
     <div className="flex flex-col group">
-      <label className="text-[11px] font-bold uppercase tracking-widest text-gray-400 transition-colors group-focus-within:text-gray-900">
+      <label className="text-[11px] font-bold uppercase tracking-widest text-content-muted transition-colors group-focus-within:text-content">
         {label}
       </label>
       {as === 'textarea' ? (
@@ -42,7 +42,7 @@ function Field({ label, type = 'text', placeholder, value, onChange, as = 'input
 // ─── Main Contact Page ────────────────────────────────────────────────────────
 
 export default function ContactPage() {
-  const [form, setForm] = useState({ name: '', email: '', service: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', service: '', message: '', _gotcha: '' })
   const [status, setStatus] = useState('idle') // idle | sending | success | error
   const [errorMsg, setErrorMsg] = useState('')
   const [fieldErrors, setFieldErrors] = useState({})
@@ -100,7 +100,7 @@ export default function ContactPage() {
   return (
     <section className="relative w-full py-24 md:py-28 px-4 md:px-8 flex items-center justify-center">
       {/* Box container */}
-      <div className="mx-auto w-full max-w-[1100px] rounded-[2rem] bg-white p-6 md:p-10 lg:p-12 shadow-2xl shadow-black/5 overflow-hidden border border-gray-100">
+      <div className="mx-auto w-full max-w-[1100px] rounded-[2rem] bg-surface p-6 md:p-10 lg:p-12 shadow-2xl shadow-black/5 dark:shadow-black/50 overflow-hidden border border-border-subtle transition-colors">
         
         {/* Main Grid Wrapper */}
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
@@ -114,24 +114,27 @@ export default function ContactPage() {
           >
             {/* Header */}
             <div className="mb-8">
-              <span className="mb-3 inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
+              <span className="mb-3 inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-content-muted">
                 Inquire
               </span>
-              <h1 className="text-4xl font-extrabold leading-[1.1] tracking-tight text-gray-900 md:text-5xl">
+              <h1 className="text-4xl font-extrabold leading-[1.1] tracking-tight text-content md:text-5xl transition-colors">
                 Let&apos;s tell <br/>
                 your story.
               </h1>
-              <p className="mt-4 text-gray-500 leading-relaxed text-sm">
+              <p className="mt-4 text-content-muted leading-relaxed text-sm transition-colors">
                 Whether it&apos;s a branding shoot, a wedding, or an editorial project, I&apos;d love to hear what you have in mind. 
               </p>
             </div>
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+              {/* Honeypot field - hides from users, catches bots */}
+              <input type="text" name="_gotcha" style={{ display: 'none' }} value={form._gotcha} onChange={set('_gotcha')} tabIndex="-1" autoComplete="off" />
+
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <Field
                   label="Name"
-                  placeholder="John Doe"
+                  placeholder=""
                   value={form.name}
                   onChange={set('name')}
                   error={fieldErrors.name}
@@ -139,7 +142,7 @@ export default function ContactPage() {
                 <Field
                   label="Email"
                   type="email"
-                  placeholder="john@example.com"
+                  placeholder=""
                   value={form.email}
                   onChange={set('email')}
                   error={fieldErrors.email}
@@ -147,13 +150,13 @@ export default function ContactPage() {
               </div>
 
               <div className="group flex flex-col">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 transition-colors group-focus-within:text-gray-900">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-content-muted transition-colors group-focus-within:text-content">
                   Topic of Interest
                 </label>
                 <select
                   value={form.service}
                   onChange={set('service')}
-                  className="w-full appearance-none border-b border-gray-200 bg-transparent py-3 text-sm text-gray-900 outline-none transition-all duration-300 focus:border-gray-900 cursor-pointer"
+                  className="w-full appearance-none border-b border-border-subtle bg-transparent py-3 text-sm text-content outline-none transition-all duration-300 focus:border-content cursor-pointer"
                 >
                   <option value="" disabled>Select a service</option>
                   <option value="portrait">Portrait Session</option>
@@ -178,9 +181,9 @@ export default function ContactPage() {
                 disabled={status === 'sending'}
                 whileHover={status === 'sending' ? {} : { scale: 1.02 }}
                 whileTap={status === 'sending' ? {} : { scale: 0.98 }}
-                className={`btn-primary mt-2 flex w-fit items-center justify-between gap-4 rounded-full px-6 py-3 text-sm font-semibold text-white shadow-md mx-auto sm:mx-0 transition-all ${
-                  status === 'sending' ? 'opacity-70 cursor-not-allowed bg-gray-600' : 'bg-black'
-                } ${status === 'success' ? '!bg-emerald-600' : ''}`}
+                className={`btn-primary mt-2 flex w-fit items-center justify-between gap-4 rounded-full px-6 py-3 text-sm font-semibold shadow-md mx-auto sm:mx-0 transition-all ${
+                  status === 'sending' ? 'opacity-70 cursor-not-allowed bg-surface-muted text-content' : 'bg-content text-surface'
+                } ${status === 'success' ? '!bg-emerald-600 dark:!bg-emerald-500 dark:!text-white' : ''}`}
               >
                 <span>
                   {status === 'sending' && 'Sending...'}
@@ -188,11 +191,11 @@ export default function ContactPage() {
                   {status === 'error' && 'Try again'}
                   {status === 'idle' && 'Send Inquiry'}
                 </span>
-                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white/20">
+                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-surface/20">
                   {status === 'sending' ? (
-                    <div className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                    <div className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-surface border-t-transparent dark:border-t-transparent" />
                   ) : (
-                    <ArrowRight size={13} className="text-white" strokeWidth={2.5}/>
+                    <ArrowRight size={13} className="text-surface" strokeWidth={2.5}/>
                   )}
                 </div>
               </motion.button>
@@ -216,14 +219,14 @@ export default function ContactPage() {
               )}
             </form>
 
-            <div className="mt-10 flex flex-col gap-4 border-t border-gray-100 pt-6 sm:flex-row sm:justify-between px-2">
+            <div className="mt-10 flex flex-col gap-4 border-t border-border-subtle pt-6 sm:flex-row sm:justify-between px-2 transition-colors">
               <div className="flex items-center gap-3">
-                <Mail size={14} className="text-gray-400"/>
-                <span className="text-xs font-medium text-gray-500">hello@kapilphoto.com</span>
+                <Mail size={14} className="text-content-muted"/>
+                <span className="text-xs font-medium text-content-muted">hello@kapilphoto.com</span>
               </div>
               <div className="flex items-center gap-3">
-                <Phone size={14} className="text-gray-400"/>
-                <span className="text-xs font-medium text-gray-500">+91 98765 43210</span>
+                <Phone size={14} className="text-content-muted"/>
+                <span className="text-xs font-medium text-content-muted">+91 98765 43210</span>
               </div>
             </div>
           </motion.div>
@@ -243,7 +246,7 @@ export default function ContactPage() {
                  fill
                  className="object-cover transition-transform duration-[2s] group-hover:scale-105"
                  sizes="40vw"
-                 priority
+                 loading="lazy"
                />
             </div>
             

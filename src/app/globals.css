@@ -1,4 +1,11 @@
 @import "tailwindcss";
+@theme {
+  --color-surface: var(--bg-primary);
+  --color-surface-muted: var(--bg-secondary);
+  --color-content: var(--text-primary);
+  --color-content-muted: var(--text-secondary);
+  --color-border-subtle: var(--border-primary);
+}
 
 /* ═══════════════════════════════════════════════════════════════
    DESIGN SYSTEM — Global Tokens & Reusable Classes
@@ -7,6 +14,13 @@
 /* ── 1. Design Tokens (CSS Custom Properties) ─────────────────── */
 
 :root {
+  /* ── Semantic Tailwind Theme Maps ── */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f3f4f6; 
+  --text-primary: rgba(0, 0, 0, 0.486)
+  --text-secondary: #6b7280; 
+  --border-primary: #f3f4f6; 
+
   /* ── Colors ── */
   --background: #dbd6d696;
   --foreground: #171717;
@@ -15,9 +29,6 @@
   --accent-border: rgba(200, 120, 40, 0.45);
 
   /* Text colors */
-  --text-primary: #171717;
-  --text-secondary: rgba(23, 23, 23, 0.5);
-  --text-muted: rgba(23, 23, 23, 0.45);
   --text-on-dark: #ffffff;
   --text-on-dark-secondary: rgba(255, 255, 255, 0.65);
   --text-on-dark-muted: rgba(255, 255, 255, 0.7);
@@ -35,7 +46,7 @@
 
   /* Secondary */
   --btn-secondary-bg: #f3f4f6;
-  --btn-secondary-text: #1f2937;
+  --btn-secondary-text: #151719;
   --btn-secondary-hover-bg: #e5e7eb;
 
   /* Outline */
@@ -45,7 +56,7 @@
   --btn-outline-hover-bg: #f9fafb;
 
   /* White (on dark backgrounds) */
-  --btn-white-bg: #ffffff;
+  --btn-white-bg: #000000;
   --btn-white-text: #000000;
   --btn-white-hover-bg: #f3f4f6;
 
@@ -70,11 +81,14 @@
 
 /* Dark theme overrides (toggled by .dark on <html>) */
 .dark {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #171717; /* neutral-900 */
+  --text-primary: #e5e7eb; /* gray-200 */
+  --text-secondary: #9ca3af; /* gray-400 */
+  --border-primary: #262626; /* neutral-800 */
+
   --background: #0b0b0c;
   --foreground: #f4f4f5;
-  --text-primary: #f4f4f5;
-  --text-secondary: rgba(244, 244, 245, 0.72);
-  --text-muted: rgba(244, 244, 245, 0.6);
 
   --btn-primary-bg: #ffffff;
   --btn-primary-text: #0b0b0c;

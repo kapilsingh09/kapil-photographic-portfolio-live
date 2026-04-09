@@ -20,6 +20,8 @@ const poppins = Poppins({
   weight: ["400", "500", "600", "700", "800"],
 });
 
+import { ThemeProvider } from "../components/ThemeProvider";
+
 export const metadata = {
   title: "Kapil Photography",
   description: "A place to display your masterpiece.",
@@ -30,11 +32,14 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased`}
+      suppressHydrationWarning
     >
-      <body className="flex flex-col">
+      <body className="flex flex-col bg-white text-gray-900 transition-colors duration-300 dark:bg-neutral-900 dark:text-gray-100">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange={false}>
           <Navbar />
           {children}
           <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -119,7 +119,7 @@ export default function PricingSection() {
                 </div>
 
                 {/* Heading */}
-                <h2 className="leading-none tracking-tight" style={{ color: '#171717' }}>
+                <h2 className="leading-none tracking-tight text-content transition-colors">
                     {HEADING_WORDS.map((word, i) => (
                         <motion.span
                             key={word}
@@ -165,7 +165,7 @@ export default function PricingSection() {
                             zIndex: 20,
                             transition: { duration: 0.22, ease: 'easeOut' },
                         }}
-                        className={`absolute cursor-pointer h-50 rounded-2xl p-5 flex flex-col justify-between ${plan.featured ? 'bg-orange-400 text-white' : 'bg-gray-200'}`}
+                        className={`absolute cursor-pointer h-50 rounded-2xl p-5 flex flex-col justify-between transition-colors ${plan.featured ? 'bg-orange-400 text-white' : 'bg-surface-muted text-content'}`}
                         style={{
                             rotate: CARD_ROTATIONS[i],
                             width: i === 1 ? 290 : 265,

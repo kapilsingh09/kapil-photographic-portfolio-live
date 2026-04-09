@@ -75,6 +75,7 @@ function PhotoCard({ photo, delay = 0 }) {
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 200px, 320px"
+          loading="lazy"
         />
         {/* Film grain overlay */}
         <div

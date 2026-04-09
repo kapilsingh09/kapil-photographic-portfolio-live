@@ -46,8 +46,8 @@ export default function Navbar() {
 
           {/* ── Left: Logo ── */}
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-accent-brand rounded-sm rotate-45" />
-            <span className="font-bold text-xl tracking-tight text-text-primary">kapil Photography</span>
+            <div className="w-6 h-6 bg-green-500 rounded-sm rotate-45" />
+            <span className="font-bold text-xl tracking-tight text-text-primary">kapil photography</span>
           </div>
 
           {/* ── Right: Nav Links + Icons (desktop) ── */}

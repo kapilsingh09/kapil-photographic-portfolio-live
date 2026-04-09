@@ -1,0 +1,365 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN SYSTEM — Global Tokens & Reusable Classes
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── 1. Design Tokens (CSS Custom Properties) ─────────────────── */
+
+:root {
+  /* ── Colors ── */
+  --background: #dbd6d696;
+  --foreground: #171717;
+  --accent: #c87828;
+  --accent-light: rgba(200, 120, 40, 0.18);
+  --accent-border: rgba(200, 120, 40, 0.45);
+
+  /* Text colors */
+  --text-primary: #171717;
+  --text-secondary: rgba(23, 23, 23, 0.5);
+  --text-muted: rgba(23, 23, 23, 0.45);
+  --text-on-dark: #ffffff;
+  --text-on-dark-secondary: rgba(255, 255, 255, 0.65);
+  --text-on-dark-muted: rgba(255, 255, 255, 0.7);
+
+  /* ── Button Tokens ── */
+  --btn-radius: 9999px;               /* pill / fully rounded */
+  --btn-font-weight: 600;
+  --btn-transition: all 0.2s ease;
+
+  /* Primary */
+  --btn-primary-bg: #000000;
+  --btn-primary-text: #ffffff;
+  --btn-primary-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  --btn-primary-hover-shadow: 0 14px 40px rgba(0, 0, 0, 0.28);
+
+  /* Secondary */
+  --btn-secondary-bg: #f3f4f6;
+  --btn-secondary-text: #1f2937;
+  --btn-secondary-hover-bg: #e5e7eb;
+
+  /* Outline */
+  --btn-outline-bg: #ffffff;
+  --btn-outline-text: #1f2937;
+  --btn-outline-border: #d1d5db;
+  --btn-outline-hover-bg: #f9fafb;
+
+  /* White (on dark backgrounds) */
+  --btn-white-bg: #ffffff;
+  --btn-white-text: #000000;
+  --btn-white-hover-bg: #f3f4f6;
+
+  /* Icon */
+  --btn-icon-bg: #ffffff;
+  --btn-icon-border: #f3f4f6;
+  --btn-icon-hover-bg: #f3f4f6;
+  --btn-icon-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+
+  /* ── Subtext Tokens ── */
+  --subtext-font-size: 0.875rem;      /* 14px — text-sm */
+  --subtext-font-size-xs: 0.75rem;    /* 12px — text-xs */
+  --subtext-font-size-lg: 1.125rem;   /* 18px — text-lg */
+  --subtext-line-height: 1.625;       /* leading-relaxed */
+  --subtext-color: rgba(23, 23, 23, 0.5);
+  --subtext-color-light: rgba(255, 255, 255, 0.65);
+  --subtext-color-muted: #6b7280;
+
+  /* ── Typography ── */
+  --font-heading: var(--font-poppins), 'Poppins', sans-serif;
+}
+
+/* Dark theme overrides (toggled by .dark on <html>) */
+.dark {
+  --background: #0b0b0c;
+  --foreground: #f4f4f5;
+  --text-primary: #f4f4f5;
+  --text-secondary: rgba(244, 244, 245, 0.72);
+  --text-muted: rgba(244, 244, 245, 0.6);
+
+  --btn-primary-bg: #ffffff;
+  --btn-primary-text: #0b0b0c;
+
+  --btn-secondary-bg: rgba(255, 255, 255, 0.08);
+  --btn-secondary-text: #f4f4f5;
+  --btn-secondary-hover-bg: rgba(255, 255, 255, 0.12);
+
+  --btn-outline-bg: transparent;
+  --btn-outline-text: #f4f4f5;
+  --btn-outline-border: rgba(255, 255, 255, 0.18);
+
+  --btn-white-bg: #ffffff;
+  --btn-white-text: #0b0b0c;
+
+  --subtext-color: rgba(244, 244, 245, 0.72);
+  --subtext-color-light: rgba(244, 244, 245, 0.78);
+  --subtext-color-muted: rgba(244, 244, 245, 0.62);
+}
+
+/* ── 2. Base ──────────────────────────────────────────────────── */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ── Headings: Poppins everywhere ── */
+h1, h2 {  
+  font-family: var(--font-heading);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   3. BUTTON SYSTEM
+   Usage:  className="btn-primary"  /  className="btn-secondary"
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Shared base for all buttons ── */
+.btn-primary,
+.btn-secondary,
+.btn-outline,
+.btn-white,
+.btn-ghost,
+.btn-hero-outline,
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--btn-radius);
+  font-weight: var(--btn-font-weight);
+  cursor: pointer;
+  transition: var(--btn-transition);
+  border: none;
+  outline: none;
+  line-height: 1;
+}
+
+/* ── Primary: solid black pill ── */
+.btn-primary {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  padding: 0.75rem 2rem;
+  font-size: 0.875rem;
+  box-shadow: var(--btn-primary-shadow);
+}
+.btn-primary:hover {
+  box-shadow: var(--btn-primary-hover-shadow);
+  transform: scale(1.03);
+}
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+/* ── Primary Large (hero sections) ── */
+.btn-primary-lg {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  padding: 1rem 2rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  box-shadow: var(--btn-primary-shadow);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--btn-radius);
+  cursor: pointer;
+  transition: var(--btn-transition);
+  border: none;
+  outline: none;
+  line-height: 1;
+}
+.btn-primary-lg:hover {
+  box-shadow: var(--btn-primary-hover-shadow);
+  transform: scale(1.03);
+}
+.btn-primary-lg:active {
+  transform: scale(0.97);
+}
+
+/* ── Secondary: light gray pill ── */
+.btn-secondary {
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  padding: 0.75rem 2rem;
+  font-size: 0.875rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+.btn-secondary:hover {
+  background: var(--btn-secondary-hover-bg);
+  transform: scale(1.03);
+}
+.btn-secondary:active {
+  transform: scale(0.97);
+}
+
+/* ── Secondary Large ── */
+.btn-secondary-lg {
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  padding: 1rem 2rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--btn-radius);
+  cursor: pointer;
+  transition: var(--btn-transition);
+  border: none;
+  outline: none;
+  line-height: 1;
+}
+.btn-secondary-lg:hover {
+  background: var(--btn-secondary-hover-bg);
+  transform: scale(1.03);
+}
+.btn-secondary-lg:active {
+  transform: scale(0.97);
+}
+
+/* ── Outline: bordered white pill ── */
+.btn-outline {
+  background: var(--btn-outline-bg);
+  color: var(--btn-outline-text);
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid var(--btn-outline-border);
+}
+.btn-outline:hover {
+  background: var(--btn-outline-hover-bg);
+}
+
+/* ── White: solid white pill (for dark backgrounds) ── */
+.btn-white {
+  background: var(--btn-white-bg);
+  color: var(--btn-white-text);
+  padding: 0.625rem 1.5rem;
+  font-size: 0.875rem;
+}
+.btn-white:hover {
+  background: var(--btn-white-hover-bg);
+  transform: scale(1.03);
+}
+.btn-white:active {
+  transform: scale(0.97);
+}
+
+/* ── Hero Outline: dramatic bordered button for dark overlays ── */
+.btn-hero-outline {
+  background: transparent;
+  color: #ffffff;
+  padding: 1rem 2.5rem;
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  border: 2px solid #6b7280;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+.btn-hero-outline:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #9ca3af;
+  transform: scale(1.03);
+}
+.btn-hero-outline:active {
+  transform: scale(0.97);
+}
+
+/* ── Ghost: transparent with subtle hover (nav actions, etc.) ── */
+.btn-ghost {
+  background: transparent;
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.btn-ghost:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* ── Icon: circular icon-only button ── */
+.btn-icon {
+  background: var(--btn-icon-bg);
+  padding: 0.5rem;
+  border: 1px solid var(--btn-icon-border);
+  box-shadow: var(--btn-icon-shadow);
+}
+.btn-icon:hover {
+  background: var(--btn-icon-hover-bg);
+  transform: scale(1.15);
+}
+
+/* ── Like: compact white pill with icon (ModelSection-style) ── */
+.btn-like {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #ffffff;
+  color: #111827;
+  padding: 0.5625rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  border-radius: var(--btn-radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: var(--btn-transition);
+  border: none;
+}
+.btn-like:hover {
+  transform: scale(1.05);
+}
+.btn-like:active {
+  transform: scale(0.95);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   4. SUBTEXT / PARAGRAPH SYSTEM
+   Usage:  className="subtext"  /  className="subtext-light"
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Default subtext: muted paragraph on light background ── */
+.subtext {
+  font-size: var(--subtext-font-size);
+  line-height: var(--subtext-line-height);
+  color: var(--subtext-color);
+}
+
+/* ── Extra-small subtext ── */
+.subtext-xs {
+  font-size: var(--subtext-font-size-xs);
+  line-height: var(--subtext-line-height);
+  color: var(--subtext-color);
+}
+
+/* ── Large subtext (section intros) ── */
+.subtext-lg {
+  font-size: var(--subtext-font-size-lg);
+  line-height: var(--subtext-line-height);
+  color: var(--subtext-color-muted);
+}
+
+/* ── Light subtext (on dark/image backgrounds) ── */
+.subtext-light {
+  font-size: var(--subtext-font-size);
+  line-height: var(--subtext-line-height);
+  color: var(--subtext-color-light);
+}
+
+/* ── Light extra-small ── */
+.subtext-light-xs {
+  font-size: var(--subtext-font-size-xs);
+  line-height: var(--subtext-line-height);
+  color: var(--subtext-color-light);
+}
+
+/* ── Muted gray subtext (footer, captions) ── */
+.subtext-muted {
+  font-size: var(--subtext-font-size);
+  line-height: var(--subtext-line-height);
+  color: var(--subtext-color-muted);
+}

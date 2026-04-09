@@ -1,0 +1,287 @@
+"use client";
+
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { Sun, User, Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+
+export default function Navbar() {
+  const [showProfile, setShowProfile] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const profileRef = useRef(null);
+  const pathname = usePathname();
+
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "Gallery", href: "/gallery" },
+    { name: "Pricing", href: "/pricing" },
+    { name: "Contact", href: "/contact" },
+    { name: "About", href: "/about" },
+  ];
+
+  // Close profile popup when clicking outside
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (profileRef.current && !profileRef.current.contains(e.target)) {
+        setShowProfile(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
+  return (
+    <>
+      <nav className="w-full sticky top-0 z-50 bg-transparent backdrop-blur-md">
+        <div className="flex items-center justify-between max-w-7xl mx-auto px-6 pt-8">
+
+          {/* ── Left: Logo ── */}
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 bg-emerald-400 rounded-sm rotate-45" />
+            <span className="font-bold text-xl tracking-tight">kapil Photography</span>
+          </div>
+
+          {/* ── Right: Nav Links + Icons (desktop) ── */}
+          <div className="flex items-center gap-6">
+
+            {/* Nav Links — hidden on mobile */}
+            <ul className="hidden md:flex items-center gap-6 text-sm font-medium text-black">
+              {navLinks.map((link, index) => (
+                <li key={index}>
+                  <Link href={link.href} className="relative pb-1 block group">
+                    <motion.span
+                      initial={{ opacity: 0, y: -15, filter: "blur(6px)" }}
+                      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                      transition={{ delay: index * 0.1, duration: 0.4, ease: "easeOut" }}
+                      className={`inline-block relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-[2px] after:bottom-0 after:left-0 after:bg-black after:origin-bottom-right after:transition-transform after:duration-300 group-hover:after:scale-x-100 group-hover:after:origin-bottom-left ${pathname === link.href ? "text-gray-900 underline-offset-4 underline decoration-2 font-bold" : ""}`}
+                    >
+                      {link.name}
+                    </motion.span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            {/* Icons */}
+            <div className="flex items-center gap-3">
+
+              {/* User Avatar Button — desktop only */}
+              <div className="relative hidden md:block" ref={profileRef}>
+                <motion.button
+                  initial={{ scale: 0.7, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.7, duration: 0.3 }}
+                  whileHover={{ scale: 1.1 }}
+                  onClick={() => setShowProfile((prev) => !prev)}
+                  className="w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 bg-white shadow-sm hover:border-gray-300 hover:bg-gray-50"
+                >
+                  <User className="w-4 h-4 text-black" />
+                </motion.button>
+
+                {/* Profile Popup */}
+                <AnimatePresence>
+                  {showProfile && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.9, y: -8 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.9, y: -8 }}
+                      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                      className="absolute right-0 top-12 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden z-50"
+                    >
+                      {/* Header with cover + avatar */}
+                      <div className="relative h-20 bg-gradient-to-br from-emerald-400 to-teal-500">
+                        <div className="absolute -bottom-6 left-5">
+                          <div className="w-14 h-14 rounded-full border-[3px] border-white overflow-hidden shadow-lg">
+                            <Image
+                              src="/Team_Photo/waguri.jpg"
+                              alt="Profile"
+                              width={56}
+                              height={56}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Info */}
+                      <div className="pt-9 px-5 pb-4">
+                        <p className="text-sm font-bold text-gray-900">Kapil Singh</p>
+                        <p className="text-xs text-gray-400 mt-0.5">Photographer & Visual Artist</p>
+                      </div>
+
+                      {/* Divider */}
+                      <div className="border-t border-gray-100 mx-4" />
+
+                      {/* Actions */}
+                      <div className="p-3 flex flex-col gap-1">
+                        <Link href="/about" onClick={() => setShowProfile(false)} className="text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-3 py-2 rounded-lg transition-colors">View Profile</Link>
+                        <Link href="/gallery" onClick={() => setShowProfile(false)} className="text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-3 py-2 rounded-lg transition-colors">My Gallery</Link>
+                        <Link href="/contact" onClick={() => setShowProfile(false)} className="text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-3 py-2 rounded-lg transition-colors">Book a Session</Link>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Sun / Theme toggle — desktop only */}
+              <motion.button
+                initial={{ scale: 0.7, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.8, duration: 0.3 }}
+                whileHover={{ scale: 1.15 }}
+                className="hidden md:flex w-9 h-9 items-center justify-center rounded-full border border-gray-200 bg-white shadow-sm hover:border-gray-300 hover:bg-gray-50"
+              >
+                <Sun className="w-4 h-4 text-black" />
+              </motion.button>
+
+              {/* Hamburger — mobile only */}
+              <motion.button
+                initial={{ scale: 0.7, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                onClick={() => setMobileOpen((prev) => !prev)}
+                className="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 bg-white shadow-sm"
+                aria-label="Toggle menu"
+              >
+                <AnimatePresence mode="wait" initial={false}>
+                  {mobileOpen ? (
+                    <motion.span
+                      key="close"
+                      initial={{ rotate: -90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: 90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <X className="w-4 h-4 text-black" />
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      key="open"
+                      initial={{ rotate: 90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: -90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Menu className="w-4 h-4 text-black" />
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </motion.button>
+
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* ── Mobile Menu Overlay ── */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="fixed inset-0 z-40 bg-black/20 md:hidden"
+              onClick={() => setMobileOpen(false)}
+            />
+
+            {/* Glass panel — slides in from top */}
+            <motion.div
+              key="mobile-menu"
+              initial={{ opacity: 0, y: -24, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -24, scale: 0.97 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="fixed top-4 left-4 right-4 z-50 md:hidden rounded-3xl overflow-hidden"
+              style={{
+                background: "rgba(255, 255, 255, 0.35)",
+                backdropFilter: "blur(24px)",
+                WebkitBackdropFilter: "blur(24px)",
+                border: "1px solid rgba(255, 255, 255, 0.5)",
+                boxShadow: "0 8px 40px rgba(0,0,0,0.12)",
+              }}
+            >
+              {/* Header row inside glass panel */}
+              <div className="flex items-center justify-between px-6 pt-6 pb-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-5 h-5 bg-emerald-400 rounded-sm rotate-45" />
+                  <span className="font-bold text-base tracking-tight text-gray-900">kapil Photography</span>
+                </div>
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  className="w-8 h-8 flex items-center justify-center rounded-full bg-white/60 border border-white/60"
+                >
+                  <X className="w-4 h-4 text-gray-700" />
+                </button>
+              </div>
+
+              {/* Divider */}
+              <div className="mx-6 border-t border-white/40" />
+
+              {/* Nav links */}
+              <ul className="flex flex-col px-4 py-4 gap-1">
+                {navLinks.map((link, index) => (
+                  <motion.li
+                    key={index}
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.06 * index, duration: 0.3, ease: "easeOut" }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className={`block px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
+                        pathname === link.href
+                          ? "bg-white/60 text-gray-900 font-bold"
+                          : "text-gray-700 hover:bg-white/40 hover:text-gray-900"
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+
+              {/* Divider */}
+              <div className="mx-6 border-t border-white/40" />
+
+              {/* Profile row */}
+              <div className="flex items-center gap-4 px-6 py-5">
+                <div className="w-11 h-11 rounded-full border-2 border-white/70 overflow-hidden shadow-sm flex-shrink-0">
+                  <Image
+                    src="/Team_Photo/waguri.jpg"
+                    alt="Profile"
+                    width={44}
+                    height={44}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-bold text-gray-900 truncate">Kapil Singh</p>
+                  <p className="text-xs text-gray-500 truncate">Photographer & Visual Artist</p>
+                </div>
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  className="w-9 h-9 flex items-center justify-center rounded-full bg-white/60 border border-white/60 flex-shrink-0"
+                >
+                  <Sun className="w-4 h-4 text-gray-700" />
+                </motion.button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}

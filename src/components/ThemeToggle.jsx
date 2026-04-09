@@ -23,22 +23,27 @@ export default function ThemeToggle() {
   return (
     <motion.button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="relative flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 bg-white transition-colors hover:bg-gray-50 focus:outline-none dark:border-neutral-800 dark:bg-neutral-900 dark:hover:bg-neutral-800"
-      whileTap={{ scale: 0.9 }}
+      className="relative flex items-center justify-center w-10 h-10 rounded-full border border-[var(--border-primary)] bg-[var(--bg-secondary)] hover:bg-[var(--bg-tertiary)] transition-all duration-300 focus:outline-none"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
       aria-label="Toggle Dark Mode"
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={isDark ? "dark" : "light"}
-          initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+          initial={{ opacity: 0, rotate: -90, scale: 0 }}
           animate={{ opacity: 1, rotate: 0, scale: 1 }}
-          exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
-          transition={{ duration: 0.2 }}
+          exit={{ opacity: 0, rotate: 90, scale: 0 }}
+          transition={{ 
+            type: "spring",
+            stiffness: 200,
+            damping: 15
+          }}
         >
           {isDark ? (
-            <Moon size={18} className="text-gray-100" />
+            <Moon size={18} className="text-[var(--text-primary)]" />
           ) : (
-            <Sun size={18} className="text-gray-900" />
+            <Sun size={18} className="text-[var(--text-primary)]" />
           )}
         </motion.div>
       </AnimatePresence>

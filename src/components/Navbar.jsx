@@ -46,15 +46,15 @@ export default function Navbar() {
 
           {/* ── Left: Logo ── */}
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-emerald-400 rounded-sm rotate-45" />
-            <span className="font-bold text-xl tracking-tight">kapil Photography</span>
+            <div className="w-6 h-6 bg-accent-brand rounded-sm rotate-45" />
+            <span className="font-bold text-xl tracking-tight text-text-primary">kapil Photography</span>
           </div>
 
           {/* ── Right: Nav Links + Icons (desktop) ── */}
           <div className="flex items-center gap-6">
 
             {/* Nav Links — hidden on mobile */}
-            <ul className="hidden md:flex items-center gap-6 text-sm font-medium text-black dark:text-gray-200">
+            <ul className="hidden md:flex items-center gap-6 text-sm font-medium text-text-secondary">
               {navLinks.map((link, index) => (
                 <li key={index}>
                   <Link href={link.href} className="relative pb-1 block group">
@@ -62,7 +62,7 @@ export default function Navbar() {
                       initial={{ opacity: 0, y: -15, filter: "blur(6px)" }}
                       animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                       transition={{ delay: index * 0.1, duration: 0.4, ease: "easeOut" }}
-                      className={`inline-block relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-[2px] after:bottom-0 after:left-0 after:bg-black dark:after:bg-white after:origin-bottom-right after:transition-transform after:duration-300 group-hover:after:scale-x-100 group-hover:after:origin-bottom-left ${pathname === link.href ? "text-gray-900 dark:text-white underline-offset-4 underline decoration-2 font-bold" : ""}`}
+                      className={`inline-block relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-[2px] after:bottom-0 after:left-0 after:bg-text-primary after:origin-bottom-right after:transition-transform after:duration-300 group-hover:after:scale-x-100 group-hover:after:origin-bottom-left ${pathname === link.href ? "text-text-primary underline-offset-4 underline decoration-2 font-bold" : ""}`}
                     >
                       {link.name}
                     </motion.span>
@@ -85,9 +85,9 @@ export default function Navbar() {
                   transition={{ delay: 0.7, duration: 0.3 }}
                   whileHover={{ scale: 1.1 }}
                   onClick={() => setShowProfile((prev) => !prev)}
-                  className="w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 bg-white shadow-sm transition-colors hover:border-gray-300 hover:bg-gray-50 focus:outline-none dark:border-neutral-800 dark:bg-neutral-900 dark:hover:bg-neutral-800"
+                  className="w-9 h-9 flex items-center justify-center rounded-full border border-border-primary bg-bg-secondary shadow-sm transition-all hover:bg-bg-tertiary focus:outline-none"
                 >
-                  <User className="w-4 h-4 text-black dark:text-gray-200" />
+                  <User className="w-4 h-4 text-text-primary" />
                 </motion.button>
 
                 {/* Profile Popup */}
@@ -98,7 +98,7 @@ export default function Navbar() {
                       animate={{ opacity: 1, scale: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.9, y: -8 }}
                       transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                      className="absolute right-0 top-12 w-64 bg-white dark:bg-neutral-900 rounded-2xl shadow-xl border border-gray-100 dark:border-neutral-800 overflow-hidden z-50 text-black dark:text-white"
+                      className="absolute right-0 top-12 w-64 bg-bg-primary rounded-2xl shadow-xl border border-border-primary overflow-hidden z-50 text-text-primary"
                     >
                       {/* Header with cover + avatar */}
                       <div className="relative h-20 bg-gradient-to-br from-emerald-400 to-teal-500">
@@ -118,8 +118,8 @@ export default function Navbar() {
 
                       {/* Info */}
                       <div className="pt-9 px-5 pb-4">
-                        <p className="text-sm font-bold text-gray-900 dark:text-white">Kapil Singh</p>
-                        <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">Photographer & Visual Artist</p>
+                        <p className="text-sm font-bold text-text-primary">Kapil Singh</p>
+                        <p className="text-xs text-text-muted mt-0.5">Photographer & Visual Artist</p>
                       </div>
 
                       {/* Divider */}
@@ -144,7 +144,7 @@ export default function Navbar() {
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.3 }}
                 onClick={() => setMobileOpen((prev) => !prev)}
-                className="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 transition-colors shadow-sm"
+                className="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-border-primary bg-bg-secondary transition-all shadow-sm focus:outline-none"
                 aria-label="Toggle menu"
               >
                 <AnimatePresence mode="wait" initial={false}>
@@ -156,7 +156,7 @@ export default function Navbar() {
                       exit={{ rotate: 90, opacity: 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <X className="w-4 h-4 text-black dark:text-gray-100" />
+                      <X className="w-4 h-4 text-text-primary" />
                     </motion.span>
                   ) : (
                     <motion.span
@@ -166,7 +166,7 @@ export default function Navbar() {
                       exit={{ rotate: -90, opacity: 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <Menu className="w-4 h-4 text-black dark:text-gray-100" />
+                      <Menu className="w-4 h-4 text-text-primary" />
                     </motion.span>
                   )}
                 </AnimatePresence>
@@ -204,14 +204,14 @@ export default function Navbar() {
               {/* Header row inside glass panel */}
               <div className="flex items-center justify-between px-6 pt-6 pb-4">
                 <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 bg-emerald-400 rounded-sm rotate-45" />
-                  <span className="font-bold text-base tracking-tight text-gray-900 dark:text-white">kapil Photography</span>
+                  <div className="w-5 h-5 bg-accent-brand rounded-sm rotate-45" />
+                  <span className="font-bold text-base tracking-tight text-text-primary">kapil Photography</span>
                 </div>
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="w-8 h-8 flex items-center justify-center rounded-full bg-white/60 dark:bg-neutral-900/60 transition-colors border border-white/60 dark:border-neutral-800"
+                  className="w-8 h-8 flex items-center justify-center rounded-full bg-bg-secondary hover:bg-bg-tertiary transition-colors border border-border-primary"
                 >
-                  <X className="w-4 h-4 text-gray-700 dark:text-gray-300" />
+                  <X className="w-4 h-4 text-text-secondary" />
                 </button>
               </div>
 
@@ -232,8 +232,8 @@ export default function Navbar() {
                       onClick={() => setMobileOpen(false)}
                       className={`block px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
                         pathname === link.href
-                          ? "bg-white/60 text-gray-900 font-bold"
-                          : "text-gray-700 hover:bg-white/40 hover:text-gray-900"
+                          ? "bg-bg-secondary text-text-primary font-bold"
+                          : "text-text-secondary hover:bg-bg-secondary hover:text-text-primary"
                       }`}
                     >
                       {link.name}
@@ -258,15 +258,10 @@ export default function Navbar() {
                   />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-bold text-gray-900 truncate">Kapil Singh</p>
-                  <p className="text-xs text-gray-500 truncate">Photographer & Visual Artist</p>
+                  <p className="text-sm font-bold text-text-primary truncate">Kapil Singh</p>
+                  <p className="text-xs text-text-muted truncate">Photographer & Visual Artist</p>
                 </div>
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  className="w-9 h-9 flex items-center justify-center rounded-full bg-white/60 border border-white/60 flex-shrink-0"
-                >
-                  <Sun className="w-4 h-4 text-gray-700" />
-                </motion.button>
+                <ThemeToggle />
               </div>
             </motion.div>
           </>

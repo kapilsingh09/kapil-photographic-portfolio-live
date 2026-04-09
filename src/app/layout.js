@@ -34,10 +34,12 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased`}
       suppressHydrationWarning
     >
-      <body className="flex flex-col bg-white text-gray-900 transition-colors duration-300 dark:bg-neutral-900 dark:text-gray-100">
+      <body className="flex flex-col min-h-screen">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange={false}>
           <Navbar />
-          {children}
+          <main className="flex-grow">
+            {children}
+          </main>
           <Footer />
         </ThemeProvider>
       </body>

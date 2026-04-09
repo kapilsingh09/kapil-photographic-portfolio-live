@@ -1,5 +1,17 @@
 @import "tailwindcss";
 @theme {
+  /* User requested names */
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-tertiary: var(--bg-tertiary);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-border-primary: var(--border-primary);
+  --color-border-secondary: var(--border-secondary);
+  --color-accent-brand: var(--accent);
+
+  /* Legacy / Compatibility names used in Footer etc. */
   --color-surface: var(--bg-primary);
   --color-surface-muted: var(--bg-secondary);
   --color-content: var(--text-primary);
@@ -14,108 +26,82 @@
 /* ── 1. Design Tokens (CSS Custom Properties) ─────────────────── */
 
 :root {
-  /* ── Semantic Tailwind Theme Maps ── */
+  /* ── Semantic Backgrounds ── */
   --bg-primary: #ffffff;
-  --bg-secondary: #f3f4f6; 
-  --text-primary: rgba(0, 0, 0, 0.486)
-  --text-secondary: #6b7280; 
-  --border-primary: #f3f4f6; 
+  --bg-secondary: #f8f9fa; 
+  --bg-tertiary: #f1f3f5;
+  
+  /* ── Semantic Text ── */
+  --text-primary: #1a1a1b; 
+  --text-secondary: #4a4a4b; 
+  --text-muted: #6c757d;
+  
+  /* ── Semantic Borders ── */
+  --border-primary: #e9ecef; 
+  --border-secondary: #dee2e6;
 
-  /* ── Colors ── */
-  --background: #dbd6d696;
-  --foreground: #171717;
+  /* ── Brand Colors ── */
   --accent: #c87828;
-  --accent-light: rgba(200, 120, 40, 0.18);
-  --accent-border: rgba(200, 120, 40, 0.45);
-
-  /* Text colors */
-  --text-on-dark: #ffffff;
-  --text-on-dark-secondary: rgba(255, 255, 255, 0.65);
-  --text-on-dark-muted: rgba(255, 255, 255, 0.7);
+  --accent-light: rgba(200, 120, 40, 0.1);
+  --accent-border: rgba(200, 120, 40, 0.3);
 
   /* ── Button Tokens ── */
-  --btn-radius: 9999px;               /* pill / fully rounded */
-  --btn-font-weight: 600;
-  --btn-transition: all 0.2s ease;
+  --btn-radius: 9999px;               
+  --btn-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Primary */
-  --btn-primary-bg: #000000;
+  --btn-primary-bg: #1a1a1b;
   --btn-primary-text: #ffffff;
-  --btn-primary-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  --btn-primary-hover-shadow: 0 14px 40px rgba(0, 0, 0, 0.28);
+  --btn-primary-shadow: 0 4px 14px 0 rgba(0,0,0,0.1);
 
-  /* Secondary */
-  --btn-secondary-bg: #f3f4f6;
-  --btn-secondary-text: #151719;
-  --btn-secondary-hover-bg: #e5e7eb;
-
-  /* Outline */
-  --btn-outline-bg: #ffffff;
-  --btn-outline-text: #1f2937;
-  --btn-outline-border: #d1d5db;
-  --btn-outline-hover-bg: #f9fafb;
-
-  /* White (on dark backgrounds) */
-  --btn-white-bg: #000000;
-  --btn-white-text: #000000;
-  --btn-white-hover-bg: #f3f4f6;
-
-  /* Icon */
-  --btn-icon-bg: #ffffff;
-  --btn-icon-border: #f3f4f6;
-  --btn-icon-hover-bg: #f3f4f6;
-  --btn-icon-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-
-  /* ── Subtext Tokens ── */
-  --subtext-font-size: 0.875rem;      /* 14px — text-sm */
-  --subtext-font-size-xs: 0.75rem;    /* 12px — text-xs */
-  --subtext-font-size-lg: 1.125rem;   /* 18px — text-lg */
-  --subtext-line-height: 1.625;       /* leading-relaxed */
-  --subtext-color: rgba(23, 23, 23, 0.5);
-  --subtext-color-light: rgba(255, 255, 255, 0.65);
-  --subtext-color-muted: #6b7280;
+  --btn-secondary-bg: #f8f9fa;
+  --btn-secondary-text: #1a1a1b;
+  --btn-secondary-hover-bg: #e9ecef;
 
   /* ── Typography ── */
   --font-heading: var(--font-poppins), 'Poppins', sans-serif;
 }
 
-/* Dark theme overrides (toggled by .dark on <html>) */
+/* Dark theme overrides */
 .dark {
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #171717; /* neutral-900 */
-  --text-primary: #e5e7eb; /* gray-200 */
-  --text-secondary: #9ca3af; /* gray-400 */
-  --border-primary: #262626; /* neutral-800 */
+  /* ── Semantic Backgrounds ── */
+  --bg-primary: #0a0a0a; 
+  --bg-secondary: #141414; 
+  --bg-tertiary: #1c1c1c;
 
-  --background: #0b0b0c;
-  --foreground: #f4f4f5;
+  /* ── Semantic Text ── */
+  --text-primary: #f8f9fa; 
+  --text-secondary: #adb5bd; 
+  --text-muted: #6c757d;
 
-  --btn-primary-bg: #ffffff;
-  --btn-primary-text: #0b0b0c;
+  /* ── Semantic Borders ── */
+  --border-primary: #1f1f1f; 
+  --border-secondary: #2d2d2d;
 
-  --btn-secondary-bg: rgba(255, 255, 255, 0.08);
-  --btn-secondary-text: #f4f4f5;
-  --btn-secondary-hover-bg: rgba(255, 255, 255, 0.12);
+  /* ── Button Tokens ── */
+  --btn-primary-bg: #f8f9fa;
+  --btn-primary-text: #0a0a0a;
 
-  --btn-outline-bg: transparent;
-  --btn-outline-text: #f4f4f5;
-  --btn-outline-border: rgba(255, 255, 255, 0.18);
+  --btn-secondary-bg: #1c1c1c;
+  --btn-secondary-text: #f8f9fa;
+  --btn-secondary-hover-bg: #2d2d2d;
+}
 
-  --btn-white-bg: #ffffff;
-  --btn-white-text: #0b0b0c;
-
-  --subtext-color: rgba(244, 244, 245, 0.72);
-  --subtext-color-light: rgba(244, 244, 245, 0.78);
-  --subtext-color-muted: rgba(244, 244, 245, 0.62);
+/* ── Global Transitions ── */
+*, *::before, *::after {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
 }
 
 /* ── 2. Base ──────────────────────────────────────────────────── */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ── Headings: Poppins everywhere ── */

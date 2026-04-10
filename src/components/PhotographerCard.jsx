@@ -67,14 +67,14 @@ function CardConnectCreate() {
           <div
             className="absolute w-36 h-48 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 cursor-pointer rotate-[3deg] -translate-y-[34px] translate-x-[15px] z-[1] hover:z-50 hover:scale-[1.15]"
           >
-            <img src="/images/img-5.jpg" alt="Art 3" className="w-full h-full object-cover" draggable={false} />
+            <img src="/images/img-2.jpg" alt="Art 3" className="w-full h-full object-cover" draggable={false} />
           </div>
 
           {/* Left card – peeking sideways */}
           <div
             className="absolute w-36 h-48 rounded-2xl shadow-xl overflow-hidden transition-all duration-300 cursor-pointer -rotate-[15deg] -translate-x-[60px] translate-y-[10px] z-[2] hover:z-50 hover:scale-[1.15]"
           >
-            <img src="/images/img-4.jpg" alt="Art 2" className="w-full h-full object-cover" draggable={false} />
+            <img src="/images/img-3.jpg" alt="Art 2" className="w-full h-full object-cover" draggable={false} />
           </div>
 
           {/* Bottom right card – peeking downwards */}
@@ -88,7 +88,7 @@ function CardConnectCreate() {
           <div
             className="absolute w-40 h-52 rounded-xl shadow-[0_20px_40px_rgba(0,0,0,0.4)] overflow-hidden border border-white/10 transition-all duration-300 cursor-pointer rotate-0 z-[10] hover:z-50 hover:scale-[1.1]"
           >
-            <img src="/images/img-1.jpg" alt="Main Art" className="w-full h-full object-cover" draggable={false} />
+            <img src="/section/img-1.jpg" alt="Main Art" className="w-full h-full object-cover" draggable={false} />
           </div>
 
           {/* @robin speech bubble (Hero Style Tag) */}
@@ -113,7 +113,7 @@ function CardConnectCreate() {
           <p className="subtext-muted mb-5">
             Offering buyers a chance to own a piece of that narrative.…
           </p>
-          <button className="btn-outline">
+          <button className="border-2 border-gray-900 rounded-full px-5 py-2.5 hover:bg-black hover:text-white transition-all font-medium">
             How it works
           </button>
         </div>
@@ -130,72 +130,25 @@ function CardArtBreathes() {
   return (
     <Reveal delay={0.2} className="h-full">
       <div className="relative bg-[#1a35e8] rounded-3xl flex flex-col justify-between h-full overflow-hidden min-h-[540px]">
-        {/* Illustration area */}
-        <div className="flex-1 flex items-center justify-center relative overflow-hidden pt-6 pb-2 px-6">
-          {/* Abstract eye SVG illustration */}
-          <motion.div
-            animate={{ scale: [1, 1.04, 1], rotate: [0, 2, -2, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="relative z-10 w-72 h-56"
-          >
-            <svg
-              viewBox="0 0 300 220"
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-full h-full drop-shadow-2xl"
-            >
-              {/* Body blob */}
-              <ellipse cx="150" cy="130" rx="110" ry="75" fill="#e0e0ff" />
-              <ellipse cx="100" cy="150" rx="50" ry="35" fill="#ffb3c1" />
-              <ellipse cx="210" cy="155" rx="40" ry="28" fill="#ff6b6b" />
-
-              {/* Polka dots */}
-              {[
-                [130, 155], [160, 170], [145, 180], [170, 145],
-              ].map(([cx, cy], i) => (
-                <circle key={i} cx={cx} cy={cy} r="8" fill="white" opacity="0.6" />
-              ))}
-
-              {/* Stripe arm */}
-              <rect
-                x="55" y="118" width="70" height="18" rx="9"
-                fill="white" opacity="0.9"
-                transform="rotate(-20 90 127)"
-              />
-              <rect
-                x="55" y="118" width="70" height="18" rx="9"
-                fill="#111" opacity="0.3"
-                transform="rotate(-20 90 127) translateX(4)"
-              />
-
-              {/* Eye white */}
-              <ellipse cx="152" cy="100" rx="64" ry="48" fill="white" />
-              {/* Iris */}
-              <circle cx="152" cy="102" r="34" fill="#1a35e8" />
-              {/* Pupil */}
-              <circle cx="152" cy="102" r="20" fill="#05010f" />
-              {/* Highlight */}
-              <circle cx="162" cy="94" r="7" fill="white" opacity="0.9" />
-              <circle cx="144" cy="112" r="3" fill="white" opacity="0.5" />
-
-              {/* Yellow ring accent */}
-              <circle cx="152" cy="102" r="38" fill="none" stroke="#ffe600" strokeWidth="5" opacity="0.8" />
-
-              {/* Horizontal blur bars (decorative) */}
-              <rect x="30" y="148" width="240" height="12" rx="6" fill="#4b5aff" opacity="0.5" />
-              <rect x="60" y="164" width="180" height="8" rx="4" fill="#7b87ff" opacity="0.4" />
-            </svg>
-          </motion.div>
+        {/* Header Image */}
+        <div className="relative w-full h-72 overflow-hidden">
+          <img
+            src="/section/img-3.jpg"
+            alt="Art illustration"
+            className="w-full h-full object-cover"
+            draggable={false}
+          />
         </div>
 
-        {/* Text block */}
-        <div className="bg-white/10 backdrop-blur-sm p-6 rounded-b-3xl">
+        {/* Text block with blurry effect */}
+        <div className="bg-white/10 backdrop-blur-md p-8 rounded-b-3xl border-t border-white/10">
           <h3 className="text-2xl font-bold text-white mb-2">
             Where Art Breathes Commerce
           </h3>
-          <p className="subtext-light mb-5">
+          <p className="subtext-light mb-6 leading-relaxed">
             Artistic spirit with commercial viability, providing a platform where creativity…
           </p>
-          <button className="btn-white">
+          <button className="text-white border border-white rounded-full px-5 py-2.5 hover:bg-white hover:text-[#1a35e8] transition-all font-medium">
             Read more
           </button>
         </div>
@@ -216,7 +169,7 @@ function CardSpinArt() {
         <div className="relative w-full overflow-hidden" style={{ height: "260px" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="https://picsum.photos/seed/colorart55/600/400"
+            src="/section/img-1.jpg"
             alt="Spin your art"
             className="w-full h-full object-cover"
             draggable={false}
@@ -235,7 +188,7 @@ function CardSpinArt() {
               Unleash your artistic potential, where innovation and creativity converge…
             </p>
           </div>
-          <button className="btn-outline mt-3 self-start">
+          <button className="border-2 border-gray-900 rounded-full px-5 py-2.5 hover:bg-black hover:text-white transition-all font-medium mt-3">
             Join us now
           </button>
         </div>
@@ -278,8 +231,8 @@ function CardAdvantages() {
                 ${item.main
                   ? "text-3xl font-bold text-white"
                   : item.highlight
-                  ? "text-lg font-semibold text-[#7c9bff]"
-                  : "text-base font-medium text-gray-500"}
+                    ? "text-lg font-semibold text-[#7c9bff]"
+                    : "text-base font-medium text-gray-500"}
               `}
             >
               {item.label}

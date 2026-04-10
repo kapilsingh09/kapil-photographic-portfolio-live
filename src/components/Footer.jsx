@@ -1,8 +1,13 @@
+"use client";
+
 import React from "react";
 import { FaCamera, FaInstagram, FaXTwitter, FaLinkedinIn, FaDribbble } from "react-icons/fa6";
+import { useContent } from "@/hooks/useContent";
 
 export default function Footer() {
+    const { site } = useContent();
     const year = new Date().getFullYear();
+    const socialIcons = [FaInstagram, FaXTwitter, FaLinkedinIn, FaDribbble];
 
     return (
         <footer className="bg-surface-muted mx-[10px] mb-[10px] px-8 md:px-16 pt-20 pb-0 flex flex-col mt-20 text-content border border-border-subtle rounded-[2rem] transition-colors">
@@ -12,7 +17,7 @@ export default function Footer() {
                 <div className="max-w-xs md:max-w-sm flex flex-col">
                     <div className="flex items-center gap-3 mb-6 relative w-max">
                         <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-content transition-colors">
-                            Your vision, our lens.
+                            {site.branding.heading}
                         </h2>
                         <div className="absolute -top-3 -right-8 bg-surface border border-border-subtle shadow-sm rounded-xl p-1 flex items-center justify-center transition-colors">
                             <span className="flex items-center gap-0.5 px-1 py-0.5">
@@ -24,20 +29,23 @@ export default function Footer() {
                     </div>
 
                     <p className="subtext-muted mb-10">
-                        In the realm of visual storytelling, creativity knows no bounds. This eternal marketplace celebrates the timeless nature of photography and cinematic art.
+                        {site.branding.description}
                     </p>
 
                     {/* Socials */}
                     <div className="flex items-center gap-4">
-                        {[FaInstagram, FaXTwitter, FaLinkedinIn, FaDribbble].map((Icon, idx) => (
-                            <a
-                                key={idx}
-                                href="#"
-                                className="w-12 h-12 bg-surface rounded-full flex items-center justify-center shadow-sm border border-border-subtle text-content-muted hover:text-content hover:scale-105 hover:shadow-md transition-all duration-300"
-                            >
-                                <Icon size={18} strokeWidth={1.5} />
-                            </a>
-                        ))}
+                        {site.socials.map((social, idx) => {
+                            const Icon = socialIcons[idx] || FaInstagram;
+                            return (
+                                <a
+                                    key={idx}
+                                    href={social.url}
+                                    className="w-12 h-12 bg-surface rounded-full flex items-center justify-center shadow-sm border border-border-subtle text-content-muted hover:text-content hover:scale-105 hover:shadow-md transition-all duration-300"
+                                >
+                                    <Icon size={18} strokeWidth={1.5} />
+                                </a>
+                            );
+                        })}
                     </div>
                 </div>
 
@@ -47,28 +55,33 @@ export default function Footer() {
                     {/* Column 1: Services */}
                     <div className="flex flex-col gap-4">
                         <h3 className="font-semibold text-content text-[15px] mb-2 tracking-tight">Services</h3>
-                        <a href="#" className="font-medium text-text-secondary hover:text-text-primary text-sm transition-colors flex items-center gap-3 w-max group">
-                            <FaCamera size={14} className="text-text-muted group-hover:text-text-primary transition-colors" />
-                            Photography
-                            <span className="ml-1 px-2.5 py-0.5 bg-accent-light text-accent-brand rounded-full text-[10px] font-bold tracking-wide">New</span>
-                        </a>
-                        <a href="#" className="font-medium text-text-secondary hover:text-text-primary text-sm transition-colors">Videography</a>
-                        <a href="#" className="font-medium text-text-secondary hover:text-text-primary text-sm transition-colors">Color Grading</a>
-                        <a href="#" className="font-medium text-text-secondary hover:text-text-primary text-sm transition-colors">Drone Aerials</a>
-                        <a href="#" className="font-medium text-text-secondary hover:text-text-primary text-sm transition-colors">E-Commerce</a>
+                        {site.services.map((service, idx) => (
+                             <a key={idx} href={service.url} className="font-medium text-text-secondary hover:text-text-primary text-sm transition-colors flex items-center gap-3 w-max group">
+                                {idx === 0 && <FaCamera size={14} className="text-text-muted group-hover:text-text-primary transition-colors" />}
+                                {service.name}
+                                {service.badge && (
+                                    <span className="ml-1 px-2.5 py-0.5 bg-accent-light text-accent-brand rounded-full text-[10px] font-bold tracking-wide">
+                                        {service.badge}
+                                    </span>
+                                )}
+                            </a>
+                        ))}
                     </div>
 
                     {/* Column 2: Portfolios */}
                     <div className="flex flex-col gap-4">
                         <h3 className="font-semibold text-content text-[15px] mb-2 tracking-tight">Portfolios</h3>
-                        <a href="#" className="font-medium text-text-secondary hover:text-text-primary text-sm transition-colors flex items-center gap-3 w-max group">
-                            <FaCamera size={14} className="text-text-muted group-hover:text-text-primary transition-colors" />
-                            Weddings
-                        </a>
-                        <a href="#" className="font-medium text-text-secondary hover:text-text-primary text-sm transition-colors flex items-center w-max">
-                            Commercial
-                            <span className="ml-2 px-2.5 py-0.5 bg-accent-light border border-accent-border text-accent-brand rounded-full text-[10px] font-bold tracking-wide">Soon</span>
-                        </a>
+                        {site.portfolios.map((item, idx) => (
+                             <a key={idx} href={item.url} className="font-medium text-text-secondary hover:text-text-primary text-sm transition-colors flex items-center gap-3 w-max group">
+                                {idx === 0 && <FaCamera size={14} className="text-text-muted group-hover:text-text-primary transition-colors" />}
+                                {item.name}
+                                {item.badge && (
+                                    <span className="ml-2 px-2.5 py-0.5 bg-accent-light border border-accent-border text-accent-brand rounded-full text-[10px] font-bold tracking-wide">
+                                        {item.badge}
+                                    </span>
+                                )}
+                            </a>
+                        ))}
                     </div>
 
                     {/* Column 3: Legal & Policy */}
@@ -85,8 +98,8 @@ export default function Footer() {
 
             {/* Bottom bar — stretches to page edge */}
             <div className="w-full mt-16 py-6 border-t border-border-subtle flex flex-col md:flex-row items-center justify-between gap-2 transition-colors">
-                <p className="text-text-secondary font-medium text-sm">© {year} All rights reserved.</p>
-                <p className="text-text-muted text-xs hidden md:block">Made with ♥ for visual storytellers</p>
+                <p className="text-text-secondary font-medium text-sm">© {year} {site.copyright}</p>
+                <p className="text-text-muted text-xs hidden md:block">{site.tagline}</p>
             </div>
         </footer>
     );

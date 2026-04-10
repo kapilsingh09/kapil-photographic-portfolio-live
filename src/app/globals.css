@@ -27,12 +27,12 @@
 
 :root {
   /* ── Semantic Backgrounds ── */
-  --bg-primary: #ffffff;
+  --bg-primary: #e4e7e4ed;
   --bg-secondary: #f8f9fa; 
   --bg-tertiary: #f1f3f5;
   
   /* ── Semantic Text ── */
-  --text-primary: #000000ec; 
+  --text-primary: rgba(0, 0, 0, 0.925)
   --text-secondary: #4a4a4b; 
   --text-muted: #6c757d;
   

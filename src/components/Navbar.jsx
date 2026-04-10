@@ -7,6 +7,7 @@ import { Sun, User, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import ThemeToggle from "./ThemeToggle";
+import { useContent } from "@/hooks/useContent";
 
 export default function Navbar() {
   const [showProfile, setShowProfile] = useState(false);
@@ -47,7 +48,9 @@ export default function Navbar() {
           {/* ── Left: Logo ── */}
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 bg-green-500 rounded-sm rotate-45" />
-            <span className="font-bold text-xl tracking-tight text-text-primary">kapil photography</span>
+            <span className="font-bold text-xl tracking-tight text-text-primary capitalize">
+                {useContent().site.name}
+            </span>
           </div>
 
           {/* ── Right: Nav Links + Icons (desktop) ── */}

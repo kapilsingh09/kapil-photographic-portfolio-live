@@ -3,21 +3,11 @@
 import { useState, useRef } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { Camera } from 'lucide-react'
+import { useContent } from '@/hooks/useContent'
 
 // ─── Data ───────────────────────────────────────────────────────────────────
 
-const INR = [
-    { label: 'Monthly', sym: '₹', num: '4,999', dec: '', sub: 'Regular monthly billing', featured: false },
-    { label: 'Quarterly', sym: '₹', num: '11,999', dec: '', sub: 'Save ₹3,000 vs monthly', featured: true },
-    { label: 'Annually', sym: '₹', num: '39,999', dec: '', sub: 'Best value — 40% off', featured: false },
-]
-const USD = [
-    { label: 'Monthly', sym: '$', num: '59', dec: '.99', sub: 'Regular monthly billing', featured: false },
-    { label: 'Quarterly', sym: '$', num: '143', dec: '.99', sub: 'Save $35 vs monthly', featured: true },
-    { label: 'Annually', sym: '$', num: '479', dec: '.99', sub: 'Best value — 40% off', featured: false },
-]
-
-const HEADING_WORDS = ['Book for.', 'Stories.', 'Adventures.']
+// Data is now fetched from useContent hook inside the component
 const CARD_ROTATIONS = [-5, 0, 5]
 
 // ─── Variants ───────────────────────────────────────────────────────────────
@@ -57,14 +47,16 @@ const numVariants = {
 // ─── Component ──────────────────────────────────────────────────────────────
 
 export default function PricingSection() {
+    const { pricing } = useContent();
     const [isINR, setIsINR] = useState(false)
-    const prices = isINR ? INR : USD
+    const prices = isINR ? pricing.plans.INR : pricing.plans.USD
 
     const cardsRef = useRef(null)
     const isInView = useInView(cardsRef, { once: true, margin: '-60px' })
 
     return (
         <section
+            ref={cardsRef}
             className="relative flex flex-col md:flex-row items-center justify-center overflow-hidden px-6 md:px-16 gap-8"
             style={{
                 minHeight: '30vh',
@@ -120,7 +112,7 @@ export default function PricingSection() {
 
                 {/* Heading */}
                 <h2 className="leading-none tracking-tight text-content transition-colors">
-                    {HEADING_WORDS.map((word, i) => (
+                    {pricing.heading.map((word, i) => (
                         <motion.span
                             key={word}
                             custom={i}
@@ -142,13 +134,12 @@ export default function PricingSection() {
                     transition={{ delay: 0.75, duration: 0.5 }}
                     className="subtext-xs"
                 >
-                    Every frame tells a story. Choose a plan that fits your vision.
+                    {pricing.subtext}
                 </motion.p>
             </div>
 
             {/* ── Cards: Desktop fan layout ── */}
             <div
-                ref={cardsRef}
                 className="relative z-10 flex-1 hidden md:block"
                 style={{ height: 340, minWidth: 320, maxWidth: 640, width: '100%' }}
             >
@@ -187,7 +178,6 @@ export default function PricingSection() {
 
             {/* ── Cards: Mobile horizontal scroll ── */}
             <div
-                ref={cardsRef}
                 className="md:hidden w-full z-10"
             >
                 <div

@@ -18,13 +18,13 @@ const PAGES = [
     description:
       'A month spent wandering old alleys and rooftops — every corner held a frame worth keeping.',
     photos: [
-      { id: 1,  src: '/photocard_imgs/pc-img-1.jpg', location: 'Jaipur, Rajasthan',   label: 'click click ✦',      rot: 1.5,   size: 'wide'   },
-      { id: 2,  src: '/photocard_imgs/pc-img-2.jpg', location: 'Udaipur, Rajasthan',  label: 'golden hour ✿',     rot: -1.2,  size: 'wide'   },
-      { id: 3,  src: '/photocard_imgs/pc-img-3.jpg', location: 'Jodhpur, Rajasthan',  label: 'zzzz ♡',            rot: 2,     size: 'tall'   },
-      { id: 4,  src: '/photocard_imgs/pc-img-4.jpg', location: 'Pushkar, Rajasthan',  label: 'candid ☆',          rot: -2.5,  size: 'tall'   },
-      { id: 5,  src: '/photocard_imgs/pc-img-5.jpg', location: 'Bikaner, Rajasthan',  label: 'attention! ✉',      rot: 1,     size: 'tall'   },
-      { id: 6,  src: '/photocard_imgs/pc-img-6.jpg', location: 'Jaisalmer, Rajasthan',label: 'de la cruise ✈',    rot: -1.8,  size: 'tall'   },
-      { id: 7,  src: '/photocard_imgs/pc-img-7.jpg', location: 'Mount Abu, Rajasthan',label: '♥ ♥ ♥',             rot: 0.8,   size: 'wide'   },
+      { id: 1, src: '/photocard_imgs/pc-img-1.jpg', location: 'Jaipur, Rajasthan', label: 'click click ✦', rot: 1.5, size: 'wide' },
+      { id: 2, src: '/photocard_imgs/pc-img-2.jpg', location: 'Udaipur, Rajasthan', label: 'golden hour ✿', rot: -1.2, size: 'wide' },
+      { id: 3, src: '/photocard_imgs/pc-img-3.jpg', location: 'Jodhpur, Rajasthan', label: 'zzzz ♡', rot: 2, size: 'tall' },
+      { id: 4, src: '/photocard_imgs/pc-img-4.jpg', location: 'Pushkar, Rajasthan', label: 'candid ☆', rot: -2.5, size: 'tall' },
+      { id: 5, src: '/photocard_imgs/pc-img-5.jpg', location: 'Bikaner, Rajasthan', label: 'attention! ✉', rot: 1, size: 'tall' },
+      { id: 6, src: '/photocard_imgs/pc-img-6.jpg', location: 'Jaisalmer, Rajasthan', label: 'de la cruise ✈', rot: -1.8, size: 'tall' },
+      { id: 7, src: '/photocard_imgs/pc-img-7.jpg', location: 'Mount Abu, Rajasthan', label: '♥ ♥ ♥', rot: 0.8, size: 'wide' },
     ],
   },
   {
@@ -36,14 +36,14 @@ const PAGES = [
     description:
       'January brought fog, fireside cafés, and strangers who became faces I will never forget.',
     photos: [
-      { id: 8,  src: '/photocard_imgs/pc-img-8.jpg', location: 'Manali, Himachal',    label: 'cheeeeese ☃',       rot: -1.5,  size: 'wide'   },
-      { id: 9,  src: '/photocard_imgs/pc-img-9.jpg', location: 'Kasol, Himachal',     label: 'squad goals ♛',     rot: 1.8,   size: 'wide'   },
-      { id: 10, src: '/images/img-1.jpg', location: 'Spiti Valley, HP',    label: 'shutter ✦',         rot: -2,    size: 'tall'   },
-      { id: 11, src: '/images/img-2.jpg', location: 'Dharamshala, HP',     label: 'café vibes ☕',      rot: 2.5,   size: 'tall'   },
-      { id: 12, src: '/images/img-3.jpg', location: 'Bir Billing, HP',     label: 'fly high ✈',        rot: -1,    size: 'tall'   },
-      { id: 13, src: '/images/img-4.jpg', location: 'Shimla, HP',          label: 'portrait mode ♡',   rot: 1.5,   size: 'tall'   },
-      { id: 14, src: '/images/img-5.jpg', location: 'Kufri, HP',           label: 'snow days ❄',       rot: -0.8,  size: 'wide'   },
-      { id: 15, src: '/images/img-6.jpg', location: 'Chail, HP',           label: 'night walks ★',     rot: 1.2,   size: 'wide'   },
+      { id: 8, src: '/photocard_imgs/pc-img-8.jpg', location: 'Manali, Himachal', label: 'cheeeeese ☃', rot: -1.5, size: 'wide' },
+      { id: 9, src: '/photocard_imgs/pc-img-9.jpg', location: 'Kasol, Himachal', label: 'squad goals ♛', rot: 1.8, size: 'wide' },
+      { id: 10, src: '/images/img-1.jpg', location: 'Spiti Valley, HP', label: 'shutter ✦', rot: -2, size: 'tall' },
+      { id: 11, src: '/images/img-2.jpg', location: 'Dharamshala, HP', label: 'café vibes ☕', rot: 2.5, size: 'tall' },
+      { id: 12, src: '/images/img-3.jpg', location: 'Bir Billing, HP', label: 'fly high ✈', rot: -1, size: 'tall' },
+      { id: 13, src: '/images/img-4.jpg', location: 'Shimla, HP', label: 'portrait mode ♡', rot: 1.5, size: 'tall' },
+      { id: 14, src: '/images/img-5.jpg', location: 'Kufri, HP', label: 'snow days ❄', rot: -0.8, size: 'wide' },
+      { id: 15, src: '/images/img-6.jpg', location: 'Chail, HP', label: 'night walks ★', rot: 1.2, size: 'wide' },
     ],
   },
 ]
@@ -65,9 +65,8 @@ function PhotoCard({ photo, delay = 0 }) {
     >
       {/* Photo */}
       <div
-        className={`relative overflow-hidden rounded-sm bg-gray-200 shadow-md ${
-          isWide ? 'h-44 w-64 md:h-52 md:w-80' : 'h-56 w-44 md:h-64 md:w-52'
-        }`}
+        className={`relative overflow-hidden rounded-sm bg-gray-200 shadow-md ${isWide ? 'h-44 w-64 md:h-52 md:w-80' : 'h-56 w-44 md:h-64 md:w-52'
+          }`}
       >
         <Image
           src={photo.src}
@@ -179,7 +178,7 @@ function GalleryPage({ page, pageIndex }) {
             {(() => {
               const mainLocation = page.photos[0].location.split(',')[1]?.trim() || page.photos[0].location.split(',')[0];
               const bgColor = pageIndex % 2 === 0 ? 'bg-black' : 'bg-black'; // synced perfectly with the rest of the site branding
-              
+
               return (
                 <div className={`relative flex items-center gap-1.5 rounded-full ${bgColor} px-4 py-1.5 text-xs font-bold tracking-widest uppercase text-white shadow-xl`}>
                   <MapPin size={12} strokeWidth={2.5} />

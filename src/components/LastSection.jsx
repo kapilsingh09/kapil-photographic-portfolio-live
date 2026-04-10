@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 // import { useRouter } from 'next/navigation'
 import { Aperture, BookImage, Images, PenLine } from 'lucide-react'
 import Image from 'next/image'
+import { useContent } from '@/hooks/useContent'
 
 
 // ─── Framer Variants ──────────────────────────────────────────────────────────
@@ -20,6 +21,7 @@ const fadeUp = (delay = 0) => ({
 import { useRouter } from 'next/navigation'
 export default function LastSection() {
   const router = useRouter();
+  const { about } = useContent();
   return (
     <section className="flex min-h-[100vh] items-center justify-center px-4 py-24 md:py-0 md:px-10">
       <div className="grid w-full max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
@@ -32,7 +34,7 @@ export default function LastSection() {
         >
           {/* Background photo — replace src with your actual team photo */}
           <Image
-            src="/Team_Photo/waguri.jpg"
+            src={about.hero.image}
             alt="Our Team"
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
@@ -87,9 +89,9 @@ export default function LastSection() {
             {/* Heading */}
             <motion.h2
               {...fadeUp(0.15)}
-              className="mb-3 text-4xl font-bold leading-tight text-white"
+              className="mb-3 text-4xl font-bold leading-tight text-white whitespace-pre-line"
             >
-              Meet<br />our team
+              {about.hero.title}
             </motion.h2>
 
             {/* Subtext */}
@@ -97,7 +99,7 @@ export default function LastSection() {
               {...fadeUp(0.25)}
               className="subtext-light mb-6 max-w-xs"
             >
-              A passionate crew of photographers and storytellers, dedicated to capturing moments that last forever.
+              {about.hero.description}
             </motion.p>
 
             {/* Button */}
@@ -108,7 +110,7 @@ export default function LastSection() {
               whileTap={{ scale: 0.97 }}
               className="btn-white"
             >
-              Let&apos;s Meet
+              {about.hero.cta}
             </motion.button>
           </div>
         </motion.div>
@@ -121,7 +123,7 @@ export default function LastSection() {
         >
           {/* Full background photo */}
           <Image
-            src="/Team_Photo/img-2.jpg"
+            src={about.archive.image}
             alt="Team creative"
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
@@ -175,9 +177,9 @@ export default function LastSection() {
             {/* Heading */}
             <motion.h2
               {...fadeUp(0.2)}
-              className="mb-3 text-4xl font-bold leading-tight text-white"
+              className="mb-3 text-4xl font-bold leading-tight text-white whitespace-pre-line"
             >
-              Archive<br />of new arts
+              {about.archive.title}
             </motion.h2>
 
             {/* Subtext */}
@@ -185,7 +187,7 @@ export default function LastSection() {
               {...fadeUp(0.3)}
               className="subtext-light mb-6 max-w-xs"
             >
-              Our portfolio is the canvas where every shutter click becomes a timeless piece, showcasing work to a broad audience.
+              {about.archive.description}
             </motion.p>
 
             {/* Button */}
@@ -196,7 +198,7 @@ export default function LastSection() {
               whileTap={{ scale: 0.97 }}
               className="btn-white"
             >
-              Archives
+              {about.archive.cta}
             </motion.button>
           </div>
         </motion.div>

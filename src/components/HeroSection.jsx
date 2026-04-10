@@ -15,6 +15,8 @@ import {
     useMotionTemplate,
 } from "framer-motion";
 
+import { useContent } from "@/hooks/useContent";
+
 // ────────────────────────────────────────────────────────────────
 // ARC MATH — y = k * (x - centerX)²
 // ────────────────────────────────────────────────────────────────
@@ -269,6 +271,7 @@ const FloatingImage = ({ children, index, scrollYProgress, isInView, tag1, tag1P
 // HERO SECTION
 // ────────────────────────────────────────────────────────────────
 export default function HeroSection() {
+    const { hero } = useContent();
     const router = useRouter();
     const containerRef = useRef(null);
     const arcRef = useRef(null);
@@ -327,83 +330,24 @@ export default function HeroSection() {
                 <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-30">
                     <div className="sticky top-0 left-0 w-full h-screen overflow-visible">
                         {/* ── FLOATING IMAGES ── */}
-                        <FloatingImage
-                            index={0}
-                            scrollYProgress={scrollYProgress}
-                            isInView={isInView}
-                            hoverTag={{ label: "@morgan", bg: "bg-red-500" }}
-                            disableHover={isBundling}
-                        >
-                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-xl overflow-hidden bg-surface-muted transition-colors">
-                                <Image src="/images/img-1.jpg" loading="lazy" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
-                            </div>
-                        </FloatingImage>
-
-                        <FloatingImage
-                            index={1}
-                            scrollYProgress={scrollYProgress}
-                            isInView={isInView}
-                            tag1="@coplin"
-                            tag1Props={{ pos: "right-3", bg: "bg-blue-500" }}
-                            hoverTag={{ label: "@coplin", bg: "bg-blue-500" }}
-                            disableHover={isBundling}
-                        >
-                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-lg overflow-hidden bg-surface-muted transition-colors">
-                                <Image src="/images/img-2.jpg" loading="lazy" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
-                            </div>
-                        </FloatingImage>
-
-                        <FloatingImage
-                            index={2}
-                            scrollYProgress={scrollYProgress}
-                            isInView={isInView}
-                            tag2="@robin"
-                            tag2Props={{ pos: "right-3", bg: "bg-violet-600" }}
-                            hoverTag={{ label: "@robin", bg: "bg-violet-600" }}
-                            disableHover={isBundling}
-                        >
-                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-lg overflow-hidden bg-surface-muted transition-colors">
-                                <Image src="/images/img-3.jpg" loading="lazy" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
-                            </div>
-                        </FloatingImage>
-
-                        <FloatingImage
-                            index={3}
-                            scrollYProgress={scrollYProgress}
-                            isInView={isInView}
-                            hoverTag={{ label: "@taylor", bg: "bg-amber-500" }}
-                            disableHover={isBundling}
-                        >
-                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-lg overflow-hidden bg-surface-muted transition-colors">
-                                <Image src="/images/img-7.jpg" loading="lazy" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
-                            </div>
-                        </FloatingImage>
-
-                        <FloatingImage index={4} scrollYProgress={scrollYProgress} isInView={isInView} hoverTag={{ label: "@jordan", bg: "bg-pink-500" }} disableHover={isBundling}>
-                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-2xl overflow-hidden bg-surface-muted transition-colors">
-                                <Image src="/images/img-5.jpg" loading="lazy" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
-                            </div>
-                        </FloatingImage>
-
-                        <FloatingImage
-                            index={5}
-                            scrollYProgress={scrollYProgress}
-                            isInView={isInView}
-                            tag1="@andrea"
-                            tag1Props={{ pos: "left-3", bg: "bg-green-500" }}
-                            hoverTag={{ label: "@andrea", bg: "bg-green-500" }}
-                            disableHover={isBundling}
-                        >
-                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-lg overflow-hidden bg-surface-muted transition-colors">
-                                <Image src="/images/img-4.jpg" loading="lazy" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
-                            </div>
-                        </FloatingImage>
-
-                        <FloatingImage index={6} scrollYProgress={scrollYProgress} isInView={isInView} hoverTag={{ label: "@alex", bg: "bg-cyan-500" }} disableHover={isBundling}>
-                            <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-xl overflow-hidden bg-surface-muted transition-colors">
-                                <Image src="/images/img-6.jpg" loading="lazy" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
-                            </div>
-                        </FloatingImage>
+                        {hero.images.map((img, idx) => (
+                            <FloatingImage
+                                key={img.id}
+                                index={idx}
+                                scrollYProgress={scrollYProgress}
+                                isInView={isInView}
+                                hoverTag={{ label: img.tag, bg: img.color }}
+                                disableHover={isBundling}
+                                tag1={idx === 1 || idx === 5 ? img.tag : null}
+                                tag1Props={idx === 1 ? { pos: "right-3", bg: img.color } : idx === 5 ? { pos: "left-3", bg: img.color } : {}}
+                                tag2={idx === 2 ? img.tag : null}
+                                tag2Props={idx === 2 ? { pos: "right-3", bg: img.color } : {}}
+                            >
+                                <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-xl overflow-hidden bg-surface-muted transition-colors">
+                                    <Image src={img.src} loading="lazy" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
+                                </div>
+                            </FloatingImage>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -419,7 +363,7 @@ export default function HeroSection() {
                         transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
                         className="text-4xl md:text-6xl font-bold text-content max-w-4xl leading-tight inline-block transition-colors"
                     >
-                        A place to display your masterpiece.
+                        {hero.title}
                     </motion.h1>
                 </motion.div>
                 {/* Invisible spacer — bloom trigger zone */}
@@ -427,9 +371,9 @@ export default function HeroSection() {
                 {/* Mobile: keep layout tight (no floating images) */}
                 <div className="md:hidden w-full max-w-md mt-8 mb-10">
                     <div className="grid grid-cols-3 gap-2 opacity-95">
-                        {["/images/img-1.jpg", "/images/img-2.jpg", "/images/img-3.jpg", "/images/img-7.jpg", "/images/img-5.jpg", "/images/img-4.jpg"].map((src, idx) => (
-                            <div key={src} className="relative aspect-square overflow-hidden rounded-2xl bg-surface-muted shadow-sm transition-colors">
-                                <Image src={src} loading="lazy" alt="" fill sizes="(max-width: 768px) 33vw, 210px" className="object-cover" />
+                        {hero.images.slice(0, 6).map((img) => (
+                            <div key={img.id} className="relative aspect-square overflow-hidden rounded-2xl bg-surface-muted shadow-sm transition-colors">
+                                <Image src={img.src} loading="lazy" alt="" fill sizes="(max-width: 768px) 33vw, 210px" className="object-cover" />
                             </div>
                         ))}
                     </div>
@@ -442,7 +386,7 @@ export default function HeroSection() {
                     className="flex flex-col items-center gap-5"
                 >
                     <p className="text-content-muted text-md max-w-xl transition-colors">
-                        Photographers can showcase their work and clients can easily book them.
+                        {hero.subtitle}
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 w-full sm:w-auto">
                         <motion.button
@@ -473,22 +417,20 @@ export default function HeroSection() {
                 {/* --- MOBILE (STATIC) --- */}
                 <div className="md:hidden flex-1 max-w-2xl space-y-6 z-50 text-left relative">
                     <p className="text-xs tracking-[0.2em] text-content font-medium uppercase transition-colors">
-                        Photography &amp; Portfolio
+                        {hero.splitSection.tagline}
                     </p>
-                    <h1 className="text-4xl font-bold leading-[1.1] text-content transition-colors">
-                        Showcase, Sell, <br />
-                        <span className="text-red-600 dark:text-red-500">&amp; acquire arts</span> <br />
-                        to our marketplace.
+                    <h1 className="text-4xl font-bold leading-[1.1] text-content transition-colors whitespace-pre-line">
+                        {hero.splitSection.title}
                     </h1>
                     <p className="subtext-lg max-w-md text-content-muted transition-colors">
-                        A place to display your masterpiece. Dynamic community where artists and buyers seamlessly merge and grow together.
+                        {hero.splitSection.description}
                     </p>
                     <div className="flex flex-wrap gap-4 pt-4">
                         <button onClick={() => router.push("/pricing")} className="btn-primary-lg pointer-events-auto">
-                            Join for $9.99/m
+                            {hero.splitSection.ctaPrimary}
                         </button>
                         <button onClick={() => router.push("/about")} className="btn-secondary-lg pointer-events-auto">
-                            Read More
+                            {hero.splitSection.ctaSecondary}
                         </button>
                     </div>
                 </div>
@@ -508,23 +450,21 @@ export default function HeroSection() {
                 >
                     <motion.p
                         variants={{ hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } } }}
-                        className="text-xs md:text-sm tracking-[0.2em] text-black font-medium uppercase"
+                        className="text-xs md:text-sm tracking-[0.2em] text-text-primary font-medium uppercase"
                     >
-                        Photography &amp; Portfolio
+                        {hero.splitSection.tagline}
                     </motion.p>
                     <motion.h1
                         variants={{ hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } } }}
-                        className="text-4xl md:text-5xl font-bold leading-[1.1] text-gray-900"
+                        className="text-4xl md:text-5xl font-bold leading-[1.1] text-text-primary whitespace-pre-line"
                     >
-                        Showcase, Sell, <br />
-                        <span className="text-red-600">&amp; acquire arts</span> <br />
-                        to our marketplace.
+                        {hero.splitSection.title}
                     </motion.h1>
                     <motion.p
                         variants={{ hidden: { opacity: 0, x: -20 }, visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } } }}
                         className="subtext-lg max-w-md"
                     >
-                        A place to display your masterpiece. Dynamic community where artists and buyers seamlessly merge and grow together.
+                        {hero.splitSection.description}
                     </motion.p>
                     <motion.div
                         variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } } }}
@@ -536,15 +476,15 @@ export default function HeroSection() {
                             whileTap={{ scale: 0.95 }}
                             className="btn-primary-lg pointer-events-auto"
                         >
-                            Join for $9.99/m
+                            {hero.splitSection.ctaPrimary}
                         </motion.button>
                         <motion.button
                             variants={{ hidden: { opacity: 0, scale: 0.8, y: 20 }, visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", stiffness: 120, damping: 14 } } }}
-                            whileHover={{ scale: 1.05, backgroundColor: "#e5e7eb" }}
+                            whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             className="btn-secondary-lg pointer-events-auto"
                         >
-                            Read More
+                            {hero.splitSection.ctaSecondary}
                         </motion.button>
                     </motion.div>
                 </motion.div>

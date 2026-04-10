@@ -7,6 +7,7 @@ import {
     useTransform,
     useSpring,
 } from "framer-motion";
+import { useContent } from "@/hooks/useContent";
 import HoverTag from "./HoverTag";
 
 /* ─────────────────────────────────────────────────────────────
@@ -14,29 +15,29 @@ import HoverTag from "./HoverTag";
    Each entry: seed, positional CSS, dimensions, fly-in offsets
 ───────────────────────────────────────────────────────────── */
 const TILES = [
-  // ── COL 1 (Outer Left — small, further out) ──
-  { seed:"ti01", ml: -500, mt: -190, w: 120, h: 155, initX: -150, initY: -100, tag: "@alex",   color: "bg-red-500",     tagPos: "bottom" },
-  { seed:"ti02", ml: -510, mt: -10,  w: 130, h: 160, initX: -180, initY: 0,    tag: "@jordan", color: "bg-blue-500",    tagPos: "bottom" },
-  { seed:"ti03", ml: -495, mt: 175,  w: 125, h: 150, initX: -150, initY: 120,  tag: "@taylor", color: "bg-green-500",   tagPos: "bottom" },
+    // ── COL 1 (Outer Left — small, further out) ──
+    { seed: "ti01", ml: -500, mt: -190, w: 120, h: 155, initX: -150, initY: -100, tag: "@alex", color: "bg-red-500", tagPos: "bottom" },
+    { seed: "ti02", ml: -510, mt: -10, w: 130, h: 160, initX: -180, initY: 0, tag: "@jordan", color: "bg-blue-500", tagPos: "bottom" },
+    { seed: "ti03", ml: -495, mt: 175, w: 125, h: 150, initX: -150, initY: 120, tag: "@taylor", color: "bg-green-500", tagPos: "bottom" },
 
-  // ── COL 2 (Inner Left — medium, closer) ──
-  { seed:"ti04", ml: -310, mt: -260, w: 150, h: 195, initX: -100, initY: -150, tag: "@sam",    color: "bg-purple-500",  tagPos: "bottom" },
-  { seed:"ti05", ml: -320, mt: -40,  w: 160, h: 175, initX: -130, initY: 0,    tag: "@casey",  color: "bg-yellow-500",  tagPos: "bottom" },
-  { seed:"ti06", ml: -305, mt: 160,  w: 145, h: 185, initX: -100, initY: 120,  tag: "@riley",  color: "bg-pink-500",    tagPos: "bottom" },
+    // ── COL 2 (Inner Left — medium, closer) ──
+    { seed: "ti04", ml: -310, mt: -260, w: 150, h: 195, initX: -100, initY: -150, tag: "@sam", color: "bg-purple-500", tagPos: "bottom" },
+    { seed: "ti05", ml: -320, mt: -40, w: 160, h: 175, initX: -130, initY: 0, tag: "@casey", color: "bg-yellow-500", tagPos: "bottom" },
+    { seed: "ti06", ml: -305, mt: 160, w: 145, h: 185, initX: -100, initY: 120, tag: "@riley", color: "bg-pink-500", tagPos: "bottom" },
 
-  // ── COL 3 (Center Flankers — biggest, tight to center) ──
-  { seed:"ti07", ml: -95,  mt: -295, w: 175, h: 220, initX: 0,    initY: -200, tag: "@morgan", color: "bg-indigo-500",  tagPos: "bottom" },
-  { seed:"ti08", ml: -90,  mt: 155,  w: 180, h: 210, initX: 0,    initY: 180,  tag: "@quinn",  color: "bg-teal-500",    tagPos: "bottom" },
+    // ── COL 3 (Center Flankers — biggest, tight to center) ──
+    { seed: "ti07", ml: -95, mt: -295, w: 175, h: 220, initX: 0, initY: -200, tag: "@morgan", color: "bg-indigo-500", tagPos: "bottom" },
+    { seed: "ti08", ml: -90, mt: 155, w: 180, h: 210, initX: 0, initY: 180, tag: "@quinn", color: "bg-teal-500", tagPos: "bottom" },
 
-  // ── COL 4 (Inner Right — medium, closer) ──
-  { seed:"ti09", ml: 165,  mt: -260, w: 155, h: 190, initX: 100,  initY: -150, tag: "@avery",  color: "bg-orange-500",  tagPos: "bottom" },
-  { seed:"ti10", ml: 155,  mt: -45,  w: 165, h: 180, initX: 130,  initY: 0,    tag: "@dakota", color: "bg-cyan-500",    tagPos: "bottom" },
-  { seed:"ti11", ml: 160,  mt: 155,  w: 150, h: 190, initX: 100,  initY: 120,  tag: "@reese",  color: "bg-rose-500",    tagPos: "bottom" },
+    // ── COL 4 (Inner Right — medium, closer) ──
+    { seed: "ti09", ml: 165, mt: -260, w: 155, h: 190, initX: 100, initY: -150, tag: "@avery", color: "bg-orange-500", tagPos: "bottom" },
+    { seed: "ti10", ml: 155, mt: -45, w: 165, h: 180, initX: 130, initY: 0, tag: "@dakota", color: "bg-cyan-500", tagPos: "bottom" },
+    { seed: "ti11", ml: 160, mt: 155, w: 150, h: 190, initX: 100, initY: 120, tag: "@reese", color: "bg-rose-500", tagPos: "bottom" },
 
-  // ── COL 5 (Outer Right — small, further out) ──
-  { seed:"ti12", ml: 365,  mt: -195, w: 125, h: 160, initX: 150,  initY: -100, tag: "@cam",    color: "bg-lime-500",    tagPos: "bottom" },
-  { seed:"ti13", ml: 375,  mt: -10,  w: 130, h: 155, initX: 180,  initY: 0,    tag: "@blake",  color: "bg-fuchsia-500", tagPos: "bottom" },
-  { seed:"ti14", ml: 360,  mt: 175,  w: 120, h: 150, initX: 150,  initY: 120,  tag: "@drew",   color: "bg-sky-500",     tagPos: "bottom" },
+    // ── COL 5 (Outer Right — small, further out) ──
+    { seed: "ti12", ml: 365, mt: -195, w: 125, h: 160, initX: 150, initY: -100, tag: "@cam", color: "bg-lime-500", tagPos: "bottom" },
+    { seed: "ti13", ml: 375, mt: -10, w: 130, h: 155, initX: 180, initY: 0, tag: "@blake", color: "bg-fuchsia-500", tagPos: "bottom" },
+    { seed: "ti14", ml: 360, mt: 175, w: 120, h: 150, initX: 150, initY: 120, tag: "@drew", color: "bg-sky-500", tagPos: "bottom" },
 ];
 
 /* ─────────────────────────────────────────────────────────────
@@ -81,8 +82,9 @@ function Tile({ data, progress }) {
 
 /* ─────────────────────────────────────────────────────────────
    CENTER CARD
+   Note: Now accepts 'artist' data as a prop
 ───────────────────────────────────────────────────────────── */
-function CenterCard({ progress }) {
+function CenterCard({ progress, artist }) {
     const width = useTransform(progress, [0, 1], ["100vw", "250px"]);
     const height = useTransform(progress, [0, 1], ["100vh", "300px"]);
     const br = useTransform(progress, [0, 0.3, 1], ["10px", "26px", "32px"]);
@@ -112,8 +114,8 @@ function CenterCard({ progress }) {
             className="will-change-transform"
         >
             <img
-                src="https://picsum.photos/seed/modelorange88/700/1050"
-                alt="Trisha Woodward"
+                src={artist.image}
+                alt={artist.name}
                 draggable={false}
                 style={{ objectPosition: "top center" }}
                 className="w-full h-full object-cover"
@@ -145,7 +147,7 @@ function CenterCard({ progress }) {
                         className="text-white text-[13px] font-extrabold px-4 py-2 shadow-2xl select-none"
                         style={{ background: "#ff5c35", borderRadius: "18px 18px 18px 4px" }}
                     >
-                        @artist
+                        {artist.handle}
                     </div>
                 </motion.div>
             </motion.div>
@@ -154,16 +156,16 @@ function CenterCard({ progress }) {
                 <div className="flex items-center gap-3">
                     <div className="w-11 h-11 rounded-full overflow-hidden ring-2 ring-white shadow flex-shrink-0">
                         <img
-                            src="https://picsum.photos/seed/avtr42/80/80"
-                            alt="Trisha"
+                            src={artist.avatar}
+                            alt={artist.name}
                             className="w-full h-full object-cover"
                         />
                     </div>
                     <div>
                         <p className="text-white font-bold text-[15px] leading-tight drop-shadow-sm">
-                            Trisha Woodward
+                            {artist.name}
                         </p>
-                        <p className="text-white/60 text-xs drop-shadow-sm">from ArtRoss</p>
+                        <p className="text-white/60 text-xs drop-shadow-sm">{artist.source}</p>
                     </div>
                 </div>
             </motion.div>
@@ -199,7 +201,16 @@ function ScrollHint({ progress }) {
    EXPORTED COMPONENT
 ───────────────────────────────────────────────────────────── */
 export default function HeroScrollGallery() {
+    const { featuredArtist } = useContent();
     const containerRef = useRef(null);
+
+    // Merge static positions with dynamic content
+    const dynamicTiles = TILES.map((tile, i) => ({
+        ...tile,
+        tag: featuredArtist.tiles[i]?.tag || tile.tag,
+        color: featuredArtist.tiles[i]?.color || tile.color,
+        seed: featuredArtist.tiles[i]?.seed || tile.seed,
+    }));
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -225,11 +236,11 @@ export default function HeroScrollGallery() {
         <div ref={containerRef} className="relative w-full">
             {/* Mobile: simplified (prevents absolute tile overflow) */}
             <section className="md:hidden w-full px-4 py-20">
-                <div className="mx-auto w-full max-w-md rounded-4xl border border-gray-100 bg-white shadow-[0_28px_80px_rgba(0,0,0,0.10)] overflow-hidden">
-                    <div className="relative aspect-[4/5] w-full bg-gray-100">
+                <div className="mx-auto w-full max-w-md rounded-4xl border border-border-subtle bg-surface shadow-[0_28px_80px_rgba(0,0,0,0.10)] overflow-hidden transition-colors duration-300">
+                    <div className="relative aspect-[4/5] w-full bg-surface-muted">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                            src="https://picsum.photos/seed/modelorange88/700/1050"
+                            src={featuredArtist.hero.image}
                             alt="Featured"
                             className="absolute inset-0 w-full h-full object-cover object-top"
                             draggable={false}
@@ -246,7 +257,7 @@ export default function HeroScrollGallery() {
                                 className="text-white text-[11px] font-extrabold px-3 py-2 shadow-2xl select-none"
                                 style={{ background: "#ff5c35", borderRadius: "18px 18px 18px 4px" }}
                             >
-                                @artist
+                                {featuredArtist.hero.handle}
                             </div>
                         </div>
                         <div className="absolute top-4 right-4">
@@ -262,29 +273,29 @@ export default function HeroScrollGallery() {
                                 <div className="w-11 h-11 rounded-full overflow-hidden ring-2 ring-white shadow flex-shrink-0">
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
                                     <img
-                                        src="https://picsum.photos/seed/avtr42/80/80"
-                                        alt="Trisha"
+                                        src={featuredArtist.hero.avatar}
+                                        alt={featuredArtist.hero.name}
                                         className="w-full h-full object-cover"
                                     />
                                 </div>
                                 <div>
                                     <p className="text-white font-bold text-[15px] leading-tight drop-shadow-sm">
-                                        Trisha Woodward
+                                        {featuredArtist.hero.name}
                                     </p>
-                                    <p className="text-white/60 text-xs drop-shadow-sm">from ArtRoss</p>
+                                    <p className="text-white/60 text-xs drop-shadow-sm">{featuredArtist.hero.source}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="px-6 py-6">
-                        <p className="text-[10px] font-black uppercase tracking-[0.22em] text-gray-400 mb-2">
+                        <p className="text-[10px] font-black uppercase tracking-[0.22em] text-content-muted mb-2">
                             Featured profile
                         </p>
-                        <h3 className="text-2xl font-black tracking-tight text-gray-900">
-                            Scroll-driven story, <span className="text-orange-500">mobile-ready</span>.
+                        <h3 className="text-2xl font-black tracking-tight text-content transition-colors duration-300">
+                            {featuredArtist.mobile.title}
                         </h3>
-                        <p className="subtext mt-3">
-                            Desktop keeps the full sticky animation. On mobile we show a clean, readable card so the page never overflows.
+                        <p className="subtext mt-3 text-content-muted">
+                            {featuredArtist.mobile.description}
                         </p>
                     </div>
                 </div>
@@ -293,10 +304,10 @@ export default function HeroScrollGallery() {
             {/* Desktop: original sticky animation */}
             <div className="hidden md:block h-[400vh]">
                 <div className="sticky top-0 w-full h-screen overflow-hidden">
-                    <CenterCard progress={smoothProgress} />
+                    <CenterCard progress={smoothProgress} artist={featuredArtist.hero} />
 
                     <div className="absolute inset-0 max-w-[1120px] mx-auto pointer-events-none z-0">
-                        {TILES.map((tile) => (
+                        {dynamicTiles.map((tile) => (
                             <Tile key={tile.seed} data={tile} progress={smoothProgress} />
                         ))}
                     </div>

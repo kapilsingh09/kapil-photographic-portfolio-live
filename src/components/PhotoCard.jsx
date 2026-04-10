@@ -4,21 +4,9 @@ import Image from "next/image";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
 import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import { useContent } from "@/hooks/useContent";
 
-const images = Array.from({ length: 10 }, (_, i) => `/photocard_imgs/pc-img-${i + 1}.jpg`);
-
-const photoData = [
-    { place: "@tokyo", info: "Neon reflections across the bustling Shibuya crossing under a midnight drizzle." },
-    { place: "@kyoto", info: "A quiet morning illuminating ancient wooden temples and crimson autumn leaves." },
-    { place: "@sapporo", info: "Pristine snowscapes stretching through quiet streets beneath the winter moon." },
-    { place: "@osaka", info: "Vibrant street food stalls glowing amidst the electric energy of Dotonbori." },
-    { place: "@nara", info: "Sunlight filtering softly through ancient forests and mist-covered shrines." },
-    { place: "@fuji", info: "A breathtaking silhouette of the iconic peak against a clear twilight sky." },
-    { place: "@hakone", info: "Steaming hot springs hidden within emerald valleys and misty mountain trails." },
-    { place: "@kobe", info: "Glistening city lights reflecting off the calm harbor waters at dusk." },
-    { place: "@okinawa", info: "Crystal-clear turquoise waves crashing against dramatic coral coastlines." },
-    { place: "@yokohama", info: "A modern skyline gleaming bright against the backdrop of an endless urban sprawl." },
-];
+// Data is now fetched from useContent hook inside the component
 
 // ─── Reusable scroll-reveal wrapper ───────────────────────────────────────────
 function ScrollReveal({
@@ -85,8 +73,11 @@ function DynamicTag({ text }) {
 }
 
 export default function PhotoCard() {
+    const { anthology } = useContent();
     const [currentIndex, setCurrentIndex] = useState(0);
     const sectionRef = useRef(null);
+
+    const images = anthology.items; // For easier mapping
 
     // Parallax on the card
     const { scrollYProgress } = useScroll({
@@ -113,15 +104,14 @@ export default function PhotoCard() {
                 {/* ── Header ── */}
                 <header className="relative">
                     <ScrollReveal delay={0} y={30} blur={12}>
-                        <p className="text-[1.5vh] font-bold tracking-[0.3em] uppercase px-2 text-gray-400 mb-1.5">
-                            Visual Anthology
+                        <p className="text-[1.5vh] font-bold tracking-[0.3em] uppercase px-2 text-content-muted mb-1.5 transition-colors">
+                            {anthology.tagline}
                         </p>
                     </ScrollReveal>
 
                     <ScrollReveal delay={0.1} y={40} blur={16}>
-                        <h1 className="text-4xl md:text-5xl font-[700] leading-[1.08] tracking-tighter max-w-2xl text-gray-900">
-                            Gateway to <br />
-                            <span className="">artistic masterworks.</span>
+                        <h1 className="text-4xl md:text-5xl font-[700] leading-[1.08] tracking-tighter max-w-2xl text-content transition-colors whitespace-pre-line">
+                            {anthology.title}
                         </h1>
                     </ScrollReveal>
 
@@ -144,7 +134,7 @@ export default function PhotoCard() {
                                     className="absolute inset-0"
                                 >
                                     <Image
-                                        src={images[currentIndex]}
+                                        src={images[currentIndex].src}
                                         alt={`Artwork ${currentIndex + 1}`}
                                         fill
                                         className="object-cover"
@@ -186,7 +176,7 @@ export default function PhotoCard() {
                                                 className="relative"
                                             >
                                                 {/* Dynamic tag that animates in sync with the current slide */}
-                                                <DynamicTag text={photoData[currentIndex].place} />
+                                                <DynamicTag text={images[currentIndex].place} />
                                                 
                                                 <motion.div
                                                     initial={{ opacity: 0, y: 24, filter: "blur(10px)" }}
@@ -194,7 +184,7 @@ export default function PhotoCard() {
                                                     transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                                                 >
                                                     <p className="subtext-light mb-8 font-medium">
-                                                        {photoData[currentIndex].info}
+                                                        {images[currentIndex].info}
                                                     </p>
                                                     <motion.button
                                                         whileHover={{ scale: 1.04, backgroundColor: "#fff", color: "#000" }}

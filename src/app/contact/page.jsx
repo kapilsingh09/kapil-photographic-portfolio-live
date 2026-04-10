@@ -11,11 +11,10 @@ const WA_NUMBER = '' // 👈 apna number yahan daal
 // ─── Input Field ──────────────────────────────────────────────────────────────
 
 function Field({ label, type = 'text', placeholder, value, onChange, as = 'input', error }) {
-  const base = `w-full bg-transparent border-b py-3 text-sm text-content placeholder:text-content-muted outline-none transition-all duration-300 focus:ring-0 ${
-    error
-      ? 'border-red-400 focus:border-red-500'
-      : 'border-border-subtle focus:border-content'
-  }`
+  const base = `w-full bg-transparent border-b py-3 text-sm text-content placeholder:text-content-muted outline-none transition-all duration-300 focus:ring-0 ${error
+    ? 'border-red-400 focus:border-red-500'
+    : 'border-border-subtle focus:border-content'
+    }`
   return (
     <div className="group flex flex-col">
       <label className="text-[11px] font-bold uppercase tracking-widest text-content-muted transition-colors group-focus-within:text-content">
@@ -44,18 +43,16 @@ function ModeToggle({ mode, onChange }) {
           key={key}
           type="button"
           onClick={() => onChange(key)}
-          className={`relative flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold transition-all duration-300 ${
-            mode === key 
-              ? (key === 'whatsapp' ? 'text-white' : 'text-white dark:text-black') 
-              : 'text-content-muted hover:text-content'
-          }`}
+          className={`relative flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold transition-all duration-300 ${mode === key
+            ? (key === 'whatsapp' ? 'text-white' : 'text-white dark:text-black')
+            : 'text-content-muted hover:text-content'
+            }`}
         >
           {mode === key && (
             <motion.div
               layoutId="toggle-pill"
-              className={`absolute inset-0 rounded-full ${
-                key === 'whatsapp' ? 'bg-[#25D366]' : 'bg-zinc-950 dark:bg-white'
-              }`}
+              className={`absolute inset-0 rounded-full ${key === 'whatsapp' ? 'bg-[#25D366]' : 'bg-zinc-950 dark:bg-gray-200'
+                }`}
               transition={{ type: 'spring', stiffness: 500, damping: 35 }}
             />
           )}
@@ -70,9 +67,9 @@ function ModeToggle({ mode, onChange }) {
 // ─── WhatsApp Panel ───────────────────────────────────────────────────────────
 
 function WhatsAppPanel() {
-  const [waName, setWaName]       = useState('')
+  const [waName, setWaName] = useState('')
   const [waService, setWaService] = useState('')
-  const [waMsg, setWaMsg]         = useState('')
+  const [waMsg, setWaMsg] = useState('')
 
   const openWhatsApp = () => {
     const service = waService ? `\nService: ${waService}` : ''
@@ -154,9 +151,9 @@ function WhatsAppPanel() {
 // ─── Email Form Panel ─────────────────────────────────────────────────────────
 
 function EmailPanel() {
-  const [form, setForm]             = useState({ name: '', email: '', service: '', message: '', _gotcha: '' })
-  const [status, setStatus]         = useState('idle')
-  const [errorMsg, setErrorMsg]     = useState('')
+  const [form, setForm] = useState({ name: '', email: '', service: '', message: '', _gotcha: '' })
+  const [status, setStatus] = useState('idle')
+  const [errorMsg, setErrorMsg] = useState('')
   const [fieldErrors, setFieldErrors] = useState({})
 
   const set = (key) => (e) => {
@@ -166,8 +163,8 @@ function EmailPanel() {
 
   const validate = () => {
     const errors = {}
-    if (!form.name.trim())    errors.name    = 'Name is required'
-    if (!form.email.trim())   errors.email   = 'Email is required'
+    if (!form.name.trim()) errors.name = 'Name is required'
+    if (!form.email.trim()) errors.email = 'Email is required'
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errors.email = 'Enter a valid email'
     if (!form.message.trim()) errors.message = 'Message is required'
     return errors
@@ -181,7 +178,7 @@ function EmailPanel() {
     setStatus('sending')
     setErrorMsg('')
     try {
-      const res  = await fetch('/api/send', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) })
+      const res = await fetch('/api/send', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) })
       const data = await res.json()
       if (!res.ok || !data.success) throw new Error(data.error || 'Failed to send message')
       setStatus('success')
@@ -207,7 +204,7 @@ function EmailPanel() {
       <input type="text" name="_gotcha" style={{ display: 'none' }} value={form._gotcha} onChange={set('_gotcha')} tabIndex="-1" autoComplete="off" />
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        <Field label="Name"  placeholder="" value={form.name}  onChange={set('name')}  error={fieldErrors.name} />
+        <Field label="Name" placeholder="" value={form.name} onChange={set('name')} error={fieldErrors.name} />
         <Field label="Email" type="email" placeholder="" value={form.email} onChange={set('email')} error={fieldErrors.email} />
       </div>
 
@@ -236,19 +233,18 @@ function EmailPanel() {
         disabled={status === 'sending'}
         whileHover={status === 'sending' ? {} : { scale: 1.02 }}
         whileTap={status === 'sending' ? {} : { scale: 0.98 }}
-        className={`mt-2 flex w-fit items-center gap-4 rounded-full px-6 py-3 text-sm font-semibold shadow-md transition-all ${
-          status === 'sending'
-            ? 'cursor-not-allowed bg-surface-muted text-content opacity-70'
-            : status === 'success'
+        className={`mt-2 flex w-fit items-center gap-4 rounded-full px-6 py-3 text-sm font-semibold shadow-md transition-all ${status === 'sending'
+          ? 'cursor-not-allowed bg-surface-muted text-content opacity-70'
+          : status === 'success'
             ? '!bg-emerald-600 text-white'
-            : 'bg-zinc-950 text-white dark:bg-white dark:text-black hover:opacity-90'
-        }`}
+            : 'bg-black text-white dark:bg-black dark:text-white hover:bg-white hover:text-black hover:border'
+          }`}
       >
         <span>
           {status === 'sending' && 'Sending...'}
           {status === 'success' && '✓ Message sent!'}
-          {status === 'error'   && 'Try again'}
-          {status === 'idle'    && 'Send Inquiry'}
+          {status === 'error' && 'Try again'}
+          {status === 'idle' && 'Send Inquiry'}
         </span>
         <div className="flex h-7 w-7 items-center justify-center rounded-full bg-surface/20">
           {status === 'sending' ? (
@@ -311,8 +307,8 @@ export default function ContactPage() {
 
             {/* ── Panels ── */}
             <AnimatePresence mode="wait">
-              {mode === 'email'     && <EmailPanel     key="email"     />}
-              {mode === 'whatsapp'  && <WhatsAppPanel  key="whatsapp"  />}
+              {mode === 'email' && <EmailPanel key="email" />}
+              {mode === 'whatsapp' && <WhatsAppPanel key="whatsapp" />}
             </AnimatePresence>
 
             {/* Contact info footer */}

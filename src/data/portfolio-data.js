@@ -136,5 +136,140 @@ export const portfolioData = {
         { name: "Weddings", url: "#" },
         { name: "Commercial", badge: "Soon", url: "#" }
     ]
+  },
+
+  // ── NAVBAR ──
+  navbar: {
+    logo: {
+      text: "kapilsingh09",
+      href: "/",
+    },
+    links: [
+      { name: "Home", href: "/" },
+      { name: "Gallery", href: "/gallery" },
+      { name: "Pricing", href: "/pricing" },
+      { name: "Contact", href: "/contact" },
+      { name: "About", href: "/about" },
+    ],
+    profile: {
+      name: "Kapil Singh",
+      role: "Photographer & Visual Artist",
+      image: "/Team_Photo/waguri.jpg",
+    }
+  },
+
+  // ── VIDEO SECTION ──
+  videoSection: {
+    header: {
+      badge: "Masterpiece",
+      title: "Showreel",
+    },
+    showcase: {
+      tag: "Client Showcase",
+      titleStart: "Cinematic",
+      titleEnd: "Language.",
+      description: "Experience visual storytelling that transcends conventional videography. We blend technical mastery with an artistic soul to create high-end films that provoke thought and inspire emotion for brands that demand the absolute best.",
+    },
+    capabilities: {
+      title: "Our Capabilities",
+      items: [
+        { title: "Visual Storytelling", description: "Crafting narrative-driven reels with cinematic depth.", icon: "FaCirclePlay" },
+        { title: "Precision Grading", description: "Custom color science tailored to evoke specific moods.", icon: "FaPalette" },
+        { title: "Dynamic Movement", description: "Fluid motion capture using high-end stabilizing rigs.", icon: "FaUpDownLeftRight" },
+      ]
+    },
+    video: {
+      src: "/videos/vid-1.mp4",
+      buttonText: "See Pricing Plans"
+    }
+  },
+
+  // ── CONTACT PAGE ──
+  contactPage: {
+    header: {
+      tag: "Inquire",
+      title: "Let's tell your story.",
+      description: "We'd love to hear from you. Fill out the form below and we'll get back to you as soon as possible.",
+    },
+    whatsappBanner: "Fill in the details below — it will pre-fill your WhatsApp message so we can get started faster.",
+    services: [
+      { id: "photography", label: "Photography" },
+      { id: "videography", label: "Videography" },
+      { id: "both", label: "Photo + Video" },
+      { id: "other", label: "Other" }
+    ]
+  },
+
+  // ── GALLERY PAGE ──
+  galleryPage: {
+    header: {
+      title: "The Archive",
+      subtitle: "A curated collection of moments, places, and faces locked in time.",
+    },
+    pages: [
+      {
+        volume: 'Volume I',
+        month: 'March',
+        year: '2025',
+        caption: 'Figure 1–7',
+        tagline: 'Quiet streets & golden light',
+        description: 'A month spent wandering old alleys and rooftops — every corner held a frame worth keeping.',
+        photos: [
+          { id: 1, src: '/photocard_imgs/pc-img-1.jpg', location: 'Jaipur, Rajasthan', label: 'click click ✦', rot: 1.5, size: 'wide' },
+          { id: 2, src: '/photocard_imgs/pc-img-2.jpg', location: 'Udaipur, Rajasthan', label: 'golden hour ✿', rot: -1.2, size: 'wide' },
+          { id: 3, src: '/photocard_imgs/pc-img-3.jpg', location: 'Jodhpur, Rajasthan', label: 'zzzz ♡', rot: 2, size: 'tall' },
+          { id: 4, src: '/photocard_imgs/pc-img-4.jpg', location: 'Pushkar, Rajasthan', label: 'candid ☆', rot: -2.5, size: 'tall' },
+          { id: 5, src: '/photocard_imgs/pc-img-5.jpg', location: 'Bikaner, Rajasthan', label: 'attention! ✉', rot: 1, size: 'tall' },
+          { id: 6, src: '/photocard_imgs/pc-img-6.jpg', location: 'Jaisalmer, Rajasthan', label: 'de la cruise ✈', rot: -1.8, size: 'tall' },
+          { id: 7, src: '/photocard_imgs/pc-img-7.jpg', location: 'Mount Abu, Rajasthan', label: '♥ ♥ ♥', rot: 0.8, size: 'wide' },
+        ],
+      },
+      {
+        volume: 'Volume II',
+        month: 'January',
+        year: '2025',
+        caption: 'Figure 1–8',
+        tagline: 'Into the hills & misty mornings',
+        description: 'January brought fog, fireside cafés, and strangers who became faces I will never forget.',
+        photos: [
+          { id: 8, src: '/photocard_imgs/pc-img-8.jpg', location: 'Manali, Himachal', label: 'cheeeeese ☃', rot: -1.5, size: 'wide' },
+          { id: 9, src: '/photocard_imgs/pc-img-9.jpg', location: 'Kasol, Himachal', label: 'squad goals ♛', rot: 1.8, size: 'wide' },
+          { id: 10, src: '/images/img-1.jpg', location: 'Spiti Valley, HP', label: 'shutter ✦', rot: -2, size: 'tall' },
+          { id: 11, src: '/images/img-2.jpg', location: 'Dharamshala, HP', label: 'café vibes ☕', rot: 2.5, size: 'tall' },
+          { id: 12, src: '/images/img-3.jpg', location: 'Bir Billing, HP', label: 'fly high ✈', rot: -1, size: 'tall' },
+          { id: 13, src: '/images/img-4.jpg', location: 'Shimla, HP', label: 'portrait mode ♡', rot: 1.5, size: 'tall' },
+          { id: 14, src: '/images/img-5.jpg', location: 'Kufri, HP', label: 'snow days ❄', rot: -0.8, size: 'wide' },
+          { id: 15, src: '/images/img-6.jpg', location: 'Chail, HP', label: 'night walks ★', rot: 1.2, size: 'wide' },
+        ],
+      },
+    ]
+  },
+
+  // ── ABOUT PAGE ──
+  aboutPage: {
+    stats: [
+      { value: '6+', label: 'Years Active', icon: 'Camera' },
+      { value: '320+', label: 'Shoots Done', icon: 'Aperture' },
+      { value: '98%', label: 'Happy Clients', icon: 'Star' },
+      { value: '12+', label: 'Awards Won', icon: 'Award' },
+    ],
+    skills: [
+      { name: 'Portrait', pct: 97 },
+      { name: 'Wedding', pct: 92 },
+      { name: 'Commercial', pct: 88 },
+      { name: 'Landscape', pct: 85 },
+      { name: 'Street', pct: 90 },
+    ],
+    gear: [
+      { category: 'Body', items: ['Sony A7 IV', 'Fujifilm X-T5'] },
+      { category: 'Lens', items: ['35mm f/1.4', '85mm f/1.8', '24-70mm f/2.8'] },
+      { category: 'Light', items: ['Godox AD400 Pro', 'Profoto B10'] },
+    ],
+    brands: ['Vogue India', 'Nike', 'Nykaa', 'Forbes India', 'Zara'],
+    testimonials: [
+      { name: 'Aisha Mehta', role: 'Bride — Wedding', text: 'He captured every single emotion of our day. The photos felt like living memories.', avatar: 'AM', color: '#f5c340' },
+      { name: 'Rohan Sharma', role: 'CEO, Brand Studio', text: 'Our brand campaign results doubled after working with him. The visuals were iconic.', avatar: 'RS', color: '#ff6b6b' },
+      { name: 'Priya Kapoor', role: 'Model & Influencer', text: 'Working with him felt effortless. He made me feel comfortable and the shots were stunning.', avatar: 'PK', color: '#6c63ff' },
+    ]
   }
 };

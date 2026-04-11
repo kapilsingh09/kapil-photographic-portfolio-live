@@ -4,9 +4,10 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Phone, Mail, Camera, ArrowRight, X, MessageCircle } from 'lucide-react'
 import Image from 'next/image'
+import { useContent } from '@/hooks/useContent'
 
 // ─── YOUR WHATSAPP NUMBER (with country code, no + or spaces) ───────────────
-const WA_NUMBER = '' // 👈 apna number yahan daal
+const WA_NUMBER = process.env.WHATSUPP // 👈 apna number yahan daal
 
 // ─── Input Field ──────────────────────────────────────────────────────────────
 
@@ -33,25 +34,27 @@ function Field({ label, type = 'text', placeholder, value, onChange, as = 'input
 // ─── Mode Toggle ─────────────────────────────────────────────────────────────
 
 function ModeToggle({ mode, onChange }) {
+  const { contactPage } = useContent();
+
   return (
     <div className="mb-6 flex w-fit items-center gap-1 rounded-full border border-border-subtle bg-surface-muted p-1">
       {[
-        { key: 'email', icon: Mail, label: 'Email' },
-        { key: 'whatsapp', icon: MessageCircle, label: 'WhatsApp' },
-      ].map(({ key, icon: Icon, label }) => (
+        { id: 'email', icon: Mail, label: 'Email' },
+        { id: 'whatsapp', icon: MessageCircle, label: 'WhatsApp' },
+      ].map(({ id, icon: Icon, label }) => (
         <button
-          key={key}
+          key={id}
           type="button"
-          onClick={() => onChange(key)}
-          className={`relative flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold transition-all duration-300 ${mode === key
-            ? (key === 'whatsapp' ? 'text-white' : 'text-white dark:text-black')
+          onClick={() => onChange(id)}
+          className={`relative flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold transition-all duration-300 ${mode === id
+            ? (id === 'whatsapp' ? 'text-white' : 'text-white dark:text-black')
             : 'text-content-muted hover:text-content'
             }`}
         >
-          {mode === key && (
+          {mode === id && (
             <motion.div
               layoutId="toggle-pill"
-              className={`absolute inset-0 rounded-full ${key === 'whatsapp' ? 'bg-[#25D366]' : 'bg-zinc-950 dark:bg-gray-200'
+              className={`absolute inset-0 rounded-full ${id === 'whatsapp' ? 'bg-[#25D366]' : 'bg-zinc-950 dark:bg-gray-200'
                 }`}
               transition={{ type: 'spring', stiffness: 500, damping: 35 }}
             />
@@ -67,6 +70,7 @@ function ModeToggle({ mode, onChange }) {
 // ─── WhatsApp Panel ───────────────────────────────────────────────────────────
 
 function WhatsAppPanel() {
+  const { contactPage } = useContent();
   const [waName, setWaName] = useState('')
   const [waService, setWaService] = useState('')
   const [waMsg, setWaMsg] = useState('')
@@ -92,7 +96,7 @@ function WhatsAppPanel() {
       <div className="flex items-start gap-3 rounded-2xl bg-[#25D366]/8 border border-[#25D366]/20 px-4 py-3.5">
         <MessageCircle size={16} className="mt-0.5 flex-none text-[#25D366]" strokeWidth={2} />
         <p className="text-xs leading-relaxed text-content-muted">
-          Fill in the details below — it will pre-fill your WhatsApp message so we can get started faster.
+          {contactPage.whatsappBanner}
         </p>
       </div>
 
@@ -110,10 +114,9 @@ function WhatsAppPanel() {
           className="w-full appearance-none border-b border-border-subtle bg-transparent py-3 text-sm text-content outline-none transition-all duration-300 focus:border-content cursor-pointer"
         >
           <option value="" disabled>Select a service</option>
-          <option value="Portrait Session">Portrait Session</option>
-          <option value="Wedding Coverage">Wedding Coverage</option>
-          <option value="Commercial / Brand">Commercial / Brand</option>
-          <option value="Other Inquiry">Other Inquiry</option>
+          {contactPage.services.map((service) => (
+            <option key={service.id} value={service.label}>{service.label}</option>
+          ))}
         </select>
       </div>
 
@@ -218,10 +221,9 @@ function EmailPanel() {
           className="w-full appearance-none border-b border-border-subtle bg-transparent py-3 text-sm text-content outline-none transition-all duration-300 focus:border-content cursor-pointer"
         >
           <option value="" disabled>Select a service</option>
-          <option value="portrait">Portrait Session</option>
-          <option value="wedding">Wedding Coverage</option>
-          <option value="commercial">Commercial / Brand</option>
-          <option value="other">Other Inquiry</option>
+          {useContent().contactPage.services.map(service => (
+            <option key={service.id} value={service.label}>{service.label}</option>
+          ))}
         </select>
       </div>
 
@@ -275,6 +277,7 @@ function EmailPanel() {
 // ─── Main Contact Page ────────────────────────────────────────────────────────
 
 export default function ContactPage() {
+  const { contactPage } = useContent();
   const [mode, setMode] = useState('email') // 'email' | 'whatsapp'
 
   return (
@@ -295,13 +298,13 @@ export default function ContactPage() {
             {/* Header */}
             <div className="mb-6">
               <span className="mb-3 inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-content-muted">
-                Inquire
+                {contactPage.header.tag}
               </span>
               <h1 className="text-4xl font-extrabold leading-[1.1] tracking-tight text-content md:text-5xl">
-                Let&apos;s tell <br />your story.
+                {contactPage.header.title}
               </h1>
-              <p className="mt-4 text-sm leading-relaxed text-content-muted">
-                Whether it&apos;s a branding shoot, a wedding, or an editorial project, I&apos;d love to hear what you have in mind.
+              <p className="mt-4 max-w-[85%] text-sm leading-relaxed text-content-muted">
+                {contactPage.header.description}
               </p>
             </div>
 

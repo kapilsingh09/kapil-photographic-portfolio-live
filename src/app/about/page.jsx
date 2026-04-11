@@ -5,54 +5,7 @@ import Image from 'next/image'
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion'
 import { Award, MapPin, Camera, AtSign, ArrowUpRight, Star, Aperture, Film, Globe } from 'lucide-react'
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
-
-const STATS = [
-  { value: '6+', label: 'Years Active', icon: Camera },
-  { value: '320+', label: 'Shoots Done', icon: Aperture },
-  { value: '98%', label: 'Happy Clients', icon: Star },
-  { value: '12+', label: 'Awards Won', icon: Award },
-]
-
-const SKILLS = [
-  { name: 'Portrait', pct: 97 },
-  { name: 'Wedding', pct: 92 },
-  { name: 'Commercial', pct: 88 },
-  { name: 'Landscape', pct: 85 },
-  { name: 'Street', pct: 90 },
-]
-
-const GEAR = [
-  { category: 'Body', items: ['Sony A7 IV', 'Fujifilm X-T5'] },
-  { category: 'Lens', items: ['35mm f/1.4', '85mm f/1.8', '24-70mm f/2.8'] },
-  { category: 'Light', items: ['Godox AD400 Pro', 'Profoto B10'] },
-]
-
-const TESTIMONIALS = [
-  {
-    name: 'Aisha Mehta',
-    role: 'Bride — Wedding',
-    text: 'He captured every single emotion of our day. The photos felt like living memories.',
-    avatar: 'AM',
-    color: '#f5c340',
-  },
-  {
-    name: 'Rohan Sharma',
-    role: 'CEO, Brand Studio',
-    text: 'Our brand campaign results doubled after working with him. The visuals were iconic.',
-    avatar: 'RS',
-    color: '#ff6b6b',
-  },
-  {
-    name: 'Priya Kapoor',
-    role: 'Model & Influencer',
-    text: 'Working with him felt effortless. He made me feel comfortable and the shots were stunning.',
-    avatar: 'PK',
-    color: '#6c63ff',
-  },
-]
-
-const BRANDS = ['Vogue India', 'Nike', 'Nykaa', 'Forbes India', 'Zara']
+import { useContent } from '@/hooks/useContent'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -162,15 +115,12 @@ function TestimonialCard({ t, delay }) {
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
-export default function About() {
+export default function AboutPage() {
   const containerRef = useRef(null)
   const [activeGear, setActiveGear] = useState(0)
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start end', 'end start'],
-  })
-  const imageY = useTransform(scrollYProgress, [0, 1], ['-6%', '6%'])
+  const { scrollYProgress } = useScroll()
+  const yBg = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
+  const { aboutPage } = useContent();
 
   return (
     <section ref={containerRef} className="relative w-full overflow-hidden px-5 pb-32 pt-24 md:px-10">
@@ -235,7 +185,7 @@ export default function About() {
               className="relative z-10 overflow-hidden rounded-3xl shadow-2xl"
               style={{ aspectRatio: '4/5' }}
             >
-              <motion.div style={{ y: imageY }} className="h-full w-full">
+              <motion.div style={{ y: yBg }} className="h-full w-full">
                 <Image
                   src="/Team_Photo/waguri.jpg"
                   alt="Portrait"
@@ -281,9 +231,9 @@ export default function About() {
 
             {/* Brands */}
             <motion.div {...fadeUp(0.4)} className="mt-12 flex flex-wrap gap-6 border-t border-card-border pt-10">
-              {BRANDS.map((b) => (
-                <span key={b} className="text-[10px] font-black uppercase tracking-widest text-subheading">
-                  {b}
+              {aboutPage.brands.map((brand, i) => (
+                <span key={brand} className="text-[10px] font-black uppercase tracking-widest text-subheading">
+                  {brand}
                 </span>
               ))}
             </motion.div>
@@ -298,9 +248,18 @@ export default function About() {
 
         {/* ── Stats ── */}
         <div className="mb-28 grid grid-cols-2 gap-4 md:grid-cols-4">
-          {STATS.map((s, i) => (
-            <StatCard key={s.label} value={s.value} label={s.label} icon={s.icon} index={i} />
-          ))}
+          {aboutPage.stats.map((stat, i) => {
+            const IconMap = { Camera: Camera, Aperture: Aperture, Star: Star, Award: Award }
+            return (
+              <StatCard
+                key={stat.label}
+                value={stat.value}
+                label={stat.label}
+                icon={IconMap[stat.icon] || Camera}
+                index={i}
+              />
+            )
+          })}
         </div>
 
         {/* ── Skills & Gear ── */}
@@ -308,8 +267,8 @@ export default function About() {
           <motion.div {...fadeUp(0)} className="rounded-5xl border border-card-border bg-card p-10 shadow-sm">
             <h4 className="mb-10 text-xl font-black uppercase tracking-widest text-heading">Expertise</h4>
             <div className="flex flex-col gap-8">
-              {SKILLS.map((s, i) => (
-                <SkillBar key={s.name} name={s.name} pct={s.pct} delay={i * 0.1} />
+              {aboutPage.skills.map((skill, i) => (
+                <SkillBar key={skill.name} name={skill.name} pct={skill.pct} delay={i * 0.1} />
               ))}
             </div>
           </motion.div>
@@ -317,14 +276,14 @@ export default function About() {
           <motion.div {...fadeUp(0.1)} className="rounded-5xl border border-card-border bg-card p-10 shadow-sm">
             <h4 className="mb-8 text-xl font-black uppercase tracking-widest text-heading">My Gear</h4>
             <div className="mb-8 flex gap-2">
-              {GEAR.map((g, i) => (
+              {aboutPage.gear.map((cat, i) => (
                 <button
-                  key={g.category}
+                  key={cat.category}
                   onClick={() => setActiveGear(i)}
                   className={`rounded-xl px-5 py-2 text-[10px] font-black uppercase tracking-widest transition-all ${activeGear === i ? 'bg-heading text-card' : 'bg-card-alt text-subheading hover:text-paragraph'
                     }`}
                 >
-                  {g.category}
+                  {cat.category}
                 </button>
               ))}
             </div>
@@ -336,7 +295,7 @@ export default function About() {
                 exit={{ opacity: 0, y: -10 }}
                 className="flex flex-col gap-3"
               >
-                {GEAR[activeGear].items.map((item) => (
+                {aboutPage.gear[activeGear].items.map((item) => (
                   <li key={item} className="flex items-center gap-3 text-sm text-paragraph font-medium">
                     <div className="h-1 w-1 rounded-full bg-orange-400" />
                     {item}
@@ -357,7 +316,7 @@ export default function About() {
           </motion.div>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {TESTIMONIALS.map((t, i) => (
+            {aboutPage.testimonials.map((t, i) => (
               <TestimonialCard key={t.name} t={t} delay={0.1 + i * 0.1} />
             ))}
           </div>

@@ -15,13 +15,7 @@ export default function Navbar() {
   const profileRef = useRef(null);
   const pathname = usePathname();
 
-  const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Gallery", href: "/gallery" },
-    { name: "Pricing", href: "/pricing" },
-    { name: "Contact", href: "/contact" },
-    { name: "About", href: "/about" },
-  ];
+  const { navbar } = useContent();
 
   // Close profile popup when clicking outside
   useEffect(() => {
@@ -51,14 +45,14 @@ export default function Navbar() {
         <div className="flex items-center justify-between max-w-7xl mx-auto px-6 pt-8">
 
           {/* ── Left: Logo ── */}
-          <Link href="/" className="flex items-center gap-2 cursor-pointer group">
+          <Link href={navbar.logo.href} className="flex items-center gap-2 cursor-pointer group">
             <motion.div 
               whileHover={{ rotate: 135 }}
               transition={{ duration: 0.4 }}
               className="w-6 h-6 bg-green-500 rounded-sm rotate-45" 
             />
             <span className="font-bold text-xl tracking-tight text-text-primary capitalize group-hover:opacity-80 transition-opacity">
-                {useContent().site.name}
+                {navbar.logo.text}
             </span>
           </Link>
 
@@ -67,7 +61,7 @@ export default function Navbar() {
 
             {/* Nav Links — hidden on mobile */}
             <ul className="hidden md:flex items-center gap-6 text-sm font-medium text-text-secondary">
-              {navLinks.map((link, index) => (
+              {navbar.links.map((link, index) => (
                 <li key={index}>
                   <Link href={link.href} className="relative block group px-2 py-1">
                     <motion.span
@@ -121,7 +115,7 @@ export default function Navbar() {
                         <div className="absolute -bottom-6 left-5">
                           <div className="w-14 h-14 rounded-full border-[3px] border-white overflow-hidden shadow-lg">
                             <Image
-                              src="/Team_Photo/waguri.jpg"
+                              src={navbar.profile.image}
                               alt="Profile"
                               width={56}
                               height={56}
@@ -134,8 +128,8 @@ export default function Navbar() {
 
                       {/* Info */}
                       <div className="pt-9 px-5 pb-4">
-                        <p className="text-sm font-bold text-text-primary">Kapil Singh</p>
-                        <p className="text-xs text-text-muted mt-0.5">Photographer & Visual Artist</p>
+                        <p className="text-sm font-bold text-text-primary">{navbar.profile.name}</p>
+                        <p className="text-xs text-text-muted mt-0.5">{navbar.profile.role}</p>
                       </div>
 
                       {/* Divider */}
@@ -236,7 +230,7 @@ export default function Navbar() {
 
               {/* Nav links */}
               <ul className="flex flex-col px-4 py-4 gap-1">
-                {navLinks.map((link, index) => (
+                {navbar.links.map((link, index) => (
                   <motion.li
                     key={index}
                     initial={{ opacity: 0, x: -16 }}

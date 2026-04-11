@@ -20,11 +20,13 @@ import {
     FaCircleInfo,
     FaXmark
 } from 'react-icons/fa6'
+import { useContent } from '@/hooks/useContent'
 
 export default function VideoPlayer() {
     const sectionRef = useRef(null)
     const playerWrapperRef = useRef(null)
     const videoRef = useRef(null)
+    const { videoSection } = useContent();
     const router = useRouter()
     const [isPlaying, setIsPlaying] = useState(false)
     const [isMuted, setIsMuted] = useState(false)
@@ -111,6 +113,12 @@ export default function VideoPlayer() {
         }
     }
 
+    const formatTime = (time) => {
+        const minutes = Math.floor(time / 60)
+        const seconds = Math.floor(time % 60)
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`
+    }
+
     return (
         <>
             <style>{`@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap');`}</style>
@@ -136,9 +144,9 @@ export default function VideoPlayer() {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: 0.2 }}
-                                className="text-xs font-semibold uppercase tracking-widest"
+                                className="text-xs font-semibold uppercase tracking-widest text-heading"
                             >
-                                {/* — Masterpiece */}
+                                {videoSection.header.badge}
                             </motion.span>
                             <div className="overflow-hidden">
                                 <motion.h1
@@ -149,7 +157,7 @@ export default function VideoPlayer() {
                                     className="text-[10vw] font-black leading-none tracking-tight text-heading md:text-[5vw]"
                                     style={{ fontFamily: "'Syne', sans-serif" }}
                                 >
-                                    Showreel
+                                    {videoSection.header.title}
                                 </motion.h1>
                             </div>
                         </div>
@@ -162,51 +170,35 @@ export default function VideoPlayer() {
                         <div className="flex flex-col gap-8 w-full lg:w-[40%] max-w-[500px] z-10">
                             <div className="space-y-4">
                                 <div className="flex items-center gap-2 px-3 py-1 bg-card-alt text-paragraph rounded-full w-fit">
-                                    <span className="text-[10px] font-black uppercase tracking-widest leading-none">Client Showcase</span>
+                                    <span className="text-[10px] font-black uppercase tracking-widest leading-none">{videoSection.showcase.tag}</span>
                                 </div>
                                 <h2 className="text-5xl font-black tracking-[-0.01em] text-heading leading-[0.9]">
-                                    Cinematic <br /> <span className="text-heading">Language.</span>
+                                    {videoSection.showcase.titleStart} <br /> <span className="text-heading">{videoSection.showcase.titleEnd}</span>
                                 </h2>
 
                                 <p className="text-paragraph text-[13px] font-medium leading-relaxed">
-                                    Experience visual storytelling that transcends conventional videography. We blend technical mastery with an artistic soul to create high-end films that provoke thought and inspire emotion for brands that demand the absolute best.
+                                    {videoSection.showcase.description}
                                 </p>
                             </div>
 
                             {/* VIDEO CAPABILITIES WITH FONT AWESOME */}
                             <div className="flex flex-col gap-6">
-                                <h5 className="text-[11px] font-black uppercase tracking-[0.4em] text-subheading">Our Capabilities</h5>
+                                <h5 className="text-[11px] font-black uppercase tracking-[0.4em] text-subheading">{videoSection.capabilities.title}</h5>
 
                                 <div className="grid grid-cols-1 gap-6">
-                                    <div className="flex items-start gap-4 group">
-                                        <div className="p-3.5 bg-card-alt rounded-2xl text-subheading group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-all duration-300 shadow-sm">
-                                            <FaCirclePlay size={18} />
+                                    {videoSection.capabilities.items.map((item, idx) => (
+                                        <div key={idx} className="flex items-start gap-4 group">
+                                            <div className="p-3.5 bg-card-alt rounded-2xl text-subheading group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-all duration-300 shadow-sm">
+                                                {idx === 0 && <FaCirclePlay size={18} />}
+                                                {idx === 1 && <FaPalette size={18} />}
+                                                {idx === 2 && <FaUpDownLeftRight size={18} />}
+                                            </div>
+                                            <div className="space-y-1">
+                                                <h4 className="text-[13px] font-black uppercase text-heading tracking-wider">{item.title}</h4>
+                                                <p className="text-[11px] text-subheading font-medium">{item.description}</p>
+                                            </div>
                                         </div>
-                                        <div className="space-y-1">
-                                            <h4 className="text-[13px] font-black uppercase text-heading tracking-wider">Visual Storytelling</h4>
-                                            <p className="text-[11px] text-subheading font-medium">Crafting narrative-driven reels with cinematic depth.</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-start gap-4 group">
-                                        <div className="p-3.5 bg-card-alt rounded-2xl text-subheading group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-all duration-300 shadow-sm">
-                                            <FaPalette size={18} />
-                                        </div>
-                                        <div className="space-y-1">
-                                            <h4 className="text-[13px] font-black uppercase text-heading tracking-wider">Precision Grading</h4>
-                                            <p className="text-[11px] text-subheading font-medium">Custom color science tailored to evoke specific moods.</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-start gap-4 group">
-                                        <div className="p-3.5 bg-card-alt rounded-2xl text-subheading group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-all duration-300 shadow-sm">
-                                            <FaUpDownLeftRight size={18} />
-                                        </div>
-                                        <div className="space-y-1">
-                                            <h4 className="text-[13px] font-black uppercase text-heading tracking-wider">Dynamic Movement</h4>
-                                            <p className="text-[11px] text-subheading font-medium">Fluid motion capture using high-end stabilizing rigs.</p>
-                                        </div>
-                                    </div>
+                                    ))}
                                 </div>
                             </div>
 
@@ -252,7 +244,7 @@ export default function VideoPlayer() {
                                 className="w-full h-full object-cover cursor-pointer"
                                 playsInline
                                 loop
-                                src="/videos/vid-1.mp4"
+                                src={videoSection.video.src}
                             />
 
                             {/* Top MacBook Style Bar */}
@@ -332,7 +324,7 @@ export default function VideoPlayer() {
                                                 </div>
                                                 <div>
                                                     <h4 className="text-white/40 text-[10px] uppercase font-black tracking-widest mb-1">Description</h4>
-                                                    <p className="leading-relaxed text-[11px] text-white/60">This cinematic sequence captures the essence of legacy—timeless movements translated into deep color science and dynamic lighting. Experience visual storytelling that transcends conventional videography.</p>
+                                                    <p className="leading-relaxed text-[11px] text-white/60">{videoSection.showcase.description}</p>
                                                 </div>
                                             </div>
                                         </motion.div>

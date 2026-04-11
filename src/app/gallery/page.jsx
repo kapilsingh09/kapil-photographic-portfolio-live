@@ -4,49 +4,12 @@ import Image from 'next/image'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { MapPin, Calendar } from 'lucide-react'
+import { useContent } from '@/hooks/useContent'
 
 // ─── Gallery Data ─────────────────────────────────────────────────────────────
 // picsum images with seed for consistency — swap src with your real photos
 
-const PAGES = [
-  {
-    volume: 'Volume I',
-    month: 'March',
-    year: '2025',
-    caption: 'Figure 1–7',
-    tagline: 'Quiet streets & golden light',
-    description:
-      'A month spent wandering old alleys and rooftops — every corner held a frame worth keeping.',
-    photos: [
-      { id: 1, src: '/photocard_imgs/pc-img-1.jpg', location: 'Jaipur, Rajasthan', label: 'click click ✦', rot: 1.5, size: 'wide' },
-      { id: 2, src: '/photocard_imgs/pc-img-2.jpg', location: 'Udaipur, Rajasthan', label: 'golden hour ✿', rot: -1.2, size: 'wide' },
-      { id: 3, src: '/photocard_imgs/pc-img-3.jpg', location: 'Jodhpur, Rajasthan', label: 'zzzz ♡', rot: 2, size: 'tall' },
-      { id: 4, src: '/photocard_imgs/pc-img-4.jpg', location: 'Pushkar, Rajasthan', label: 'candid ☆', rot: -2.5, size: 'tall' },
-      { id: 5, src: '/photocard_imgs/pc-img-5.jpg', location: 'Bikaner, Rajasthan', label: 'attention! ✉', rot: 1, size: 'tall' },
-      { id: 6, src: '/photocard_imgs/pc-img-6.jpg', location: 'Jaisalmer, Rajasthan', label: 'de la cruise ✈', rot: -1.8, size: 'tall' },
-      { id: 7, src: '/photocard_imgs/pc-img-7.jpg', location: 'Mount Abu, Rajasthan', label: '♥ ♥ ♥', rot: 0.8, size: 'wide' },
-    ],
-  },
-  {
-    volume: 'Volume II',
-    month: 'January',
-    year: '2025',
-    caption: 'Figure 1–8',
-    tagline: 'Into the hills & misty mornings',
-    description:
-      'January brought fog, fireside cafés, and strangers who became faces I will never forget.',
-    photos: [
-      { id: 8, src: '/photocard_imgs/pc-img-8.jpg', location: 'Manali, Himachal', label: 'cheeeeese ☃', rot: -1.5, size: 'wide' },
-      { id: 9, src: '/photocard_imgs/pc-img-9.jpg', location: 'Kasol, Himachal', label: 'squad goals ♛', rot: 1.8, size: 'wide' },
-      { id: 10, src: '/images/img-1.jpg', location: 'Spiti Valley, HP', label: 'shutter ✦', rot: -2, size: 'tall' },
-      { id: 11, src: '/images/img-2.jpg', location: 'Dharamshala, HP', label: 'café vibes ☕', rot: 2.5, size: 'tall' },
-      { id: 12, src: '/images/img-3.jpg', location: 'Bir Billing, HP', label: 'fly high ✈', rot: -1, size: 'tall' },
-      { id: 13, src: '/images/img-4.jpg', location: 'Shimla, HP', label: 'portrait mode ♡', rot: 1.5, size: 'tall' },
-      { id: 14, src: '/images/img-5.jpg', location: 'Kufri, HP', label: 'snow days ❄', rot: -0.8, size: 'wide' },
-      { id: 15, src: '/images/img-6.jpg', location: 'Chail, HP', label: 'night walks ★', rot: 1.2, size: 'wide' },
-    ],
-  },
-]
+
 
 // ─── Single Photo Card ────────────────────────────────────────────────────────
 
@@ -255,17 +218,41 @@ function GalleryPage({ page, pageIndex }) {
 
 // ─── Main Export ──────────────────────────────────────────────────────────────
 
-export default function GalleryJournal() {
+export default function EditorialGallery() {
+  const { galleryPage } = useContent();
+
   return (
-    <>
+    <div className="min-h-screen bg-bg-primary font-sans text-text-primary selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black pt-28">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&display=swap');
       `}</style>
-      <main>
-        {PAGES.map((page, i) => (
-          <GalleryPage key={page.volume} page={page} pageIndex={i} />
+      <div className="relative pb-32">
+        {/* Header */}
+        <section className="relative px-6 py-20 md:py-32 flex flex-col items-center text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-3xl"
+          >
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <span className="h-px w-8 bg-text-primary"></span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em]">{galleryPage.header.title}</span>
+              <span className="h-px w-8 bg-text-primary"></span>
+            </div>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] mb-8">
+              {galleryPage.header.title}
+            </h1>
+            <p className="text-sm md:text-base font-medium text-text-secondary max-w-md mx-auto leading-relaxed">
+              {galleryPage.header.subtitle}
+            </p>
+          </motion.div>
+        </section>
+
+        {galleryPage.pages.map((page, index) => (
+          <GalleryPage key={page.volume} page={page} pageIndex={index} />
         ))}
-      </main>
-    </>
+      </div>
+    </div>
   )
 }

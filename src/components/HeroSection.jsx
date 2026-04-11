@@ -392,14 +392,14 @@ export default function HeroSection() {
                         <motion.button
                             whileHover={{ scale: 1.04 }}
                             whileTap={{ scale: 0.96 }}
-                            className="w-full sm:w-44 h-12 rounded-full bg-black text-white dark:bg-white dark:text-black text-sm font-semibold tracking-tight cursor-pointer shadow-md transition-colors"
+                            className="w-full sm:w-44 h-12 rounded-full bg-[#000000] text-[#ffffff] dark:bg-[#ffffff] dark:text-[#000000] text-sm font-semibold tracking-tight cursor-pointer shadow-md transition-colors"
                             onClick={() => router.push('/pricing')}>
                             Get Started
                         </motion.button>
                         <motion.button
                             whileHover={{ scale: 1.04 }}
                             whileTap={{ scale: 0.96 }}
-                            className="w-full sm:w-44 h-12 rounded-full bg-surface text-heading text-sm font-semibold tracking-tight cursor-pointer border-[1.5px] border-border-subtle hover:border-heading transition-colors duration-200"
+                            className="w-full border sm:w-44 h-12 rounded-full bg-surface text-heading text-sm font-semibold tracking-tight cursor-pointer border-[#000000] dark:border-white hover:border-black dark:hover:border-white transition-colors duration-200"
                             onClick={() => router.push('/gallery')}
                         >
                             Explore

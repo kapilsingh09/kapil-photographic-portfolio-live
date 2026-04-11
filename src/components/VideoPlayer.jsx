@@ -136,7 +136,7 @@ export default function VideoPlayer() {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: 0.2 }}
-                                className="text-xs font-semibold uppercase tracking-widest text-red-600"
+                                className="text-xs font-semibold uppercase tracking-widest"
                             >
                                 {/* — Masterpiece */}
                             </motion.span>
@@ -165,7 +165,7 @@ export default function VideoPlayer() {
                                     <span className="text-[10px] font-black uppercase tracking-widest leading-none">Client Showcase</span>
                                 </div>
                                 <h2 className="text-5xl font-black tracking-[-0.01em] text-heading leading-[0.9]">
-                                    Cinematic <br /> <span className="text-red-600">Language.</span>
+                                    Cinematic <br /> <span className="text-heading">Language.</span>
                                 </h2>
 
                                 <p className="text-paragraph text-[13px] font-medium leading-relaxed">
@@ -179,7 +179,7 @@ export default function VideoPlayer() {
 
                                 <div className="grid grid-cols-1 gap-6">
                                     <div className="flex items-start gap-4 group">
-                                        <div className="p-3.5 bg-card-alt rounded-2xl text-red-600 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-red-200">
+                                        <div className="p-3.5 bg-card-alt rounded-2xl text-subheading group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-all duration-300 shadow-sm">
                                             <FaCirclePlay size={18} />
                                         </div>
                                         <div className="space-y-1">
@@ -189,7 +189,7 @@ export default function VideoPlayer() {
                                     </div>
 
                                     <div className="flex items-start gap-4 group">
-                                        <div className="p-3.5 bg-card-alt rounded-2xl text-red-600 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-red-200">
+                                        <div className="p-3.5 bg-card-alt rounded-2xl text-subheading group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-all duration-300 shadow-sm">
                                             <FaPalette size={18} />
                                         </div>
                                         <div className="space-y-1">
@@ -199,7 +199,7 @@ export default function VideoPlayer() {
                                     </div>
 
                                     <div className="flex items-start gap-4 group">
-                                        <div className="p-3.5 bg-card-alt rounded-2xl text-red-600 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-red-200">
+                                        <div className="p-3.5 bg-card-alt rounded-2xl text-subheading group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-all duration-300 shadow-sm">
                                             <FaUpDownLeftRight size={18} />
                                         </div>
                                         <div className="space-y-1">
@@ -212,7 +212,7 @@ export default function VideoPlayer() {
 
                             <button
                                 onClick={() => router.push('/pricing')}
-                                className="btn-primary w-fit flex items-center gap-4 group px-10 py-5 h-16 text-[11px] font-black uppercase tracking-widest rounded-full"
+                                className="btn-primary w-fit flex items-center gap-4 group px-10 py-5 h-16 text-[11px]  font-extrabold uppercase tracking-widest rounded-full"
                             >
                                 See Pricing Plans <FaArrowRightLong size={16} className="group-hover:translate-x-1.5 transition-transform" />
                             </button>
@@ -221,6 +221,8 @@ export default function VideoPlayer() {
                         {/* --- Main Video Player --- */}
                         <motion.div
                             ref={playerWrapperRef}
+                            initial="rest"
+                            whileHover="hover"
                             animate={{
                                 borderRadius: isFullscreen ? 0 : "30px",
                             }}
@@ -306,14 +308,14 @@ export default function VideoPlayer() {
                                         >
                                             <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/10 shrink-0">
                                                 <h3 className="text-white font-bold text-[10px] tracking-widest uppercase">Video Info</h3>
-                                                <button onClick={() => setShowInfo(false)} className="text-white/50 hover:text-red-500 transition-colors">
+                                                <button onClick={() => setShowInfo(false)} className="text-white/50 hover:text-white transition-colors">
                                                     <FaXmark size={16} />
                                                 </button>
                                             </div>
 
                                             <div className="space-y-4 flex-1 min-h-0 text-[11px] text-white/70 overflow-y-auto custom-scrollbar pr-2 pb-2 pointer-events-auto">
                                                 <div>
-                                                    <h4 className="text-red-500/80 text-[10px] uppercase font-black tracking-widest mb-1">Duration</h4>
+                                                    <h4 className="text-white/40 text-[10px] uppercase font-black tracking-widest mb-1">Duration</h4>
                                                     <p className="text-white/90 font-medium tabular-nums text-[13px]">{formatTime(duration)}</p>
                                                 </div>
                                                 <div>
@@ -339,27 +341,34 @@ export default function VideoPlayer() {
                             </AnimatePresence>
 
                             {/* Pill Bar Controls */}
-                            <div className="absolute bottom-5 w-[95%] max-w-[500px] left-1/2 -translate-x-1/2 z-40 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                                <div className="flex items-center justify-between gap-4 bg-white/10 backdrop-blur-xl p-4 px-6 rounded-[40px] border border-white/20 shadow-2xl w-full">
+                            <motion.div 
+                                variants={{
+                                    rest: { opacity: 0, y: 20 },
+                                    hover: { opacity: 1, y: 0, transition: { staggerChildren: 0.08, delayChildren: 0.05, ease: "easeOut" } }
+                                }}
+                                className="absolute bottom-5 w-[95%] max-w-[500px] left-1/2 -translate-x-1/2 z-40 pointer-events-none"
+                            >
+                                <div className="flex items-center justify-between gap-3 md:gap-4 bg-white/10 backdrop-blur-xl p-4 px-6 rounded-[40px] border border-white/20 shadow-2xl w-full pointer-events-auto">
 
-                                    <div className="flex items-center gap-4">
-                                        <button onClick={togglePlay} className="text-white border-2 border-white/10 px-2 py-2 rounded-full hover:text-red-500 transition-transform active:scale-90 shrink-0">
+                                    <motion.div variants={{ rest: { opacity: 0, scale: 0.8 }, hover: { opacity: 1, scale: 1 } }} className="flex items-center gap-2 md:gap-4">
+                                        <button onClick={togglePlay} className="text-white border-2 border-white/10 px-2 py-2 rounded-full hover:scale-105 hover:bg-white/10 transition-all active:scale-90 shrink-0">
                                             {isPlaying ? <FaPause size={16} /> : <FaPlay size={16} />}
                                         </button>
 
-                                        <button onClick={cyclePlaybackRate} className="px-2 hover:bg-white/20 rounded-full py-0.5 shrink-0 transition-colors">
+                                        <button onClick={cyclePlaybackRate} className="px-2 hover:bg-white/20 rounded-full py-0.5 shrink-0 transition-colors hidden md:block">
                                             <span className="text-[10px] font-black text-white/70 tracking-tighter hover:text-white uppercase leading-none">
                                                 {playbackRate}x
                                             </span>
                                         </button>
-                                    </div>
+                                    </motion.div>
 
-                                    <span className="text-[12px] font-bold tabular-nums text-white shrink-0 shadow-sm">
+                                    <motion.span variants={{ rest: { opacity: 0, y: 5 }, hover: { opacity: 1, y: 0 } }} className="text-[10px] md:text-[12px] font-bold tabular-nums text-white shrink-0 shadow-sm">
                                         {formatTime(currentTime)}
-                                    </span>
+                                    </motion.span>
 
-                                    <div
-                                        className="relative flex-1 h-1.5 bg-white/10 rounded-full cursor-pointer flex items-center select-none"
+                                    <motion.div
+                                        variants={{ rest: { opacity: 0, scaleX: 0.8 }, hover: { opacity: 1, scaleX: 1 } }}
+                                        className="relative flex-1 h-1.5 bg-white/10 rounded-full cursor-pointer flex items-center select-none origin-left"
                                         onClick={(e) => {
                                             const rect = e.currentTarget.getBoundingClientRect()
                                             videoRef.current.currentTime = ((e.clientX - rect.left) / rect.width) * duration
@@ -373,22 +382,22 @@ export default function VideoPlayer() {
                                             className="absolute w-3 h-3 bg-white rounded-full border border-white shadow-xl"
                                             style={{ left: `calc(${progress}% - 6px)` }}
                                         />
-                                    </div>
+                                    </motion.div>
 
-                                    <span className="text-[12px] font-bold tabular-nums text-white/60 shrink-0">
+                                    <motion.span variants={{ rest: { opacity: 0, y: 5 }, hover: { opacity: 1, y: 0 } }} className="text-[10px] md:text-[12px] font-bold tabular-nums text-white/60 shrink-0">
                                         {formatTime(duration)}
-                                    </span>
+                                    </motion.span>
 
-                                    <div className="flex items-center gap-4 border-l border-white/20 pl-4 shrink-0">
-                                        <button onClick={toggleMute} className="text-white/80 hover:text-red-500 transition-colors">
-                                            {isMuted ? <FaVolumeXmark size={16} /> : <FaVolumeHigh size={16} />}
+                                    <motion.div variants={{ rest: { opacity: 0, x: 10, scale: 0.9 }, hover: { opacity: 1, x: 0, scale: 1 } }} className="flex items-center gap-2 md:gap-4 border-l border-white/20 pl-2 md:pl-4 shrink-0">
+                                        <button onClick={toggleMute} className="text-white/80 hover:text-white transition-colors">
+                                            {isMuted ? <FaVolumeXmark size={14} /> : <FaVolumeHigh size={14} />}
                                         </button>
                                         <button onClick={handleFullscreen} className="text-white/80 hover:text-white transition-all hover:scale-110">
-                                            <FaExpand size={16} />
+                                            <FaExpand size={14} />
                                         </button>
-                                    </div>
+                                    </motion.div>
                                 </div>
-                            </div>
+                            </motion.div>
                         </motion.div>
 
                     </div> {/* End Center Flex Container */}

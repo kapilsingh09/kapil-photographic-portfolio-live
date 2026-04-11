@@ -392,7 +392,7 @@ export default function HeroSection() {
                         <motion.button
                             whileHover={{ scale: 1.04 }}
                             whileTap={{ scale: 0.96 }}
-                            className="w-full sm:w-44 h-12 rounded-full bg-content text-surface text-sm font-semibold tracking-tight cursor-pointer shadow-md transition-colors"
+                            className="w-full sm:w-44 h-12 rounded-full bg-black text-white dark:bg-white dark:text-black text-sm font-semibold tracking-tight cursor-pointer shadow-md transition-colors"
                             onClick={() => router.push('/pricing')}>
                             Get Started
                         </motion.button>
@@ -426,7 +426,7 @@ export default function HeroSection() {
                         {hero.splitSection.description}
                     </p>
                     <div className="flex flex-wrap gap-4 pt-4">
-                        <button onClick={() => router.push("/pricing")} className="btn-primary-lg pointer-events-auto">
+                        <button onClick={() => router.push("/pricing")} className="w-auto h-12 px-8 rounded-full bg-black text-white dark:bg-white dark:text-black text-sm font-semibold transition-transform hover:scale-[1.03] active:scale-95 pointer-events-auto shadow-md">
                             {hero.splitSection.ctaPrimary}
                         </button>
                         <button onClick={() => router.push("/about")} className="btn-secondary-lg pointer-events-auto">
@@ -474,7 +474,7 @@ export default function HeroSection() {
                             variants={{ hidden: { opacity: 0, scale: 0.8, y: 20 }, visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", stiffness: 120, damping: 14 } } }}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="btn-primary-lg pointer-events-auto"
+                            className="h-12 px-8 rounded-full bg-black text-white dark:bg-white dark:text-black text-[0.9375rem] font-semibold shadow-md pointer-events-auto"
                         >
                             {hero.splitSection.ctaPrimary}
                         </motion.button>

@@ -42,16 +42,25 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="w-full sticky top-0 z-50 bg-transparent backdrop-blur-md">
+      <motion.nav 
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="w-full sticky top-0 z-50 bg-transparent backdrop-blur-md"
+      >
         <div className="flex items-center justify-between max-w-7xl mx-auto px-6 pt-8">
 
           {/* ── Left: Logo ── */}
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-green-500 rounded-sm rotate-45" />
-            <span className="font-bold text-xl tracking-tight text-text-primary capitalize">
+          <Link href="/" className="flex items-center gap-2 cursor-pointer group">
+            <motion.div 
+              whileHover={{ rotate: 135 }}
+              transition={{ duration: 0.4 }}
+              className="w-6 h-6 bg-green-500 rounded-sm rotate-45" 
+            />
+            <span className="font-bold text-xl tracking-tight text-text-primary capitalize group-hover:opacity-80 transition-opacity">
                 {useContent().site.name}
             </span>
-          </div>
+          </Link>
 
           {/* ── Right: Nav Links + Icons (desktop) ── */}
           <div className="flex items-center gap-6">
@@ -60,14 +69,18 @@ export default function Navbar() {
             <ul className="hidden md:flex items-center gap-6 text-sm font-medium text-text-secondary">
               {navLinks.map((link, index) => (
                 <li key={index}>
-                  <Link href={link.href} className="relative pb-1 block group">
+                  <Link href={link.href} className="relative block group px-2 py-1">
                     <motion.span
                       initial={{ opacity: 0, y: -15, filter: "blur(6px)" }}
                       animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                       transition={{ delay: index * 0.1, duration: 0.4, ease: "easeOut" }}
-                      className={`inline-block relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-[2px] after:bottom-0 after:left-0 after:bg-text-primary after:origin-bottom-right after:transition-transform after:duration-300 group-hover:after:scale-x-100 group-hover:after:origin-bottom-left ${pathname === link.href ? "text-text-primary underline-offset-4 underline decoration-2 font-bold" : ""}`}
+                      className={`inline-block relative text-sm pb-1 transition-colors ${pathname === link.href ? "text-text-primary font-bold" : "text-text-secondary group-hover:text-text-primary"}`}
                     >
                       {link.name}
+                      {/* Hover / Active Animated Line */}
+                      <span 
+                        className={`absolute left-0 bottom-0 h-[2px] w-full bg-text-primary origin-left transition-transform duration-300 ease-out ${pathname === link.href ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                      />
                     </motion.span>
                   </Link>
                 </li>
@@ -126,13 +139,13 @@ export default function Navbar() {
                       </div>
 
                       {/* Divider */}
-                      <div className="border-t border-gray-100 dark:border-neutral-800 mx-4" />
+                      <div className="border-t border-border-primary mx-4" />
 
                       {/* Actions */}
                       <div className="p-3 flex flex-col gap-1">
-                        <Link href="/about" onClick={() => setShowProfile(false)} className="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-neutral-800 px-3 py-2 rounded-lg transition-colors">View Profile</Link>
-                        <Link href="/gallery" onClick={() => setShowProfile(false)} className="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-neutral-800 px-3 py-2 rounded-lg transition-colors">My Gallery</Link>
-                        <Link href="/contact" onClick={() => setShowProfile(false)} className="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-neutral-800 px-3 py-2 rounded-lg transition-colors">Book a Session</Link>
+                        <Link href="/about" onClick={() => setShowProfile(false)} className="text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary px-3 py-2 rounded-lg transition-colors">View Profile</Link>
+                        <Link href="/gallery" onClick={() => setShowProfile(false)} className="text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary px-3 py-2 rounded-lg transition-colors">My Gallery</Link>
+                        <Link href="/contact" onClick={() => setShowProfile(false)} className="text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary px-3 py-2 rounded-lg transition-colors">Book a Session</Link>
                       </div>
                     </motion.div>
                   )}
@@ -178,7 +191,7 @@ export default function Navbar() {
             </div>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* ── Mobile Menu Overlay ── */}
       <AnimatePresence>

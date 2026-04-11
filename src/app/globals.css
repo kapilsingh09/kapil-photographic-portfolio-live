@@ -1,4 +1,5 @@
 @import "tailwindcss";
+
 @theme {
   /* User requested names */
   --color-bg-primary: var(--bg-primary);
@@ -10,6 +11,16 @@
   --color-border-primary: var(--border-primary);
   --color-border-secondary: var(--border-secondary);
   --color-accent-brand: var(--accent);
+
+  /* Heading / Subheading / Paragraph */
+  --color-heading: var(--heading-color);
+  --color-subheading: var(--subheading-color);
+  --color-paragraph: var(--paragraph-color);
+
+  /* Card / Surface */
+  --color-card: var(--card-bg);
+  --color-card-alt: var(--card-bg-alt);
+  --color-card-border: var(--card-border);
 
   /* Legacy / Compatibility names used in Footer etc. */
   --color-surface: var(--bg-primary);
@@ -28,17 +39,27 @@
 :root {
   /* ── Semantic Backgrounds ── */
   --bg-primary: #e4e7e4ed;
-  --bg-secondary: #f8f9fa; 
+  --bg-secondary: #f8f9fa;
   --bg-tertiary: #f1f3f5;
-  
+
   /* ── Semantic Text ── */
-  --text-primary: rgba(0, 0, 0, 0.925)
-  --text-secondary: #4a4a4b; 
+  --text-primary: rgba(0, 0, 0, 0.925);
+  --text-secondary: #4a4a4b;
   --text-muted: #6c757d;
-  
+
+  /* ── Heading & Subheading (theme-aware) ── */
+  --heading-color: #111827;
+  --subheading-color: #6b7280;
+  --paragraph-color: #4b5563;
+
   /* ── Semantic Borders ── */
-  --border-primary: #e9ecef; 
+  --border-primary: #e9ecef;
   --border-secondary: #dee2e6;
+
+  /* ── Card / Surface Tokens ── */
+  --card-bg: #ffffff;
+  --card-bg-alt: #f9fafb;
+  --card-border: #f3f4f6;
 
   /* ── Brand Colors ── */
   --accent: #c87828;
@@ -46,12 +67,12 @@
   --accent-border: rgba(200, 120, 40, 0.3);
 
   /* ── Button Tokens ── */
-  --btn-radius: 9999px;               
+  --btn-radius: 9999px;
   --btn-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   --btn-primary-bg: #1a1a1b;
   --btn-primary-text: #ffffff;
-  --btn-primary-shadow: 0 4px 14px 0 rgba(0,0,0,0.1);
+  --btn-primary-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
 
   --btn-secondary-bg: #f8f9fa;
   --btn-secondary-text: #1a1a1b;
@@ -64,18 +85,28 @@
 /* Dark theme overrides */
 .dark {
   /* ── Semantic Backgrounds ── */
-  --bg-primary: #0a0a0a; 
-  --bg-secondary: #141414; 
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #141414;
   --bg-tertiary: #1c1c1c;
 
   /* ── Semantic Text ── */
-  --text-primary: #f8f9fa; 
-  --text-secondary: #adb5bd; 
+  --text-primary: #f8f9fa;
+  --text-secondary: #adb5bd;
   --text-muted: #6c757d;
 
+  /* ── Heading & Subheading (theme-aware) ── */
+  --heading-color: #f9fafb;
+  --subheading-color: #9ca3af;
+  --paragraph-color: #d1d5db;
+
   /* ── Semantic Borders ── */
-  --border-primary: #1f1f1f; 
+  --border-primary: #1f1f1f;
   --border-secondary: #2d2d2d;
+
+  /* ── Card / Surface Tokens ── */
+  --card-bg: #141414;
+  --card-bg-alt: #1c1c1c;
+  --card-border: #2d2d2d;
 
   /* ── Button Tokens ── */
   --btn-primary-bg: #f8f9fa;
@@ -87,7 +118,9 @@
 }
 
 /* ── Global Transitions ── */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 300ms;
@@ -105,7 +138,8 @@ body {
 }
 
 /* ── Headings: Poppins everywhere ── */
-h1, h2 {  
+h1,
+h2 {
   font-family: var(--font-heading);
 }
 
@@ -143,10 +177,12 @@ h1, h2 {
   font-size: 0.875rem;
   box-shadow: var(--btn-primary-shadow);
 }
+
 .btn-primary:hover {
   box-shadow: var(--btn-primary-hover-shadow);
   transform: scale(1.03);
 }
+
 .btn-primary:active {
   transform: scale(0.97);
 }
@@ -170,10 +206,12 @@ h1, h2 {
   outline: none;
   line-height: 1;
 }
+
 .btn-primary-lg:hover {
   box-shadow: var(--btn-primary-hover-shadow);
   transform: scale(1.03);
 }
+
 .btn-primary-lg:active {
   transform: scale(0.97);
 }
@@ -186,10 +224,12 @@ h1, h2 {
   font-size: 0.875rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
+
 .btn-secondary:hover {
   background: var(--btn-secondary-hover-bg);
   transform: scale(1.03);
 }
+
 .btn-secondary:active {
   transform: scale(0.97);
 }
@@ -213,10 +253,12 @@ h1, h2 {
   outline: none;
   line-height: 1;
 }
+
 .btn-secondary-lg:hover {
   background: var(--btn-secondary-hover-bg);
   transform: scale(1.03);
 }
+
 .btn-secondary-lg:active {
   transform: scale(0.97);
 }
@@ -230,6 +272,7 @@ h1, h2 {
   font-weight: 500;
   border: 1px solid var(--btn-outline-border);
 }
+
 .btn-outline:hover {
   background: var(--btn-outline-hover-bg);
 }
@@ -241,10 +284,12 @@ h1, h2 {
   padding: 0.625rem 1.5rem;
   font-size: 0.875rem;
 }
+
 .btn-white:hover {
   background: var(--btn-white-hover-bg);
   transform: scale(1.03);
 }
+
 .btn-white:active {
   transform: scale(0.97);
 }
@@ -261,11 +306,13 @@ h1, h2 {
   border: 2px solid #6b7280;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
+
 .btn-hero-outline:hover {
   background: rgba(255, 255, 255, 0.08);
   border-color: #9ca3af;
   transform: scale(1.03);
 }
+
 .btn-hero-outline:active {
   transform: scale(0.97);
 }
@@ -278,6 +325,7 @@ h1, h2 {
   font-size: 0.875rem;
   font-weight: 500;
 }
+
 .btn-ghost:hover {
   background: rgba(0, 0, 0, 0.04);
 }
@@ -289,6 +337,7 @@ h1, h2 {
   border: 1px solid var(--btn-icon-border);
   box-shadow: var(--btn-icon-shadow);
 }
+
 .btn-icon:hover {
   background: var(--btn-icon-hover-bg);
   transform: scale(1.15);
@@ -310,9 +359,11 @@ h1, h2 {
   transition: var(--btn-transition);
   border: none;
 }
+
 .btn-like:hover {
   transform: scale(1.05);
 }
+
 .btn-like:active {
   transform: scale(0.95);
 }

@@ -86,7 +86,7 @@ export default function PricingSection() {
                     >
                         <span
                             className="cursor-pointer text-xs font-medium transition-colors duration-300"
-                            style={{ color: isINR ? '#c87828' : 'rgba(23,23,23,0.35)' }}
+                            style={{ color: isINR ? '#c87828' : 'var(--subheading-color)' }}
                             onClick={() => setIsINR(true)}
                         >₹ INR</span>
                         <button
@@ -104,7 +104,7 @@ export default function PricingSection() {
                         </button>
                         <span
                             className="cursor-pointer text-xs font-medium transition-colors duration-300"
-                            style={{ color: !isINR ? '#c87828' : 'rgba(23,23,23,0.35)' }}
+                            style={{ color: !isINR ? '#c87828' : 'var(--subheading-color)' }}
                             onClick={() => setIsINR(false)}
                         >$ USD</span>
                     </motion.div>
@@ -192,7 +192,7 @@ export default function PricingSection() {
                             initial="hidden"
                             animate={isInView ? 'visible' : 'hidden'}
                             whileTap={{ scale: 0.97 }}
-                            className={`snap-center flex-none rounded-2xl p-5 flex flex-col justify-between cursor-pointer ${plan.featured ? 'bg-orange-400 text-white' : 'bg-gray-200'}`}
+                            className={`snap-center flex-none rounded-2xl p-5 flex flex-col justify-between cursor-pointer ${plan.featured ? 'bg-orange-400 text-white' : 'bg-card-alt text-heading'}`}
                             style={{
                                 width: 'calc(75vw - 1.5rem)',
                                 maxWidth: 280,
@@ -239,7 +239,7 @@ function PriceCardContent({ plan, i, isINR }) {
                 <span
                     className="text-[10px] font-semibold uppercase tracking-widest"
                     style={{
-                        color: plan.featured ? 'rgba(255,255,255,0.75)' : 'rgba(23,23,23,0.45)',
+                        color: plan.featured ? 'rgba(255,255,255,0.75)' : 'var(--subheading-color)',
                         fontFamily: 'var(--font-geist-mono), monospace',
                     }}
                 >
@@ -256,7 +256,7 @@ function PriceCardContent({ plan, i, isINR }) {
             <div className="flex items-start">
                 <span
                     className="mt-1.5 text-base font-semibold"
-                    style={{ color: plan.featured ? '#ffffff' : '#171717' }}
+                    style={{ color: plan.featured ? '#ffffff' : 'var(--heading-color)' }}
                 >
                     {plan.sym}
                 </span>
@@ -272,7 +272,7 @@ function PriceCardContent({ plan, i, isINR }) {
                             fontSize: i === 1 ? 62 : 52,
                             fontWeight: 700,
                             letterSpacing: '-0.03em',
-                            color: plan.featured ? '#ffffff' : '#171717',
+                            color: plan.featured ? '#ffffff' : 'var(--heading-color)',
                         }}
                     >
                         {plan.num}
@@ -286,7 +286,7 @@ function PriceCardContent({ plan, i, isINR }) {
                         animate="visible"
                         exit="exit"
                         className="self-end pb-2 text-base font-light"
-                        style={{ color: plan.featured ? 'rgba(255,255,255,0.6)' : 'rgba(23,23,23,0.4)' }}
+                        style={{ color: plan.featured ? 'rgba(255,255,255,0.6)' : 'var(--subheading-color)' }}
                     >
                         {plan.dec}
                     </motion.span>
@@ -298,7 +298,7 @@ function PriceCardContent({ plan, i, isINR }) {
                 className="border-t pt-2 text-xs"
                 style={{
                     borderColor: plan.featured ? 'rgba(255,255,255,0.25)' : 'rgba(23,23,23,0.1)',
-                    color: plan.featured ? 'rgba(255,255,255,0.7)' : 'rgba(23,23,23,0.45)',
+                    color: plan.featured ? 'rgba(255,255,255,0.7)' : 'var(--subheading-color)',
                 }}
             >
                 {plan.sub}

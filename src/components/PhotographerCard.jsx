@@ -55,7 +55,7 @@ function PlayVideoBtn() {
 function CardConnectCreate() {
   return (
     <Reveal delay={0.1} className="h-full">
-      <div className="relative bg-[#f2f2f2] rounded-3xl p-7 flex flex-col justify-between h-full overflow-hidden min-h-[540px]">
+      <div className="relative bg-card rounded-3xl p-7 flex flex-col justify-between h-full overflow-hidden min-h-[540px]">
         {/* Play Video */}
         <div className="absolute top-6 left-6 z-10">
           <PlayVideoBtn />
@@ -107,13 +107,13 @@ function CardConnectCreate() {
 
         {/* Text + CTA */}
         <div className="mt-auto">
-          <h3 className="text-2xl font-bold text-gray-900 mb-2">
+          <h3 className="text-2xl font-bold text-heading mb-2">
             Connect, Create, Commerce
           </h3>
           <p className="subtext-muted mb-5">
             Offering buyers a chance to own a piece of that narrative.…
           </p>
-          <button className="border-2 border-gray-900 rounded-full px-5 py-2.5 hover:bg-black hover:text-white transition-all font-medium">
+          <button className="border-2 border-heading rounded-full px-5 py-2.5 hover:bg-heading hover:text-card transition-all font-medium text-heading">
             How it works
           </button>
         </div>
@@ -164,7 +164,7 @@ function CardArtBreathes() {
 function CardSpinArt() {
   return (
     <Reveal delay={0.15} className="h-full">
-      <div className="bg-white rounded-3xl flex flex-col overflow-hidden h-full min-h-[400px] shadow-sm">
+      <div className="bg-card rounded-3xl flex flex-col overflow-hidden h-full min-h-[400px] shadow-sm">
         {/* Full-width colorful image */}
         <div className="relative w-full overflow-hidden" style={{ height: "260px" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -181,14 +181,14 @@ function CardSpinArt() {
         {/* Text + CTA */}
         <div className="px-7 py-6 flex flex-col flex-1 justify-between">
           <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-1">
+            <h3 className="text-2xl font-bold text-heading mb-1">
               Spin Your Art into Gold
             </h3>
             <p className="subtext-muted">
               Unleash your artistic potential, where innovation and creativity converge…
             </p>
           </div>
-          <button className="border-2 border-gray-900 rounded-full px-5 py-2.5 hover:bg-black hover:text-white transition-all font-medium mt-3">
+          <button className="border-2 border-heading rounded-full px-5 py-2.5 hover:bg-heading hover:text-card transition-all font-medium text-heading mt-3">
             Join us now
           </button>
         </div>
@@ -214,7 +214,7 @@ function CardAdvantages() {
     <Reveal delay={0.25} className="h-full">
       <div className="relative bg-[#111111] rounded-3xl p-8 flex flex-col justify-between h-full min-h-[500px] overflow-hidden">
         {/* Eyebrow */}
-        <p className="text-xs font-bold tracking-[0.2em] text-gray-500 uppercase mb-6">
+        <p className="text-xs font-bold tracking-[0.2em] text-subheading uppercase mb-6">
           Advantages
         </p>
 
@@ -232,7 +232,7 @@ function CardAdvantages() {
                   ? "text-3xl font-bold text-white"
                   : item.highlight
                     ? "text-lg font-semibold text-[#7c9bff]"
-                    : "text-base font-medium text-gray-500"}
+                    : "text-base font-medium text-subheading"}
               `}
             >
               {item.label}
@@ -287,7 +287,7 @@ export default function StorySection() {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="text-xs font-bold tracking-[0.2em] uppercase mb-4"
           >
-            <span className="text-gray-400">YOUR STORY </span>
+            <span className="text-subheading">YOUR STORY </span>
             <span className="text-[#4169e1]">TELLING</span>
           </motion.p>
 
@@ -296,7 +296,7 @@ export default function StorySection() {
             initial={{ opacity: 0, filter: "blur(22px)", y: 24 }}
             animate={headingInView ? { opacity: 1, filter: "blur(0px)", y: 0 } : {}}
             transition={{ duration: 0.85, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[clamp(2.6rem,5.5vw,4.5rem)] font-bold leading-[1.07] tracking-[-0.03em] text-gray-900"
+            className="text-[clamp(2.6rem,5.5vw,4.5rem)] font-bold leading-[1.07] tracking-[-0.03em] text-heading"
           >
             Every piece of art
             <br />

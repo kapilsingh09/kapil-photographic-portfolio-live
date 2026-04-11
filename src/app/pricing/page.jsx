@@ -140,7 +140,7 @@ function CornerGrid({ side }) {
           key={i}
           className="w-10 h-10 rounded-sm"
           style={{
-            background: i % 2 === 0 ? "#e8e8ec" : "transparent",
+            background: i % 2 === 0 ? "var(--card-border)" : "transparent",
           }}
         />
       ))}
@@ -173,20 +173,20 @@ function Reveal({ children, delay = 0, className = "" }) {
 function BillingToggle({ billing, setBilling }) {
   return (
     <div className="flex items-center justify-center gap-2">
-      <div className="relative flex items-center bg-white border border-gray-200 rounded-full p-1 shadow-sm">
+      <div className="relative flex items-center bg-card border border-card-border rounded-full p-1 shadow-sm">
         {["monthly", "yearly"].map((mode) => (
           <button
             key={mode}
             onClick={() => setBilling(mode)}
             className={`relative z-10 px-5 py-2 text-sm font-semibold rounded-full transition-colors duration-200 capitalize ${
-              billing === mode ? "text-gray-900" : "text-gray-400 hover:text-gray-600"
+              billing === mode ? "text-heading" : "text-subheading hover:text-paragraph"
             }`}
           >
             {mode === "monthly" ? "Monthly billing" : "Yearly billing"}
             {billing === mode && (
               <motion.div
                 layoutId="billing-pill"
-                className="absolute inset-0 bg-gray-100 rounded-full -z-10"
+                className="absolute inset-0 bg-card-alt rounded-full -z-10"
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
               />
             )}
@@ -204,7 +204,7 @@ function CellVal({ val }) {
   if (val === true)
     return (
       <div className="flex justify-center">
-        <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center">
+        <div className="w-5 h-5 rounded-full bg-heading flex items-center justify-center">
           <Check size={11} strokeWidth={3} className="text-white" />
         </div>
       </div>
@@ -212,10 +212,10 @@ function CellVal({ val }) {
   if (val === false)
     return (
       <div className="flex justify-center">
-        <X size={16} className="text-gray-300" strokeWidth={2} />
+        <X size={16} className="text-subheading" strokeWidth={2} />
       </div>
     );
-  return <span className="text-[13px] text-gray-600 font-medium">{val}</span>;
+  return <span className="text-[13px] text-paragraph font-medium">{val}</span>;
 }
 
 /* ─────────────────────────────────────────────
@@ -228,7 +228,7 @@ export default function PricingSection() {
 
   return (
     <section className="relative w-full py-16 px-4 md:px-8 lg:px-16 flex justify-center">
-      <div className="w-full max-w-[1100px] bg-white rounded-4xl shadow-sm overflow-hidden relative pb-10">
+      <div className="w-full max-w-[1100px] bg-card rounded-4xl shadow-sm overflow-hidden relative pb-10">
         
         {/* Corner decorative grids (now inside the white card) */}
         <CornerGrid side="left" />
@@ -244,8 +244,8 @@ export default function PricingSection() {
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="flex justify-center mb-5"
           >
-            <div className="w-12 h-12 rounded-full border border-gray-200 bg-white shadow-sm flex items-center justify-center">
-              <DollarSign size={20} className="text-gray-700" />
+            <div className="w-12 h-12 rounded-full border border-card-border bg-card shadow-sm flex items-center justify-center">
+              <DollarSign size={20} className="text-paragraph" />
             </div>
           </motion.div>
 
@@ -253,7 +253,7 @@ export default function PricingSection() {
             initial={{ opacity: 0, filter: "blur(16px)", y: 20 }}
             animate={inView ? { opacity: 1, filter: "blur(0px)", y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[clamp(2.2rem,4vw,3.2rem)] font-black tracking-[-0.03em] text-gray-900 mb-4"
+            className="text-[clamp(2.2rem,4vw,3.2rem)] font-black tracking-[-0.03em] text-heading mb-4"
           >
             Pricing Plans
           </motion.h2>
@@ -292,7 +292,7 @@ export default function PricingSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -6 }}
                 transition={{ duration: 0.3 }}
-                className="text-sm text-gray-400"
+                className="text-sm text-subheading"
               >
                 Switch to yearly billing to unlock savings
               </motion.p>
@@ -305,10 +305,10 @@ export default function PricingSection() {
           <div className="hidden lg:block w-full overflow-x-auto">
             <table className="w-full min-w-[740px] border-collapse">
               <thead>
-                <tr className="border-b border-gray-200">
+                <tr className="border-b border-card-border">
                   {/* Plans label */}
                   <th className="text-left pb-5 pr-6 w-[200px]">
-                    <span className="text-[11px] font-black tracking-[0.18em] text-gray-400 uppercase">
+                    <span className="text-[11px] font-black tracking-[0.18em] text-subheading uppercase">
                       Plans
                     </span>
                   </th>
@@ -326,7 +326,7 @@ export default function PricingSection() {
                       >
                         {/* Plan label + badge */}
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="text-[11px] font-black tracking-[0.18em] text-gray-800 uppercase">
+                          <span className="text-[11px] font-black tracking-[0.18em] text-heading uppercase">
                             {plan.label}
                           </span>
                           {plan.badge && (
@@ -343,8 +343,8 @@ export default function PricingSection() {
 
               <tbody>
                 {/* ── PRICING ROW ── */}
-                <tr className="border-b border-gray-100">
-                  <td className="py-7 pr-6 text-[13px] text-gray-400 font-medium">
+                <tr className="border-b border-card-border">
+                  <td className="py-7 pr-6 text-[13px] text-subheading font-medium">
                     Pricing
                   </td>
 
@@ -364,14 +364,14 @@ export default function PricingSection() {
                             transition={{ duration: 0.25 }}
                           >
                             {plan.monthly === null ? (
-                              <p className="text-[1.8rem] font-black text-gray-900 leading-tight mb-1">
+                              <p className="text-[1.8rem] font-black text-heading leading-tight mb-1">
                                 Contact us
                               </p>
                             ) : (
-                              <p className="text-[2rem] font-black text-gray-900 leading-tight mb-1">
+                              <p className="text-[2rem] font-black text-heading leading-tight mb-1">
                                 ${price}
                                 {price > 0 && (
-                                  <span className="text-sm font-medium text-gray-400 ml-1">
+                                  <span className="text-sm font-medium text-subheading ml-1">
                                     / mo
                                   </span>
                                 )}
@@ -381,7 +381,7 @@ export default function PricingSection() {
                         </AnimatePresence>
 
                         {/* Tagline */}
-                        <p className="text-[12px] text-gray-400 leading-relaxed mb-5 max-w-[160px]">
+                        <p className="text-[12px] text-subheading leading-relaxed mb-5 max-w-[160px]">
                           {plan.tagline}
                         </p>
 
@@ -412,9 +412,9 @@ export default function PricingSection() {
                       duration: 0.45,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className={`border-b border-gray-50 hover:bg-gray-50/60 transition-colors`}
+                    className={`border-b border-card-border hover:bg-card-alt/60 transition-colors`}
                   >
-                    <td className="py-4 pr-6 text-[13px] text-gray-500 font-medium">
+                    <td className="py-4 pr-6 text-[13px] text-paragraph font-medium">
                       {row.label}
                     </td>
                     {PLANS.map((plan, pi) => (
@@ -439,11 +439,11 @@ export default function PricingSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.5, delay: pi * 0.1 }}
-                  className="bg-gray-50/50 border border-gray-100 rounded-3xl p-6 flex flex-col"
+                  className="bg-card-alt/50 border border-card-border rounded-3xl p-6 flex flex-col"
                 >
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h3 className="text-sm font-black tracking-widest text-gray-900 uppercase">
+                      <h3 className="text-sm font-black tracking-widest text-heading uppercase">
                         {plan.label}
                       </h3>
                       {plan.badge && (
@@ -452,7 +452,7 @@ export default function PricingSection() {
                         </span>
                       )}
                     </div>
-                    <plan.icon size={24} className="text-gray-300" />
+                    <plan.icon size={24} className="text-subheading" />
                   </div>
 
                   {/* Mobile Price */}
@@ -466,14 +466,14 @@ export default function PricingSection() {
                         transition={{ duration: 0.2 }}
                       >
                         {plan.monthly === null ? (
-                          <p className="text-[2rem] font-black text-gray-900 leading-tight">
+                          <p className="text-[2rem] font-black text-heading leading-tight">
                             Contact us
                           </p>
                         ) : (
-                          <p className="text-[2.2rem] font-black text-gray-900 leading-none">
+                          <p className="text-[2.2rem] font-black text-heading leading-none">
                             ${price}
                             {price > 0 && (
-                              <span className="text-sm font-medium text-gray-400 ml-1">
+                              <span className="text-sm font-medium text-subheading ml-1">
                                 / mo
                               </span>
                             )}
@@ -483,7 +483,7 @@ export default function PricingSection() {
                     </AnimatePresence>
                   </div>
 
-                  <p className="text-[13px] text-gray-500 mb-8 leading-relaxed">
+                  <p className="text-[13px] text-paragraph mb-8 leading-relaxed">
                     {plan.tagline}
                   </p>
 
@@ -496,7 +496,7 @@ export default function PricingSection() {
                       return (
                         <li key={row.label} className="flex items-start gap-3">
                           {val === true ? (
-                            <div className="w-5 h-5 shrink-0 rounded-full bg-gray-900 flex items-center justify-center mt-0.5">
+                            <div className="w-5 h-5 shrink-0 rounded-full bg-heading flex items-center justify-center mt-0.5">
                               <Check size={11} strokeWidth={3} className="text-white" />
                             </div>
                           ) : (
@@ -504,9 +504,9 @@ export default function PricingSection() {
                               <Check size={16} strokeWidth={3} className="text-green-500" />
                             </div>
                           )}
-                          <span className="text-[14px] text-gray-700 leading-snug">
+                          <span className="text-[14px] text-paragraph leading-snug">
                             {val !== true && val !== false && (
-                              <strong className="text-gray-900 font-bold">{val} </strong>
+                              <strong className="text-heading font-bold">{val} </strong>
                             )}
                             {row.label}
                           </span>
@@ -529,8 +529,8 @@ export default function PricingSection() {
         </Reveal>
 
         {/* ── FOOTER NOTE ── */}
-        <Reveal delay={0.1} className="mt-14 text-center border-t border-gray-100 pt-8 mx-6 md:mx-12">
-          <p className="subtext-xs text-gray-400">
+        <Reveal delay={0.1} className="mt-14 text-center border-t border-card-border pt-8 mx-6 md:mx-12">
+          <p className="subtext-xs text-subheading">
             All plans include usage rights for personal sharing. Commercial licensing available on Custom plan.
             <br />
             Travel & accommodation fees may apply beyond 50 km.

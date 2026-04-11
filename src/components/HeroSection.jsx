@@ -226,7 +226,7 @@ const FloatingImage = ({ children, index, scrollYProgress, isInView, tag1, tag1P
                 willChange: "transform, opacity, filter",
             }}
         >
-            <motion.div 
+            <motion.div
                 className="relative rounded-2xl"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
@@ -361,7 +361,7 @@ export default function HeroSection() {
                         initial={{ opacity: 0, filter: "blur(12px)", y: -20 }}
                         animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
                         transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-                        className="text-4xl md:text-6xl font-bold text-content max-w-4xl leading-tight inline-block transition-colors"
+                        className="text-4xl md:text-6xl font-bold text-heading max-w-4xl leading-tight inline-block transition-colors"
                     >
                         {hero.title}
                     </motion.h1>
@@ -385,7 +385,7 @@ export default function HeroSection() {
                     transition={{ duration: 0.8, delay: 0.7, type: "spring", stiffness: 100, damping: 15 }}
                     className="flex flex-col items-center gap-5"
                 >
-                    <p className="text-content-muted text-md max-w-xl transition-colors">
+                    <p className="text-subheading text-md max-w-xl transition-colors">
                         {hero.subtitle}
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 w-full sm:w-auto">
@@ -399,7 +399,7 @@ export default function HeroSection() {
                         <motion.button
                             whileHover={{ scale: 1.04 }}
                             whileTap={{ scale: 0.96 }}
-                            className="w-full sm:w-44 h-12 rounded-full bg-surface text-content text-sm font-semibold tracking-tight cursor-pointer border-[1.5px] border-border-subtle hover:border-content transition-colors duration-200"
+                            className="w-full sm:w-44 h-12 rounded-full bg-surface text-heading text-sm font-semibold tracking-tight cursor-pointer border-[1.5px] border-border-subtle hover:border-heading transition-colors duration-200"
                             onClick={() => router.push('/gallery')}
                         >
                             Explore
@@ -416,13 +416,13 @@ export default function HeroSection() {
             <section className="min-h-screen w-full flex flex-col lg:flex-row items-center justify-between px-6 md:px-16 lg:px-28 py-20 lg:py-0 overflow-visible relative pb-20 z-40">
                 {/* --- MOBILE (STATIC) --- */}
                 <div className="md:hidden flex-1 max-w-2xl space-y-6 z-50 text-left relative">
-                    <p className="text-xs tracking-[0.2em] text-content font-medium uppercase transition-colors">
+                    <p className="text-xs tracking-[0.2em] text-subheading font-medium uppercase transition-colors">
                         {hero.splitSection.tagline}
                     </p>
-                    <h1 className="text-4xl font-bold leading-[1.1] text-content transition-colors whitespace-pre-line">
+                    <h1 className="text-4xl font-bold leading-[1.1] text-heading transition-colors whitespace-pre-line">
                         {hero.splitSection.title}
                     </h1>
-                    <p className="subtext-lg max-w-md text-content-muted transition-colors">
+                    <p className="subtext-lg max-w-md text-subheading transition-colors">
                         {hero.splitSection.description}
                     </p>
                     <div className="flex flex-wrap gap-4 pt-4">
@@ -450,13 +450,13 @@ export default function HeroSection() {
                 >
                     <motion.p
                         variants={{ hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } } }}
-                        className="text-xs md:text-sm tracking-[0.2em] text-text-primary font-medium uppercase"
+                        className="text-xs md:text-sm tracking-[0.2em] text-subheading font-medium uppercase"
                     >
                         {hero.splitSection.tagline}
                     </motion.p>
                     <motion.h1
                         variants={{ hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } } }}
-                        className="text-4xl md:text-5xl font-bold leading-[1.1] text-text-primary whitespace-pre-line"
+                        className="text-4xl md:text-5xl font-bold leading-[1.1] text-heading whitespace-pre-line"
                     >
                         {hero.splitSection.title}
                     </motion.h1>

@@ -80,7 +80,7 @@ export default function VideoPlayer() {
 
         video.addEventListener('durationchange', updateDuration)
         video.addEventListener('loadedmetadata', updateDuration)
-        
+
         return () => {
             video.removeEventListener('durationchange', updateDuration)
             video.removeEventListener('loadedmetadata', updateDuration)
@@ -120,7 +120,7 @@ export default function VideoPlayer() {
             </section> */}
             <section id="video-showcase" ref={sectionRef} className="relative min-h-screen w-full overflow-hidden" style={{ fontFamily: "'DM Sans', sans-serif" }}>
 
-                <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-black text-black pointer-events-none select-none uppercase z-0 opacity-5">
+                <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-black text-heading pointer-events-none select-none uppercase z-0 opacity-5">
                     Legacy
                 </h1>
 
@@ -146,7 +146,7 @@ export default function VideoPlayer() {
                                     whileInView={{ y: '0%' }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-                                    className="text-[10vw] font-black leading-none tracking-tight text-gray-900 md:text-[5vw]"
+                                    className="text-[10vw] font-black leading-none tracking-tight text-heading md:text-[5vw]"
                                     style={{ fontFamily: "'Syne', sans-serif" }}
                                 >
                                     Showreel
@@ -161,50 +161,50 @@ export default function VideoPlayer() {
                         {/* --- LEFT SIDE CONTENT --- */}
                         <div className="flex flex-col gap-8 w-full lg:w-[40%] max-w-[500px] z-10">
                             <div className="space-y-4">
-                                <div className="flex items-center gap-2 px-3 py-1 bg-gray-100 text-gray-600 rounded-full w-fit">
+                                <div className="flex items-center gap-2 px-3 py-1 bg-card-alt text-paragraph rounded-full w-fit">
                                     <span className="text-[10px] font-black uppercase tracking-widest leading-none">Client Showcase</span>
                                 </div>
-                                <h2 className="text-5xl font-black tracking-[-0.01em] text-gray-900 leading-[0.9]">
+                                <h2 className="text-5xl font-black tracking-[-0.01em] text-heading leading-[0.9]">
                                     Cinematic <br /> <span className="text-red-600">Language.</span>
                                 </h2>
 
-                                <p className="text-gray-500 text-[13px] font-medium leading-relaxed">
+                                <p className="text-paragraph text-[13px] font-medium leading-relaxed">
                                     Experience visual storytelling that transcends conventional videography. We blend technical mastery with an artistic soul to create high-end films that provoke thought and inspire emotion for brands that demand the absolute best.
                                 </p>
                             </div>
 
                             {/* VIDEO CAPABILITIES WITH FONT AWESOME */}
                             <div className="flex flex-col gap-6">
-                                <h5 className="text-[11px] font-black uppercase tracking-[0.4em] text-gray-300">Our Capabilities</h5>
+                                <h5 className="text-[11px] font-black uppercase tracking-[0.4em] text-subheading">Our Capabilities</h5>
 
                                 <div className="grid grid-cols-1 gap-6">
                                     <div className="flex items-start gap-4 group">
-                                        <div className="p-3.5 bg-gray-50 rounded-2xl text-red-600 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-red-200">
+                                        <div className="p-3.5 bg-card-alt rounded-2xl text-red-600 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-red-200">
                                             <FaCirclePlay size={18} />
                                         </div>
                                         <div className="space-y-1">
-                                            <h4 className="text-[13px] font-black uppercase text-gray-900 tracking-wider">Visual Storytelling</h4>
-                                            <p className="text-[11px] text-gray-400 font-medium">Crafting narrative-driven reels with cinematic depth.</p>
+                                            <h4 className="text-[13px] font-black uppercase text-heading tracking-wider">Visual Storytelling</h4>
+                                            <p className="text-[11px] text-subheading font-medium">Crafting narrative-driven reels with cinematic depth.</p>
                                         </div>
                                     </div>
 
                                     <div className="flex items-start gap-4 group">
-                                        <div className="p-3.5 bg-gray-50 rounded-2xl text-red-600 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-red-200">
+                                        <div className="p-3.5 bg-card-alt rounded-2xl text-red-600 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-red-200">
                                             <FaPalette size={18} />
                                         </div>
                                         <div className="space-y-1">
-                                            <h4 className="text-[13px] font-black uppercase text-gray-900 tracking-wider">Precision Grading</h4>
-                                            <p className="text-[11px] text-gray-400 font-medium">Custom color science tailored to evoke specific moods.</p>
+                                            <h4 className="text-[13px] font-black uppercase text-heading tracking-wider">Precision Grading</h4>
+                                            <p className="text-[11px] text-subheading font-medium">Custom color science tailored to evoke specific moods.</p>
                                         </div>
                                     </div>
 
                                     <div className="flex items-start gap-4 group">
-                                        <div className="p-3.5 bg-gray-50 rounded-2xl text-red-600 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-red-200">
+                                        <div className="p-3.5 bg-card-alt rounded-2xl text-red-600 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-red-200">
                                             <FaUpDownLeftRight size={18} />
                                         </div>
                                         <div className="space-y-1">
-                                            <h4 className="text-[13px] font-black uppercase text-gray-900 tracking-wider">Dynamic Movement</h4>
-                                            <p className="text-[11px] text-gray-400 font-medium">Fluid motion capture using high-end stabilizing rigs.</p>
+                                            <h4 className="text-[13px] font-black uppercase text-heading tracking-wider">Dynamic Movement</h4>
+                                            <p className="text-[11px] text-subheading font-medium">Fluid motion capture using high-end stabilizing rigs.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -225,7 +225,7 @@ export default function VideoPlayer() {
                                 borderRadius: isFullscreen ? 0 : "30px",
                             }}
                             transition={{ duration: 0.3 }}
-                            className="relative h-[70vh] md:h-[70vh] w-full lg:w-[70%] overflow-hidden bg-black shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] border border-gray-100 group z-20"
+                            className="relative h-[70vh] md:h-[70vh] w-full lg:w-[70%] overflow-hidden bg-black shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] border border-card-border group z-20"
                         >
                             <video
                                 ref={videoRef}

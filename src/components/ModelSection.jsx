@@ -183,15 +183,15 @@ function ScrollHint({ progress }) {
             style={{ opacity: op }}
             className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-50 pointer-events-none"
         >
-            <span className="text-[10px] font-bold tracking-[0.22em] text-gray-400 uppercase">
+            <span className="text-[10px] font-bold tracking-[0.22em] text-subheading uppercase">
                 Scroll to explore
             </span>
             <motion.div
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                className="w-5 h-8 rounded-full border-2 border-gray-300 flex justify-center pt-1.5"
+                className="w-5 h-8 rounded-full border-2 border-card-border flex justify-center pt-1.5"
             >
-                <div className="w-[3px] h-2 rounded-full bg-gray-400" />
+                <div className="w-[3px] h-2 rounded-full bg-subheading" />
             </motion.div>
         </motion.div>
     );

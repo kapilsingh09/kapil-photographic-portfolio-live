@@ -98,7 +98,7 @@ export default function PhotoCard() {
     const handlePrev = () => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
 
     return (
-        <main className="min-h-[95vh] text-black font-sans">
+        <main className="min-h-[95vh] text-heading font-sans">
             <section ref={sectionRef} className="max-w-7xl mx-auto px-8 relative">
 
                 {/* ── Header ── */}

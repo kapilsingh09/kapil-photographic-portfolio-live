@@ -279,7 +279,7 @@ export default function ContactPage() {
 
   return (
     <section className="relative flex w-full items-center justify-center px-4 py-24 md:px-8 md:py-28">
-      <div className="mx-auto w-full max-w-[1100px] overflow-hidden rounded-[2rem] border border-border-subtle bg-white p-6 shadow-2xl shadow-black/5 transition-colors dark:shadow-black/50 md:p-10 lg:p-12">
+      <div className="mx-auto w-full max-w-[1100px] overflow-hidden rounded-[2rem] border border-border-subtle bg-card p-6 shadow-2xl shadow-black/5 transition-colors dark:shadow-black/50 md:p-10 lg:p-12">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
 
           {/* ── Left: Form + Toggle ────────────────────────────── */}

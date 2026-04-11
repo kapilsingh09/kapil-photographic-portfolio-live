@@ -164,7 +164,7 @@ export default function SliderGallery() {
             viewBox="0 0 36 36"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="text-gray-400"
+            className="text-subheading"
           >
             <circle cx="18" cy="18" r="17" stroke="currentColor" strokeWidth="1.5" />
             <path
@@ -190,7 +190,7 @@ export default function SliderGallery() {
             font-black
             leading-[1.08]
             tracking-[-0.03em]
-            text-gray-900
+            text-heading
           "
         >
           You will find yourself
@@ -213,7 +213,7 @@ export default function SliderGallery() {
           }}
           className="
             text-[clamp(0.85rem,1.5vw,1rem)]
-            text-gray-400
+            text-subheading
             leading-relaxed
             max-w-[320px]
           "

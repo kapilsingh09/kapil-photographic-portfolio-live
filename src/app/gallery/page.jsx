@@ -101,7 +101,7 @@ function PhotoCard({ photo, delay = 0 }) {
         whileInView={{ opacity: 1 }}
         viewport={{ once: false, margin: '-10% 0px -10% 0px' }}
         transition={{ delay: delay + 0.3, duration: 0.4 }}
-        className="absolute -top-5 left-2 text-xs italic text-gray-500"
+        className="absolute -top-5 left-2 text-xs italic text-subheading"
         style={{ fontFamily: "'Caveat', cursive", fontSize: 13 }}
       >
         {photo.label}
@@ -113,8 +113,8 @@ function PhotoCard({ photo, delay = 0 }) {
         whileHover={{ opacity: 1, y: 0 }}
         className="pointer-events-none absolute -bottom-7 left-0 flex items-center gap-1 opacity-0"
       >
-        <MapPin size={10} className="text-gray-400" />
-        <span className="text-[10px] text-gray-400">{photo.location}</span>
+        <MapPin size={10} className="text-subheading" />
+        <span className="text-[10px] text-subheading">{photo.location}</span>
       </motion.div>
     </motion.div>
   )
@@ -129,7 +129,7 @@ function GalleryPage({ page, pageIndex }) {
 
   return (
     <div
-      className={`relative w-full overflow-hidden px-4 py-24 md:px-8 lg:px-16 md:py-32 ${pageIndex % 2 !== 0 ? 'bg-black/5' : ''}`}
+      className={`relative w-full overflow-hidden px-4 py-24 md:px-8 lg:px-16 md:py-32 ${pageIndex % 2 !== 0 ? 'bg-card-alt/50' : ''}`}
     >
       {/* ── Header ── */}
       <div ref={headerRef} className="mb-14 md:mb-20 flex flex-col gap-8 md:flex-row md:items-end md:justify-between max-w-7xl mx-auto">
@@ -148,7 +148,7 @@ function GalleryPage({ page, pageIndex }) {
               initial={{ y: '110%' }}
               animate={inView ? { y: '0%' } : { y: '110%' }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
-              className="font-heading text-5xl font-black tracking-tight text-gray-900 md:text-7xl"
+              className="font-heading text-5xl font-black tracking-tight text-heading md:text-7xl"
             >
               {page.month}
             </motion.h2>
@@ -162,8 +162,8 @@ function GalleryPage({ page, pageIndex }) {
           >
             <Calendar size={14} />
             <span>{page.year}</span>
-            <span className="mx-1 text-gray-400">·</span>
-            <span className="italic text-gray-600" style={{ fontFamily: "'Caveat', cursive", fontSize: 16 }}>
+            <span className="mx-1 text-subheading">·</span>
+            <span className="italic text-paragraph" style={{ fontFamily: "'Caveat', cursive", fontSize: 16 }}>
               {page.tagline}
             </span>
           </motion.div>
@@ -233,14 +233,14 @@ function GalleryPage({ page, pageIndex }) {
       )}
 
       {/* ── Footer ── */}
-      <div className="mt-24 flex items-center justify-between border-t border-black/10 pt-6 max-w-7xl mx-auto">
+      <div className="mt-24 flex items-center justify-between border-t border-card-border pt-6 max-w-7xl mx-auto">
         <span className="subtext-xs font-bold tracking-widest">VOLUME {pageIndex === 0 ? 'I' : 'II'}</span>
         <motion.span
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: false, margin: '-10% 0px -10% 0px' }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="italic text-gray-500"
+          className="italic text-subheading"
           style={{ fontFamily: "'Caveat', cursive", fontSize: 16 }}
         >
           {page.caption}

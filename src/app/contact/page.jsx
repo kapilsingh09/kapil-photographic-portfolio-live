@@ -2,12 +2,12 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Phone, Mail, Camera, ArrowRight, X, MessageCircle } from 'lucide-react'
+import { Phone, Mail, Camera, ArrowRight, X, MessageCircle, ChevronDown } from 'lucide-react'
 import Image from 'next/image'
 import { useContent } from '@/hooks/useContent'
 
 // ─── YOUR WHATSAPP NUMBER (with country code, no + or spaces) ───────────────
-const WA_NUMBER = process.env.WHATSUPP // 👈 apna number yahan daal
+const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSUPP || '919258233160'
 
 // ─── Input Field ──────────────────────────────────────────────────────────────
 
@@ -104,20 +104,23 @@ function WhatsAppPanel() {
       <Field label="Your Name" placeholder="" value={waName} onChange={(e) => setWaName(e.target.value)} />
 
       {/* Service */}
-      <div className="group flex flex-col">
+      <div className="group flex flex-col relative">
         <label className="text-[10px] font-bold uppercase tracking-widest text-content-muted transition-colors group-focus-within:text-content">
           Topic of Interest
         </label>
-        <select
-          value={waService}
-          onChange={(e) => setWaService(e.target.value)}
-          className="w-full appearance-none border-b border-border-subtle bg-transparent py-3 text-sm text-content outline-none transition-all duration-300 focus:border-content cursor-pointer"
-        >
-          <option value="" disabled>Select a service</option>
-          {contactPage.services.map((service) => (
-            <option key={service.id} value={service.label}>{service.label}</option>
-          ))}
-        </select>
+        <div className="relative">
+          <select
+            value={waService}
+            onChange={(e) => setWaService(e.target.value)}
+            className="w-full appearance-none border-b border-border-subtle bg-transparent py-3 pr-8 text-sm text-content outline-none transition-all duration-300 focus:border-content cursor-pointer"
+          >
+            <option value="" disabled className="bg-surface text-content">Select a service</option>
+            {contactPage.services.map((service) => (
+              <option key={service.id} value={service.label} className="bg-surface text-content">{service.label}</option>
+            ))}
+          </select>
+          <ChevronDown size={14} className="absolute right-2 top-1/2 -translate-y-1/2 text-content-muted pointer-events-none transition-colors group-focus-within:text-content" />
+        </div>
       </div>
 
       {/* Message */}
@@ -211,20 +214,23 @@ function EmailPanel() {
         <Field label="Email" type="email" placeholder="" value={form.email} onChange={set('email')} error={fieldErrors.email} />
       </div>
 
-      <div className="group flex flex-col">
+      <div className="group flex flex-col relative">
         <label className="text-[10px] font-bold uppercase tracking-widest text-content-muted transition-colors group-focus-within:text-content">
           Topic of Interest
         </label>
-        <select
-          value={form.service}
-          onChange={set('service')}
-          className="w-full appearance-none border-b border-border-subtle bg-transparent py-3 text-sm text-content outline-none transition-all duration-300 focus:border-content cursor-pointer"
-        >
-          <option value="" disabled>Select a service</option>
-          {useContent().contactPage.services.map(service => (
-            <option key={service.id} value={service.label}>{service.label}</option>
-          ))}
-        </select>
+        <div className="relative">
+          <select
+            value={form.service}
+            onChange={set('service')}
+            className="w-full appearance-none border-b border-border-subtle bg-transparent py-3 pr-8 text-sm text-content outline-none transition-all duration-300 focus:border-content cursor-pointer"
+          >
+            <option value="" disabled className="bg-surface text-content">Select a service</option>
+            {useContent().contactPage.services.map(service => (
+              <option key={service.id} value={service.label} className="bg-surface text-content">{service.label}</option>
+            ))}
+          </select>
+          <ChevronDown size={14} className="absolute right-2 top-1/2 -translate-y-1/2 text-content-muted pointer-events-none transition-colors group-focus-within:text-content" />
+        </div>
       </div>
 
       <Field label="Message" placeholder="Tell me about the details..." value={form.message} onChange={set('message')} as="textarea" error={fieldErrors.message} />
@@ -235,11 +241,11 @@ function EmailPanel() {
         disabled={status === 'sending'}
         whileHover={status === 'sending' ? {} : { scale: 1.02 }}
         whileTap={status === 'sending' ? {} : { scale: 0.98 }}
-        className={`mt-2 flex w-fit items-center gap-4 rounded-full px-6 py-3 text-sm font-semibold shadow-md transition-all ${status === 'sending'
-          ? 'cursor-not-allowed bg-surface-muted text-content opacity-70'
+        className={`group mt-2 flex w-fit items-center gap-4 rounded-full px-6 py-3 text-sm font-semibold shadow-md transition-all border ${status === 'sending'
+          ? 'cursor-not-allowed bg-surface-muted text-content opacity-70 border-transparent'
           : status === 'success'
-            ? '!bg-emerald-600 text-white'
-            : 'bg-black text-white dark:bg-black dark:text-white hover:bg-white hover:text-black hover:border'
+            ? '!bg-emerald-600 text-white border-transparent'
+            : 'bg-black text-white dark:bg-white dark:text-black border-transparent hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white hover:border-border-subtle dark:hover:border-border-subtle'
           }`}
       >
         <span>
@@ -248,11 +254,11 @@ function EmailPanel() {
           {status === 'error' && 'Try again'}
           {status === 'idle' && 'Send Inquiry'}
         </span>
-        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-surface/20">
+        <div className={`flex h-7 w-7 items-center justify-center rounded-full transition-colors ${status === 'success' ? 'bg-white/20' : 'bg-white/20 dark:bg-black/10 group-hover:bg-black/10 dark:group-hover:bg-white/20'}`}>
           {status === 'sending' ? (
-            <div className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-surface border-t-transparent" />
+            <div className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-current border-t-transparent" />
           ) : (
-            <ArrowRight size={13} className="text-surface" strokeWidth={2.5} />
+            <ArrowRight size={13} className="text-current" strokeWidth={2.5} />
           )}
         </div>
       </motion.button>
@@ -339,7 +345,7 @@ export default function ContactPage() {
                 src="/Team_Photo/waguri.jpg"
                 alt="Photographer behind the scenes"
                 fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                className="object-cover "
                 sizes="40vw"
                 loading="lazy"
               />

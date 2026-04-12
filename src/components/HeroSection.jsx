@@ -399,7 +399,7 @@ export default function HeroSection() {
                         <motion.button
                             whileHover={{ scale: 1.04 }}
                             whileTap={{ scale: 0.96 }}
-                            className="w-full border sm:w-44 h-12 rounded-full bg-surface text-heading text-sm font-semibold tracking-tight cursor-pointer border-[#000000] dark:border-white hover:border-black dark:hover:border-white transition-colors duration-200"
+                            className="w-full border sm:w-44 h-12 rounded-full bg-surface text-heading text-sm font-semibold tracking-tight cursor-pointer border-[#000000] dark:border-white hover:border-black dark:hover:border-black transition-colors duration-200"
                             onClick={() => router.push('/gallery')}
                         >
                             Explore

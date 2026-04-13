@@ -15,8 +15,8 @@ export default function Home() {
       <PhotoCard />
       <SliderGallery />
       <PhotographerCard />
-      <ModelSection />
-      <PriceingOne />
+      {/* <ModelSection /> */}
+      {/* <PriceingOne /> */}
       <VideoPlayer />
       <LastSection />
       </div>

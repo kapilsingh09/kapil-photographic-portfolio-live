@@ -123,7 +123,8 @@ export const portfolioData = {
         { name: "Instagram", url: "#" },
         { name: "Twitter", url: "#" },
         { name: "LinkedIn", url: "#" },
-        { name: "Dribbble", url: "#" }
+        { name: "Dribbble", url: "#" },
+        { name: "GitHub", url: "https://github.com/kapilsingh09" }
     ],
     services: [
         { name: "Photography", badge: "New", url: "#" },

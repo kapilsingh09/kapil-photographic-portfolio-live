@@ -45,7 +45,16 @@ export default function Navbar() {
         <div className="flex items-center justify-between max-w-7xl mx-auto px-6 pt-8">
 
           {/* ── Left: Logo ── */}
-          <Link href={navbar.logo.href} className="flex items-center gap-2 cursor-pointer group">
+          <Link 
+            href={navbar.logo.href} 
+            onClick={(e) => {
+              if (pathname === navbar.logo.href) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
+            className="flex items-center gap-2 cursor-pointer group"
+          >
             <motion.div 
               whileHover={{ rotate: 135 }}
               transition={{ duration: 0.4 }}
@@ -213,10 +222,20 @@ export default function Navbar() {
             >
               {/* Header row inside glass panel */}
               <div className="flex items-center justify-between px-6 pt-6 pb-4">
-                <div className="flex items-center gap-2">
+                <Link 
+                  href={navbar.logo.href} 
+                  onClick={(e) => {
+                    setMobileOpen(false);
+                    if (pathname === navbar.logo.href) {
+                      e.preventDefault();
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                  }}
+                  className="flex items-center gap-2 cursor-pointer"
+                >
                   <div className="w-5 h-5 bg-accent-brand rounded-sm rotate-45" />
-                  <span className="font-bold text-base tracking-tight text-text-primary">kapil Photography</span>
-                </div>
+                  <span className="font-bold text-base tracking-tight text-text-primary">{navbar.logo.text}</span>
+                </Link>
                 <button
                   onClick={() => setMobileOpen(false)}
                   className="w-8 h-8 flex items-center justify-center rounded-full bg-bg-secondary hover:bg-bg-tertiary transition-colors border border-border-primary"

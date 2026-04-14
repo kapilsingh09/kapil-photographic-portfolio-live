@@ -1,16 +1,16 @@
 "use client";
 
 import React from "react";
-import { FaCamera, FaInstagram, FaXTwitter, FaLinkedinIn, FaDribbble } from "react-icons/fa6";
+import { FaCamera, FaInstagram, FaXTwitter, FaLinkedinIn, FaDribbble, FaGithub } from "react-icons/fa6";
 import { useContent } from "@/hooks/useContent";
 
 export default function Footer() {
     const { site } = useContent();
     const year = new Date().getFullYear();
-    const socialIcons = [FaInstagram, FaXTwitter, FaLinkedinIn, FaDribbble];
+    const socialIcons = [FaInstagram, FaXTwitter, FaLinkedinIn, FaDribbble, FaGithub];
 
     return (
-        <footer className="bg-surface-muted mx-[10px] mb-[10px] px-8 md:px-16 pt-20 pb-0 flex flex-col mt-20 text-content border border-border-subtle rounded-[2rem] transition-colors">
+        <footer className="bg-surface-muted mx-[10px] mb-[10px] px-8 md:px-16 pt-20 pb-0 flex flex-col mt-20 text-content border border-border-subtle rounded-4xl transition-colors">
             <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row justify-between gap-16 md:gap-8">
 
                 {/* Left Column - Branding */}

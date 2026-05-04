@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Aperture, BookImage, Images, PenLine } from 'lucide-react'
 import Image from 'next/image'
 import { useContent } from '@/hooks/useContent'
+import { usePhotoViewer, PhotoViewer } from '@/hooks/photoViewer'
 
 
 // ─── Framer Variants ──────────────────────────────────────────────────────────
@@ -22,6 +23,7 @@ import { useRouter } from 'next/navigation'
 export default function LastSection() {
   const router = useRouter();
   const { about } = useContent();
+  const { isOpen, currentImage, openViewer, closeViewer } = usePhotoViewer();
   return (
     <section className="flex min-h-[100vh] items-center justify-center px-4 py-24 md:py-0 md:px-10">
       <div className="grid w-full max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
@@ -38,8 +40,9 @@ export default function LastSection() {
             alt="Our Team"
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover object-top"
+            className="object-cover object-top cursor-pointer"
             loading="lazy"
+            onClick={() => openViewer(about.hero.image)}
           />
 
           {/* Bottom frosted blur layer */}
@@ -127,7 +130,8 @@ export default function LastSection() {
             alt="Team creative"
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover object-top"
+            className="object-cover object-top cursor-pointer"
+            onClick={() => openViewer(about.archive.image)}
           />
 
           {/* Bottom frosted blur layer */}
@@ -204,6 +208,7 @@ export default function LastSection() {
         </motion.div>
 
       </div>
+      <PhotoViewer isOpen={isOpen} currentImage={currentImage} onClose={closeViewer} />
     </section>
   )
 }

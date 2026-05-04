@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { usePhotoViewer, PhotoViewer } from "@/hooks/photoViewer";
 
 /* ─────────────────────────────────────────────────────────────
    Reusable scroll-reveal wrapper
@@ -67,28 +68,28 @@ function CardConnectCreate() {
           <div
             className="absolute w-36 h-48 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 cursor-pointer rotate-[3deg] -translate-y-[34px] translate-x-[15px] z-[1] hover:z-50 hover:scale-[1.15]"
           >
-            <img src="/images/img-2.jpg" alt="Art 3" className="w-full h-full object-cover" draggable={false} />
+            <img src="/images/img-2.jpg" alt="Art 3" className="w-full h-full object-cover" draggable={false} onClick={(e) => { e.stopPropagation(); window.__photoViewerOpen?.("/images/img-2.jpg"); }} />
           </div>
 
           {/* Left card – peeking sideways */}
           <div
             className="absolute w-36 h-48 rounded-2xl shadow-xl overflow-hidden transition-all duration-300 cursor-pointer -rotate-[15deg] -translate-x-[60px] translate-y-[10px] z-[2] hover:z-50 hover:scale-[1.15]"
           >
-            <img src="/images/img-3.jpg" alt="Art 2" className="w-full h-full object-cover" draggable={false} />
+            <img src="/images/img-3.jpg" alt="Art 2" className="w-full h-full object-cover" draggable={false} onClick={(e) => { e.stopPropagation(); window.__photoViewerOpen?.("/images/img-3.jpg"); }} />
           </div>
 
           {/* Bottom right card – peeking downwards */}
           <div
             className="absolute w-36 h-48 rounded-2xl shadow-xl overflow-hidden transition-all duration-300 cursor-pointer rotate-[12deg] translate-x-[60px] translate-y-[35px] z-[3] hover:z-50 hover:scale-[1.15]"
           >
-            <img src="/images/img-6.jpg" alt="Art 4" className="w-full h-full object-cover" draggable={false} />
+            <img src="/images/img-6.jpg" alt="Art 4" className="w-full h-full object-cover" draggable={false} onClick={(e) => { e.stopPropagation(); window.__photoViewerOpen?.("/section/img-1.jpg"); }} />
           </div>
 
           {/* Front Main card */}
           <div
             className="absolute w-40 h-52 rounded-xl shadow-[0_20px_40px_rgba(0,0,0,0.4)] overflow-hidden border border-white/10 transition-all duration-300 cursor-pointer rotate-0 z-[10] hover:z-50 hover:scale-[1.1]"
           >
-            <img src="/section/img-1.jpg" alt="Main Art" className="w-full h-full object-cover" draggable={false} />
+            <img src="/section/img-1.jpg" alt="Main Art" className="w-full h-full object-cover" draggable={false} onClick={(e) => { e.stopPropagation(); window.__photoViewerOpen?.("/section/img-1.jpg"); }} />
           </div>
 
           {/* @robin speech bubble (Hero Style Tag) */}
@@ -273,6 +274,12 @@ function CardAdvantages() {
 export default function StorySection() {
   const headingRef = useRef(null);
   const headingInView = useInView(headingRef, { once: false, margin: "-80px" });
+  const { isOpen, currentImage, openViewer, closeViewer } = usePhotoViewer();
+
+  // Expose openViewer globally for child card components
+  if (typeof window !== 'undefined') {
+    window.__photoViewerOpen = openViewer;
+  }
 
   return (
     <section className="w-full px-4 sm:px-8 lg:px-16 gap-4 pt-8 pb-20 md:pt-12 md:pb-28">
@@ -328,6 +335,7 @@ export default function StorySection() {
         </div>
 
       </div>
+      <PhotoViewer isOpen={isOpen} currentImage={currentImage} onClose={closeViewer} />
     </section>
   );
 }

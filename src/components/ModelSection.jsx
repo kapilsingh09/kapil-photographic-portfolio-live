@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import { useContent } from "@/hooks/useContent";
 import HoverTag from "./HoverTag";
+import { usePhotoViewer, PhotoViewer } from "@/hooks/photoViewer";
 
 /* ─────────────────────────────────────────────────────────────
    SURROUNDING IMAGE TILES
@@ -43,7 +44,7 @@ const TILES = [
 /* ─────────────────────────────────────────────────────────────
    Surrounding tile — flies in from offset, de-blurs
 ───────────────────────────────────────────────────────────── */
-function Tile({ data, progress }) {
+function Tile({ data, progress, onImageClick }) {
     const x = useTransform(progress, [0, 1], [data.initX, 0]);
     const y = useTransform(progress, [0, 1], [data.initY, 0]);
     const op = useTransform(progress, [0, 0.35, 1], [0, 0.45, 1]);
@@ -61,17 +62,20 @@ function Tile({ data, progress }) {
         marginTop: data.mt,
     };
 
+    const imgSrc = `https://picsum.photos/seed/${data.seed}/400/520`;
+
     return (
         <motion.div
             initial="initial"
             whileHover="hover"
+            onClick={() => onImageClick(imgSrc)}
             style={{ ...pos, x, y, scale: sc, opacity: op, filter: filt }}
             className="rounded-[32px] overflow-hidden shadow-lg will-change-transform pointer-events-auto hover:cursor-pointer z-10 hover:z-100"
         >
             <HoverTag text={data.tag} bgClass={data.color} />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-                src={`https://picsum.photos/seed/${data.seed}/400/520`}
+                src={imgSrc}
                 alt=""
                 draggable={false}
                 className="w-full h-full object-cover rounded-[32px]"
@@ -84,7 +88,7 @@ function Tile({ data, progress }) {
    CENTER CARD
    Note: Now accepts 'artist' data as a prop
 ───────────────────────────────────────────────────────────── */
-function CenterCard({ progress, artist }) {
+function CenterCard({ progress, artist, onImageClick }) {
     const width = useTransform(progress, [0, 1], ["100vw", "250px"]);
     const height = useTransform(progress, [0, 1], ["100vh", "300px"]);
     const br = useTransform(progress, [0, 0.3, 1], ["10px", "26px", "32px"]);
@@ -117,7 +121,8 @@ function CenterCard({ progress, artist }) {
                 src={artist.image}
                 alt={artist.name}
                 draggable={false}
-                style={{ objectPosition: "top center" }}
+                onClick={() => onImageClick(artist.image)}
+                style={{ objectPosition: "top center", cursor: "pointer" }}
                 className="w-full h-full object-cover"
             />
 
@@ -203,6 +208,7 @@ function ScrollHint({ progress }) {
 export default function HeroScrollGallery() {
     const { featuredArtist } = useContent();
     const containerRef = useRef(null);
+    const { isOpen, currentImage, openViewer, closeViewer } = usePhotoViewer();
 
     // Merge static positions with dynamic content
     const dynamicTiles = TILES.map((tile, i) => ({
@@ -304,17 +310,18 @@ export default function HeroScrollGallery() {
             {/* Desktop: original sticky animation */}
             <div className="hidden md:block h-[400vh]">
                 <div className="sticky top-0 w-full h-screen overflow-hidden">
-                    <CenterCard progress={smoothProgress} artist={featuredArtist.hero} />
+                    <CenterCard progress={smoothProgress} artist={featuredArtist.hero} onImageClick={openViewer} />
 
                     <div className="absolute inset-0 max-w-[1120px] mx-auto pointer-events-none z-0">
                         {dynamicTiles.map((tile) => (
-                            <Tile key={tile.seed} data={tile} progress={smoothProgress} />
+                            <Tile key={tile.seed} data={tile} progress={smoothProgress} onImageClick={openViewer} />
                         ))}
                     </div>
 
                     <ScrollHint progress={smoothProgress} />
                 </div>
             </div>
+            <PhotoViewer isOpen={isOpen} currentImage={currentImage} onClose={closeViewer} />
         </div>
     );
 }

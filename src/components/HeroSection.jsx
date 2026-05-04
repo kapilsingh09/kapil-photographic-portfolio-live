@@ -16,6 +16,7 @@ import {
 } from "framer-motion";
 
 import { useContent } from "@/hooks/useContent";
+import { usePhotoViewer, PhotoViewer } from "@/hooks/photoViewer";
 
 // ────────────────────────────────────────────────────────────────
 // ARC MATH — y = k * (x - centerX)²
@@ -273,6 +274,7 @@ const FloatingImage = ({ children, index, scrollYProgress, isInView, tag1, tag1P
 export default function HeroSection() {
     const { hero } = useContent();
     const router = useRouter();
+    const { isOpen, currentImage, openViewer, closeViewer } = usePhotoViewer();
     const containerRef = useRef(null);
     const arcRef = useRef(null);
     const isInView = useInView(arcRef, { once: false, margin: "-100px" });
@@ -343,7 +345,10 @@ export default function HeroSection() {
                                 tag2={idx === 2 ? img.tag : null}
                                 tag2Props={idx === 2 ? { pos: "right-3", bg: img.color } : {}}
                             >
-                                <div className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-xl overflow-hidden bg-surface-muted transition-colors">
+                                <div 
+                                    onClick={() => openViewer(img.src)}
+                                    className="relative w-[190px] h-[190px] md:w-[220px] md:h-[220px] rounded-2xl shadow-xl overflow-hidden bg-surface-muted transition-colors cursor-pointer"
+                                >
                                     <Image src={img.src} loading="lazy" fill className="object-cover" sizes="(max-width: 768px) 100vw, 220px" alt="" />
                                 </div>
                             </FloatingImage>
@@ -372,7 +377,11 @@ export default function HeroSection() {
                 <div className="md:hidden w-full max-w-md mt-8 mb-10">
                     <div className="grid grid-cols-3 gap-2 opacity-95">
                         {hero.images.slice(0, 6).map((img) => (
-                            <div key={img.id} className="relative aspect-square overflow-hidden rounded-2xl bg-surface-muted shadow-sm transition-colors">
+                            <div 
+                                key={img.id} 
+                                onClick={() => openViewer(img.src)}
+                                className="relative aspect-square overflow-hidden rounded-2xl bg-surface-muted shadow-sm transition-colors cursor-pointer"
+                            >
                                 <Image src={img.src} loading="lazy" alt="" fill sizes="(max-width: 768px) 33vw, 210px" className="object-cover" />
                             </div>
                         ))}
@@ -492,6 +501,8 @@ export default function HeroSection() {
                 {/* Right panel — images land here in the diagonal (hidden on mobile to prevent blank space) */}
                 <div className="hidden lg:block flex-1 relative w-full max-w-[600px] h-[500px]" />
             </section>
+
+            <PhotoViewer isOpen={isOpen} currentImage={currentImage} onClose={closeViewer} />
         </div>
     );
 }

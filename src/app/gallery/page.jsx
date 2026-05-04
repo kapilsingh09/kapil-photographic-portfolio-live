@@ -5,6 +5,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { MapPin, Calendar } from 'lucide-react'
 import { useContent } from '@/hooks/useContent'
+import { usePhotoViewer, PhotoViewer } from '@/hooks/photoViewer'
 
 // ─── Gallery Data ─────────────────────────────────────────────────────────────
 // picsum images with seed for consistency — swap src with your real photos
@@ -13,7 +14,7 @@ import { useContent } from '@/hooks/useContent'
 
 // ─── Single Photo Card ────────────────────────────────────────────────────────
 
-function PhotoCard({ photo, delay = 0 }) {
+function PhotoCard({ photo, delay = 0, onImageClick }) {
   const isWide = photo.size === 'wide'
 
   return (
@@ -25,6 +26,7 @@ function PhotoCard({ photo, delay = 0 }) {
       whileHover={{ scale: 1.03, rotate: 0, zIndex: 20, transition: { duration: 0.3 } }}
       className="group relative cursor-pointer"
       style={{ zIndex: 1 }}
+      onClick={() => onImageClick?.(photo.src)}
     >
       {/* Photo */}
       <div
@@ -85,7 +87,7 @@ function PhotoCard({ photo, delay = 0 }) {
 
 // ─── Single Page ──────────────────────────────────────────────────────────────
 
-function GalleryPage({ page, pageIndex }) {
+function GalleryPage({ page, pageIndex, onImageClick }) {
   const headerRef = useRef(null)
   // Bi-directional scrolling animations!
   const inView = useInView(headerRef, { once: false, margin: '-15% 0px -15% 0px' })
@@ -169,28 +171,28 @@ function GalleryPage({ page, pageIndex }) {
 
           {/* Row 1 — 2 wide images side by side */}
           <div className="flex flex-wrap items-start justify-center gap-10 md:gap-14">
-            <PhotoCard photo={page.photos[0]} delay={0.0} />
-            <PhotoCard photo={page.photos[1]} delay={0.1} />
+            <PhotoCard photo={page.photos[0]} delay={0.0} onImageClick={onImageClick} />
+            <PhotoCard photo={page.photos[1]} delay={0.1} onImageClick={onImageClick} />
           </div>
 
           {/* Row 2 — 3 tall + 1 wide mix */}
           <div className="flex flex-wrap items-start justify-center gap-8 md:gap-10">
-            <PhotoCard photo={page.photos[2]} delay={0.05} />
-            <PhotoCard photo={page.photos[3]} delay={0.15} />
-            {page.photos[4] && <PhotoCard photo={page.photos[4]} delay={0.22} />}
+            <PhotoCard photo={page.photos[2]} delay={0.05} onImageClick={onImageClick} />
+            <PhotoCard photo={page.photos[3]} delay={0.15} onImageClick={onImageClick} />
+            {page.photos[4] && <PhotoCard photo={page.photos[4]} delay={0.22} onImageClick={onImageClick} />}
           </div>
 
           {/* Row 3 — remaining */}
           <div className="flex flex-wrap items-start justify-center gap-10 md:gap-14">
-            {page.photos[5] && <PhotoCard photo={page.photos[5]} delay={0.0} />}
-            {page.photos[6] && <PhotoCard photo={page.photos[6]} delay={0.12} />}
-            {page.photos[7] && <PhotoCard photo={page.photos[7]} delay={0.22} />}
+            {page.photos[5] && <PhotoCard photo={page.photos[5]} delay={0.0} onImageClick={onImageClick} />}
+            {page.photos[6] && <PhotoCard photo={page.photos[6]} delay={0.12} onImageClick={onImageClick} />}
+            {page.photos[7] && <PhotoCard photo={page.photos[7]} delay={0.22} onImageClick={onImageClick} />}
           </div>
         </div>
       ) : (
         <div className="flex flex-wrap items-start justify-center gap-10 max-w-7xl mx-auto">
           {page.photos.map((p, i) => (
-            <PhotoCard key={p.id} photo={p} delay={i * 0.08} />
+            <PhotoCard key={p.id} photo={p} delay={i * 0.08} onImageClick={onImageClick} />
           ))}
         </div>
       )}
@@ -220,6 +222,7 @@ function GalleryPage({ page, pageIndex }) {
 
 export default function EditorialGallery() {
   const { galleryPage } = useContent();
+  const { isOpen, currentImage, openViewer, closeViewer } = usePhotoViewer();
 
   return (
     <div className="min-h-screen bg-bg-primary font-sans text-text-primary selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black pt-28">
@@ -250,8 +253,9 @@ export default function EditorialGallery() {
         </section>
 
         {galleryPage.pages.map((page, index) => (
-          <GalleryPage key={page.volume} page={page} pageIndex={index} />
+          <GalleryPage key={page.volume} page={page} pageIndex={index} onImageClick={openViewer} />
         ))}
+        <PhotoViewer isOpen={isOpen} currentImage={currentImage} onClose={closeViewer} />
       </div>
     </div>
   )

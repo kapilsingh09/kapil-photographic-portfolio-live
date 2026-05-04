@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "fra
 import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useContent } from "@/hooks/useContent";
+import { usePhotoViewer, PhotoViewer } from "@/hooks/photoViewer";
 
 // Data is now fetched from useContent hook inside the component
 
@@ -76,6 +77,7 @@ export default function PhotoCard() {
     const { anthology } = useContent();
     const [currentIndex, setCurrentIndex] = useState(0);
     const sectionRef = useRef(null);
+    const { isOpen, currentImage, openViewer, closeViewer } = usePhotoViewer();
 
     const images = anthology.items; // For easier mapping
 
@@ -137,8 +139,9 @@ export default function PhotoCard() {
                                         src={images[currentIndex].src}
                                         alt={`Artwork ${currentIndex + 1}`}
                                         fill
-                                        className="object-cover"
+                                        className="object-cover cursor-pointer"
                                         loading="lazy"
+                                        onClick={() => openViewer(images[currentIndex].src)}
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                                 </motion.div>
@@ -222,6 +225,7 @@ export default function PhotoCard() {
                 </ScrollReveal>
 
             </section>
+            <PhotoViewer isOpen={isOpen} currentImage={currentImage} onClose={closeViewer} />
         </main>
     );
 }

@@ -35,43 +35,43 @@ function ScrollReveal({
 }
 
 // ─── Floating tag badge ────────────────────────────────────────────────────────
-function RotatingTag() {
-    return (
-        <motion.div
-            initial={{ scale: 0, rotate: 15, opacity: 0 }}
-            whileInView={{ scale: 1, rotate: -8, opacity: 1 }}
-            viewport={{ once: false }}
-            transition={{ type: "spring", stiffness: 120, damping: 12, delay: 0.7 }}
-            whileHover={{ scale: 1.05, rotate: 2 }}
-            className="absolute left-[80%] -top-20 hidden md:flex w-32 px-6 py-2 bg-black text-white rounded-full items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.5)] cursor-pointer relative"
-        >
-            <span className="text-[10px] font-bold tracking-widest uppercase z-10">
-                @landscapes
-            </span>
-            {/* The Pin Triangle pointing down */}
-            <div className="absolute -bottom-[3px] left-1/2 -translate-x-1/2 w-2 h-2 bg-black rotate-45 z-[0]" />
-        </motion.div>
-    );
-}
+// function RotatingTag() {
+//     return (
+//         <motion.div
+//             initial={{ scale: 0, rotate: 15, opacity: 0 }}
+//             whileInView={{ scale: 1, rotate: -8, opacity: 1 }}
+//             viewport={{ once: false }}
+//             transition={{ type: "spring", stiffness: 120, damping: 12, delay: 0.7 }}
+//             whileHover={{ scale: 1.05, rotate: 2 }}
+//             className="absolute left-[80%] -top-20 hidden md:flex w-32 px-6 py-2 bg-black text-white rounded-full items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.5)] cursor-pointer relative"
+//         >
+//             <span className="text-[10px] font-bold tracking-widest uppercase z-10">
+//                 @landscapes
+//             </span>
+//             {/* The Pin Triangle pointing down */}
+//             <div className="absolute -bottom-[3px] left-1/2 -translate-x-1/2 w-2 h-2 bg-black rotate-45 z-[0]" />
+//         </motion.div>
+//     );
+// }
 
 // ─── Dynamic synchronizing tag badge ────────────────────────────────────────────────────────
-function DynamicTag({ text }) {
-    return (
-        <motion.div
-            initial={{ scale: 0, rotate: 20, opacity: 0 }}
-            animate={{ scale: 1, rotate: -4, opacity: 1 }}
-            exit={{ scale: 0, rotate: -24, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 120, damping: 12 }}
-            whileHover={{ scale: 1.05, rotate: 6 }}
-            className="absolute left-[13%] md:left-[20%] -top-[60%] md:-top-[90%] min-w-[120px] flex px-5 py-2 bg-black backdrop-blur-md  text-white rounded-full items-center justify-center shadow-xl cursor-pointer z-50"
-        >
-            <span className="text-xs font-bold tracking-widest uppercase z-10 w-full text-center">
-                {text}
-            </span>
-            <div className="absolute -bottom-[4px] left-6 w-3 h-3 bg-black  backdrop-blur-md rotate-45 z-[0]" />
-        </motion.div>
-    );
-}
+// function DynamicTag({ text }) {
+//     return (
+//         <motion.div
+//             initial={{ scale: 0, rotate: 20, opacity: 0 }}
+//             animate={{ scale: 1, rotate: -4, opacity: 1 }}
+//             exit={{ scale: 0, rotate: -24, opacity: 0 }}
+//             transition={{ type: "spring", stiffness: 120, damping: 12 }}
+//             whileHover={{ scale: 1.05, rotate: 6 }}
+//             className="absolute left-[13%] md:left-[20%] -top-[60%] md:-top-[90%] min-w-[120px] flex px-5 py-2 bg-black backdrop-blur-md  text-white rounded-full items-center justify-center shadow-xl cursor-pointer z-50"
+//         >
+//             <span className="text-xs font-bold tracking-widest uppercase z-10 w-full text-center">
+//                 {text}
+//             </span>
+//             <div className="absolute -bottom-[4px] left-6 w-3 h-3 bg-black  backdrop-blur-md rotate-45 z-[0]" />
+//         </motion.div>
+//     );
+// }
 
 export default function PhotoCard() {
     const { anthology } = useContent();
@@ -118,7 +118,7 @@ export default function PhotoCard() {
                     </ScrollReveal>
 
                     {/* Rotating floating tag */}
-                    <RotatingTag />
+                    {/* <RotatingTag /> */}
                 </header>
 
                 {/* ── Sliding Card ── */}
@@ -179,8 +179,8 @@ export default function PhotoCard() {
                                                 className="relative"
                                             >
                                                 {/* Dynamic tag that animates in sync with the current slide */}
-                                                <DynamicTag text={images[currentIndex].place} />
-                                                
+                                                {/* <DynamicTag text={images[currentIndex].place} /> */}
+
                                                 <motion.div
                                                     initial={{ opacity: 0, y: 24, filter: "blur(10px)" }}
                                                     animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}

@@ -75,7 +75,7 @@ function CardConnectCreate() {
           <div
             className="absolute w-36 h-48 rounded-2xl shadow-xl overflow-hidden transition-all duration-300 cursor-pointer -rotate-[15deg] -translate-x-[60px] translate-y-[10px] z-[2] hover:z-50 hover:scale-[1.15]"
           >
-            <img src="/images/img-3.jpg" alt="Art 2" className="w-full h-full object-cover" draggable={false} onClick={(e) => { e.stopPropagation(); window.__photoViewerOpen?.("/images/img-3.jpg"); }} />
+            <img src="/images/img-3.jpeg" alt="Art 2" className="w-full h-full object-cover" draggable={false} onClick={(e) => { e.stopPropagation(); window.__photoViewerOpen?.("/images/img-3.jpeg"); }} />
           </div>
 
           {/* Bottom right card – peeking downwards */}

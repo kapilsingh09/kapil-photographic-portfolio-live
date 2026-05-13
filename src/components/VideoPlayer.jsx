@@ -333,7 +333,7 @@ export default function VideoPlayer() {
                             </AnimatePresence>
 
                             {/* Pill Bar Controls */}
-                            <motion.div 
+                            <motion.div find
                                 variants={{
                                     rest: { opacity: 0, y: 20 },
                                     hover: { opacity: 1, y: 0, transition: { staggerChildren: 0.08, delayChildren: 0.05, ease: "easeOut" } }

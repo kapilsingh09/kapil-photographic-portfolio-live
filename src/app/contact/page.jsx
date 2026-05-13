@@ -7,7 +7,7 @@ import Image from 'next/image'
 import { useContent } from '@/hooks/useContent'
 
 // ─── YOUR WHATSAPP NUMBER (with country code, no + or spaces) ───────────────
-const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSUPP || '919258233160'
+const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSUPP 
 
 // ─── Input Field ──────────────────────────────────────────────────────────────
 
@@ -39,8 +39,8 @@ function ModeToggle({ mode, onChange }) {
   return (
     <div className="mb-6 flex w-fit items-center gap-1 rounded-full border border-border-subtle bg-surface-muted p-1">
       {[
-        { id: 'email', icon: Mail, label: 'Email' },
         { id: 'whatsapp', icon: MessageCircle, label: 'WhatsApp' },
+        { id: 'email', icon: Mail, label: 'Email' },
       ].map(({ id, icon: Icon, label }) => (
         <button
           key={id}
@@ -69,7 +69,7 @@ function ModeToggle({ mode, onChange }) {
 
 // ─── WhatsApp Panel ───────────────────────────────────────────────────────────
 
-function WhatsAppPanel() {
+function WhatsAppPanel({}) {
   const { contactPage } = useContent();
   const [waName, setWaName] = useState('')
   const [waService, setWaService] = useState('')
@@ -156,7 +156,7 @@ function WhatsAppPanel() {
 
 // ─── Email Form Panel ─────────────────────────────────────────────────────────
 
-function EmailPanel() {
+function EmailPanel({isDisabled}) {
   const [form, setForm] = useState({ name: '', email: '', service: '', message: '', _gotcha: '' })
   const [status, setStatus] = useState('idle')
   const [errorMsg, setErrorMsg] = useState('')
@@ -284,12 +284,12 @@ function EmailPanel() {
 
 export default function ContactPage() {
   const { contactPage } = useContent();
-  const [mode, setMode] = useState('email') // 'email' | 'whatsapp'
+  const [mode, setMode] = useState('whatsapp') // 'email' | 'whatsapp'
 
   return (
     <section className="relative flex w-full items-center justify-center px-4 py-24 md:px-8 md:py-28">
       <div className="mx-auto w-full max-w-[1100px] overflow-hidden rounded-[2rem] border border-border-subtle bg-card p-6 shadow-2xl shadow-black/5 transition-colors dark:shadow-black/50 md:p-10 lg:p-12">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
+        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
 
           {/* ── Left: Form + Toggle ────────────────────────────── */}
           <motion.div
@@ -316,8 +316,8 @@ export default function ContactPage() {
 
             {/* ── Panels ── */}
             <AnimatePresence mode="wait">
-              {mode === 'email' && <EmailPanel key="email" />}
-              {mode === 'whatsapp' && <WhatsAppPanel key="whatsapp" />}
+              {mode === 'whatsapp' && <WhatsAppPanel isDisabled={false} key="whatsapp" />}
+              {mode === 'email' && <EmailPanel isDisabled={false} key="email" />}
             </AnimatePresence>
 
             {/* Contact info footer */}
@@ -340,14 +340,15 @@ export default function ContactPage() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             className="group relative hidden h-[580px] w-full overflow-hidden rounded-2xl lg:block"
           >
-            <div className="absolute inset-0 h-full w-full">
+            <div className="absolute inset-0 h-full w-full overflow-hidden">
               <Image
                 src="/Team_Photo/waguri.jpg"
                 alt="Photographer behind the scenes"
                 fill
-                className="object-cover "
-                sizes="40vw"
-                loading="lazy"
+                className="object-cover"
+                sizes="(max-width: 1024px) 0px, 40vw"
+                priority={false}
+                quality={85}
               />
             </div>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />

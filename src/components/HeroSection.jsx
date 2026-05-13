@@ -235,7 +235,7 @@ const FloatingImage = ({ children, index, scrollYProgress, isInView, tag1, tag1P
                 {children}
 
                 {/* The new Hover Tag */}
-                {hoverTag && (
+                {/* {hoverTag && (
                     <motion.div
                         initial={{ opacity: 0, y: 10, scale: 0.9 }}
                         animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 10, scale: isHovered ? 1 : 0.9 }}
@@ -244,7 +244,7 @@ const FloatingImage = ({ children, index, scrollYProgress, isInView, tag1, tag1P
                     >
                         {hoverTag.label}
                     </motion.div>
-                )}
+                )} */}
                 {tag1 && (
                     <motion.div
                         style={{ opacity: dTag1Opacity, scale: dTag1Scale }}
@@ -257,7 +257,7 @@ const FloatingImage = ({ children, index, scrollYProgress, isInView, tag1, tag1P
                 {tag2 && (
                     <motion.div
                         style={{ opacity: scrollTag2Opacity, scale: scrollTag2Scale }}
-                        className={`absolute -top-9 ${tag2Props.pos} ${tag2Props.bg} text-white text-xs px-3 py-1 rounded-full shadow-lg z-30 origin-bottom`}
+                        className={`absolute -top-9 ${tag2Props.pos + '0.4px'} ${tag2Props.bg} text-white text-xs px-3 py-1 rounded-full shadow-lg z-30 origin-bottom`}
                     >
                         {tag2}
                         <div className={`absolute ${tag2Props.pos} -bottom-1 w-2 h-2 ${tag2Props.bg} rotate-45`} />

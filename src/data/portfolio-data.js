@@ -10,13 +10,13 @@ export const portfolioData = {
     title: "A place to display your masterpiece.",
     subtitle: "Photographers can showcase their work and clients can easily book them.",
     images: [
-      { id: 1, src: "/images/img-01.jpg", tag: "@morgan", color: "bg-red-500" },
-      { id: 2, src: "/images/img-02.jpg", tag: "@coplin", color: "bg-blue-500" },
-      { id: 3, src: "/images/img-03.jpg", tag: "@robin", color: "bg-violet-600" },
-      { id: 4, src: "/images/img-04.jpg", tag: "@taylor", color: "bg-amber-500" },
-      { id: 5, src: "/images/img-05.jpg", tag: "@jordan", color: "bg-pink-500" },
-      { id: 6, src: "/images/img-06.jpg", tag: "@andrea", color: "bg-green-500" },
-      { id: 7, src: "/images/img-07.jpg", tag: "@alex", color: "bg-cyan-500" },
+      { id: 1, src: "/images/img-1.jpg", tag: "@morgan", color: "bg-red-500" },
+      { id: 2, src: "/images/img-2.jpg", tag: "@coplin", color: "bg-blue-500" },
+      { id: 3, src: "/images/img-3.jpg", tag: "@robin", color: "bg-violet-600" },
+      { id: 4, src: "/images/img-4.jpg", tag: "@taylor", color: "bg-amber-500" },
+      { id: 5, src: "/images/img-5.jpg", tag: "@jordan", color: "bg-pink-500" },
+      { id: 6, src: "/images/img-6.jpg", tag: "@andrea", color: "bg-green-500" },
+      { id: 7, src: "/images/img-7.jpg", tag: "@alex", color: "bg-cyan-500" },
     ],
     splitSection: {
         tagline: "Photography & Portfolio",
@@ -36,12 +36,12 @@ export const portfolioData = {
       { id: 2, place: "@kyoto", info: "A quiet morning illuminating ancient wooden temples and crimson autumn leaves.", src: "/photocard_imgs/cl-img-2.png" },
       { id: 3, place: "@sapporo", info: "Pristine snowscapes stretching through quiet streets beneath the winter moon.", src: "/photocard_imgs/cl-img-3.png" },
       { id: 4, place: "@osaka", info: "Vibrant street food stalls glowing amidst the electric energy of Dotonbori.", src: "/photocard_imgs/cl-img-4.jpg" },
-      // { id: 5, place: "@nara", info: "Sunlight filtering softly through ancient forests and mist-covered shrines.", src: "/photocard_imgs/pc-img-5.jpg" },
-      // { id: 6, place: "@fuji", info: "A breathtaking silhouette of the iconic peak against a clear twilight sky.", src: "/photocard_imgs/pc-img-6.jpg" },
-      // { id: 7, place: "@hakone", info: "Steaming hot springs hidden within emerald valleys and misty mountain trails.", src: "/photocard_imgs/pc-img-7.jpg" },
-      // { id: 8, place: "@kobe", info: "Glistening city lights reflecting off the calm harbor waters at dusk.", src: "/photocard_imgs/pc-img-8.jpg" },
-      // { id: 9, place: "@okinawa", info: "Crystal-clear turquoise waves crashing against dramatic coral coastlines.", src: "/photocard_imgs/pc-img-9.jpg" },
-      // { id: 10, place: "@yokohama", info: "A modern skyline gleaming bright against the backdrop of an endless urban sprawl.", src: "/photocard_imgs/pc-img-10.jpg" },
+      { id: 5, place: "@nara", info: "Sunlight filtering softly through ancient forests and mist-covered shrines.", src: "/photocard_imgs/pc-img-5.jpg" },
+      { id: 6, place: "@fuji", info: "A breathtaking silhouette of the iconic peak against a clear twilight sky.", src: "/photocard_imgs/pc-img-6.jpg" },
+      { id: 7, place: "@hakone", info: "Steaming hot springs hidden within emerald valleys and misty mountain trails.", src: "/photocard_imgs/pc-img-7.jpg" },
+      { id: 8, place: "@kobe", info: "Glistening city lights reflecting off the calm harbor waters at dusk.", src: "/photocard_imgs/pc-img-8.jpg" },
+      { id: 9, place: "@okinawa", info: "Crystal-clear turquoise waves crashing against dramatic coral coastlines.", src: "/photocard_imgs/pc-img-9.jpg" },
+      { id: 10, place: "@yokohama", info: "A modern skyline gleaming bright against the backdrop of an endless urban sprawl.", src: "/photocard_imgs/pc-img-10.jpg" },
     ]
   },
 
@@ -122,7 +122,7 @@ export const portfolioData = {
     socials: [
         { name: "Instagram", url: "#" },
         { name: "Twitter", url: "#" },
-        { name: "LinkedIn", url: "#" },
+        { name: "LinkedIn", url: "https://www.linkedin.com/in/karan-katyura232435/" },
         { name: "Dribbble", url: "#" },
         { name: "GitHub", url: "https://github.com/kapilsingh09" }
     ],
@@ -148,7 +148,7 @@ export const portfolioData = {
     links: [
       { name: "Home", href: "/" },
       { name: "Gallery", href: "/gallery" },
-      // { name: "Pricing", href: "/pricing" },
+      { name: "Pricing", href: "/pricing" },
       { name: "Contact", href: "/contact" },
       { name: "About", href: "/about" },
     ],

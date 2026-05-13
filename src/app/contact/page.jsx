@@ -39,8 +39,8 @@ function ModeToggle({ mode, onChange }) {
   return (
     <div className="mb-6 flex w-fit items-center gap-1 rounded-full border border-border-subtle bg-surface-muted p-1">
       {[
-        { id: 'whatsapp', icon: MessageCircle, label: 'WhatsApp' },
         { id: 'email', icon: Mail, label: 'Email' },
+        { id: 'whatsapp', icon: MessageCircle, label: 'WhatsApp' },
       ].map(({ id, icon: Icon, label }) => (
         <button
           key={id}
@@ -284,7 +284,7 @@ function EmailPanel({isDisabled}) {
 
 export default function ContactPage() {
   const { contactPage } = useContent();
-  const [mode, setMode] = useState('whatsapp') // 'email' | 'whatsapp'
+  const [mode, setMode] = useState('email') // 'email' | 'whatsapp'
 
   return (
     <section className="relative flex w-full items-center justify-center px-4 py-24 md:px-8 md:py-28">
@@ -324,11 +324,11 @@ export default function ContactPage() {
             <div className="mt-10 flex flex-col gap-4 border-t border-border-subtle pt-6 px-2 transition-colors sm:flex-row sm:justify-between">
               <div className="flex items-center gap-3">
                 <Mail size={14} className="text-content-muted" />
-                <span className="text-xs font-medium text-content-muted">hello@kapilphoto.com</span>
+                <span className="text-xs font-medium text-content-muted">temprary@kapilphoto.com</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone size={14} className="text-content-muted" />
-                <span className="text-xs font-medium text-content-muted">+91 98765 43210</span>
+                <span className="text-xs font-medium text-content-muted">+91 98765 432**</span>
               </div>
             </div>
           </motion.div>
